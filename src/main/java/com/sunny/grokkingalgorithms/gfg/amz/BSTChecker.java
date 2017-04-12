@@ -1,6 +1,7 @@
 package com.sunny.grokkingalgorithms.gfg.amz;
 
 import com.sunny.grokkingalgorithms.gfg.amz.util.AlgoUtil;
+import com.sunny.grokkingalgorithms.gfg.amz.util.BinaryNode;
 
 import java.util.Scanner;
 class Node {
@@ -40,6 +41,28 @@ public class BSTChecker {
       isBST = isBST && checkBST(root.left) && checkBST(root.right);
     }
     return isBST;
+  }
+
+  /**
+   * Better solution
+   *
+   * http://www.ideserve.co.in/learn/check-if-a-binary-tree-is-a-binary-search-tree
+   *
+   * @param root
+   * @return
+   */
+  public static boolean checkBSTOptimized(Node root){
+    return isBST(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+  }
+
+  public static boolean isBST(Node root,int min,int max){
+    if(root == null){
+      return true;
+    }
+    if(root.data <= min || root.data >= max){
+      return false;
+    }
+    return isBST(root.left,min,root.data) && isBST(root.right,root.data,max);
   }
 
   /**
