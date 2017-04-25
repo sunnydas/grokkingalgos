@@ -10,6 +10,41 @@ public class FindAllNodesATKDistanceFromRoot {
 
   //http://www.geeksforgeeks.org/print-nodes-at-k-distance-from-root/
 
+
+  /**
+   *
+   * @param root
+   * @param k
+   */
+  public static void printNodesAtKDistanceFromRootDFS(Node root,int k){
+    printNodesAtKDistanceFromRootDFSRecursion(root,k,0);
+  }
+
+
+  /**
+   *
+   * @param root
+   * @param k
+   * @param depth
+   */
+  public static void printNodesAtKDistanceFromRootDFSRecursion(Node root,int k,int depth){
+    if(root == null){
+      return;
+    }
+    if(depth == k){
+      System.out.println(root.data);
+    }
+    else{
+      if(root.left != null){
+        printNodesAtKDistanceFromRootDFSRecursion(root.left,k,depth + 1);
+      }
+      if(root.right != null){
+        printNodesAtKDistanceFromRootDFSRecursion(root.right,k,depth + 1);
+      }
+    }
+  }
+
+
   /**
    *
    * @param root
@@ -72,7 +107,8 @@ public class FindAllNodesATKDistanceFromRoot {
     Node newNode = new Node();
     newNode.data = 11;
     firstLeftOfThree.right = newNode;
-    printNodesAtKDIstanceFromRoot(root,3);
+    printNodesAtKDIstanceFromRoot(root,2);
+    printNodesAtKDistanceFromRootDFS(root,2);
   }
 
 }
