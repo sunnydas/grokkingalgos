@@ -1,0 +1,24 @@
+Important Notes:
+---------------------
+
+1.) Dynamic Arrays : The amortized cost of adding an element to a dynamic array is O(N)
+
+          Explanation:
+          
+          Assumption : The arrays doubles itself , everytime it needs to resize
+          
+          1  
+          1 2  
+          1 2 3 - copy
+          1 2 3 4 
+          1 2 3 4 5 - copy
+          1 2 3 4 5 6
+          1 2 3 4 5 6 7
+          1 2 3 4 5 6 7 8 
+          1 2 3 4 5 6 7 8 9 - copy   
+copies happen at 3 5 9 
+9 can be written as 1001 
+1001 + 1111 = 11000 
+so number of copy instructions = 2.n => O(N)
+          
+           
