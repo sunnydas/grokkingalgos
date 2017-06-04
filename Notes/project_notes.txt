@@ -20,5 +20,22 @@ copies happen at 3 5 9
 9 can be written as 1001 
 1001 + 1111 = 11000 
 so number of copy instructions = 2.n => O(N)
+
+
+2.) Graphs post order traversal:
+
+If we want to perform operations like
+
+(15 - 5) + (2 + 3)
+
+we can have a tree like
+                    +
+                  -     +
+                15 5   2 3 
+Post order traversal can be useful here.
+                
+3.) BFS good to find shortest path , patient strategy (useful in routing algorithms).
+
+4.) In graphs , we have to make sure that visited nodes are never visited again.                
           
            
