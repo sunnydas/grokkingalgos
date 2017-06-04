@@ -36,6 +36,16 @@ Post order traversal can be useful here.
                 
 3.) BFS good to find shortest path , patient strategy (useful in routing algorithms).
 
-4.) In graphs , we have to make sure that visited nodes are never visited again.                
+4.) In graphs , we have to make sure that visited nodes are never visited again.
+
+5.) Brute Force:
+  Suppose we had a door which could be opened by a single combination like:
+    6 4 3 7
+We can start from 
+   0 0 0 0 
+we can finally work ourselves to the combination.
+10.10.10.10
+10 to the power of 4 combinations.
+   
           
            
