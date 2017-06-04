@@ -83,16 +83,20 @@ public class DFS {
    *
    * @param root
    */
-  public static void preOrder(GraphNode root){
+  public static void preOrder(GraphNode root,int indentationLevel){
     if(root == null){
       return;
     }
-    System.out.println(root.getWeight());
+    for(int i = 0 ; i < 3*indentationLevel ; i++){
+      System.out.print(" ");
+    }
+    System.out.print(root.getWeight());
+    System.out.println();
     root.setVisited(true);
     if(root.getEdges() != null){
       for(GraphNode child : root.getEdges()){
         if(!child.isVisited()){
-          preOrder(child);
+          preOrder(child,indentationLevel+1);
         }
       }
     }
@@ -155,7 +159,7 @@ public class DFS {
     f.setEdges(edgesOfF);
     GraphNode[] edgesOfG = new GraphNode[]{d};
     g.setEdges(edgesOfG);
-    //preOrder(root);
+    //preOrder(root, 0);
     System.out.println("----------------------------------------------");
     dfs(root);
   }
