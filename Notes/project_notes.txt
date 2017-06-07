@@ -47,5 +47,26 @@ we can finally work ourselves to the combination.
 10.10.10.10
 10 to the power of 4 combinations.
    
-          
-           
+6.) Greedy algorithms
+
+Suppose we had a set of coins of different denominations and we had to find the minimum number of coins that addd up to some value , for example:
+
+10 5 2 1  , target  = 18 
+
+greedy algo:
+    a.) take highest value coin and check if it is <= target (18)          
+
+7.) Worst case for quick sort happens when the pivot element is the first or the last element in the array. O(N2)
+average case (NlogN) 
+The number of halves we can cut a set until we reach one is Log N (where n is number of elements in set)
+since , in average case we get roughly sublists left and right of half the length of the previous division.
+Per level we still do at most N operations, hence N Log N 
+
+8.) Pseudo polynomial : 
+knap scalk complexity using DP O(N.C) where C = capacity and N = number of items.
+now capacity represented by bits , max is 2 to power of c 
+therefore O(N.2.pow(c)) => pseudo polynomial.
+
+9.) P refers to polynomial problems N.pow(3) + N.pow(2) + 1 etc
+
+10.) If a problem can be solved in polynomial time , it can be verified in polynomial time hence all NP include P.
