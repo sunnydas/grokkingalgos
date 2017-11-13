@@ -157,6 +157,37 @@ public class ContinousSubArray {
     return partialSumMatrix;
   }
 
+  /**
+   *
+   * @param input
+   * @param totalSum
+   */
+  public static void findContiguousSubArrayV3(int[] input, int totalSum){
+    int begin = 0;
+    int index = 0;
+    int startIndex = -1;
+    int endIndex = -1;
+    int runningSum = 0;
+    while(index < input.length){
+      runningSum += input[index];
+      while(runningSum > totalSum && begin < index){
+        runningSum -= input[begin];
+        begin++;
+      }
+      if(runningSum == totalSum){
+        endIndex = index;
+        startIndex = begin;
+        break;
+      }
+      index++;
+    }
+    if(startIndex >= 0 && endIndex >= 0) {
+      System.out.println((startIndex + 1) + " " + (endIndex+1));
+    }
+    else{
+      System.out.println(-1);
+    }
+  }
 
   /**
    *
@@ -173,7 +204,8 @@ public class ContinousSubArray {
         input[j] = scanner.nextInt();
       }
       //findContinousSubArray(input,totalSum);
-      findContinousSubArrayv2(input, totalSum);
+      //findContinousSubArrayv2(input, totalSum);
+      findContiguousSubArrayV3(input, totalSum);
     }
   }
 
