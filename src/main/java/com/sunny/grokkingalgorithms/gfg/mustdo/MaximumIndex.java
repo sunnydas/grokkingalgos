@@ -25,6 +25,46 @@ public class MaximumIndex {
     System.out.println(maxDistanceBetweenJandI);
   }
 
+  /**
+   *
+   * @param input
+   */
+  public static void printMaximumIndexEditorialSolution(int[] input){
+    int maxDistance = Integer.MIN_VALUE;
+    /*
+    This solution is an implementaion of an editorial for the same problem
+     */
+    // We use two auxillary arrays minTrcker and maxTracker
+    // Logic for minTracker , choose minTRacker[i] = Min(input[i],minTracker[i-1]) 1<=i<n
+    // Logic for maxTracker, choose maxTracker[i] = Max(input[i],maxTracker[i+1]) n-2>=i>=0
+    //Populate min tracker
+    int[] minTracker = new int[input.length];
+    minTracker[0] = input[0];
+    for(int i = 1 ; i < input.length ; i++){
+      minTracker[i] = Math.min(input[i],minTracker[i-1]);
+    }
+    //Populate maxTracker
+    int[] maxTracker = new int[input.length];
+    maxTracker[maxTracker.length - 1] = input[input.length - 1];
+    for(int i = maxTracker.length - 2; i >= 0 ; i--){
+      maxTracker[i] = Math.max(input[i],maxTracker[i+1]);
+    }
+    // Now we have the arrays populated
+    // Time to find distance
+    int i=0 ;
+    int j  = 0;
+    while(i < input.length && j < input.length){
+      if(minTracker[i] <= maxTracker[j]){
+        maxDistance = Math.max(maxDistance,Math.abs(i-j));
+        j++;
+      }
+      else{
+        i++;
+      }
+    }
+    System.out.println(maxDistance);
+  }
+
 
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
@@ -35,7 +75,8 @@ public class MaximumIndex {
       for(int j = 0 ; j < input.length ; j++){
         input[j] = scanner.nextInt();
       }
-      printMaximumIndexBruteForce(input);
+      //printMaximumIndexBruteForce(input);
+      printMaximumIndexEditorialSolution(input);
     }
   }
 
