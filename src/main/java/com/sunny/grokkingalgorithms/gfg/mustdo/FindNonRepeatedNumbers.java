@@ -50,6 +50,41 @@ public class FindNonRepeatedNumbers {
     System.out.println("" + placeHolder[0] + " " + placeHolder[1]);
   }
 
+  /**
+   *
+   *
+   * @param input
+   */
+  public static void printFoundNumbersUsingEditorialSolution(int[] input){
+    /*
+    Refer to this for explanation of logic
+     */
+    //xor all elements in the array
+    int xoredVals = input[0];
+    for(int i = 1 ; i < input.length ; i++){
+      xoredVals ^= input[i];
+    }
+    // Get right most set bit refer bit magic
+    int xoredSetBit = xoredVals & ~(xoredVals - 1);
+    //Set division
+    int a = 0;
+    int b = 0;
+    for(int i = 0 ; i < input.length ; i++){
+      if((input[i] & xoredSetBit) > 0){
+        a ^= input[i];
+      }
+      else{
+        b ^= input[i];
+      }
+    }
+    if(a < b){
+      System.out.println(a + " " + b);
+    }
+    else{
+      System.out.println(b + " " + a);
+    }
+  }
+
 
   /**
    *
@@ -69,7 +104,8 @@ public class FindNonRepeatedNumbers {
       for(int j = 0 ; j < input.length ; j++){
         input[j] = scanner.nextInt();
       }
-      printFoundNumbersUsingHashing(input, n);
+      //printFoundNumbersUsingHashing(input, n);
+      printFoundNumbersUsingEditorialSolution(input);
     }
   }
 
