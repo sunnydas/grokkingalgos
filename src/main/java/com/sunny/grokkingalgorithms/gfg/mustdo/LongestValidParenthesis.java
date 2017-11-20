@@ -158,6 +158,34 @@ public class LongestValidParenthesis {
 
   /**
    *
+   * @param input
+   * @return
+   */
+  public static int findLengthofLongestValidParenthesisEditorial(String input){
+    int result = 0;
+    Stack<Integer> matcherStack = new Stack<>();
+    //Initialization
+    matcherStack.push(-1);
+    for(int i = 0 ; i < input.length() ; i++){
+      char curBracket = input.charAt(i);
+      if(curBracket == '('){
+        matcherStack.push(i);
+      }
+      else{
+        matcherStack.pop();
+        if(!matcherStack.isEmpty()){
+          result = Math.max(result,i-matcherStack.peek());
+        }
+        else{
+          matcherStack.push(i);
+        }
+      }
+    }
+    return result;
+  }
+
+  /**
+   *
    * @param args
    */
   public static void main(String[] args) {
@@ -182,7 +210,8 @@ Expected:
     int numOfTestCases = scanner.nextInt();
     for(int i = 0 ; i < numOfTestCases ; i++){
       String parenthesisString = scanner.next();
-      System.out.println(findLengthofLongestValidParenthesis(parenthesisString));
+      //System.out.println(findLengthofLongestValidParenthesis(parenthesisString));
+      System.out.println(findLengthofLongestValidParenthesisEditorial(parenthesisString));
     }
   }
 }
