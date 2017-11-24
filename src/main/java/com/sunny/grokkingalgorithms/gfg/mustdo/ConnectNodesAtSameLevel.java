@@ -63,6 +63,81 @@ public class ConnectNodesAtSameLevel {
   }
 
   /**
+   * The Editorial solution using O(1) space
+   *
+   */
+  public static void connectEditorial(Node root){
+    /**
+     * Base case
+     */
+    if(root == null){
+      return;
+    }
+    if(root.left == null && root.right == null){
+      return;
+    }
+    /**
+     * normal use case
+     * At level one we will get connected nodes and then we build on it each node
+     */
+    if(root.left != null && root.right != null){
+      root.left.nextRight = root.right;
+      Node temp = root.nextRight;
+      while(temp != null
+          && temp.left == null
+          && temp.right == null){
+        temp = temp.nextRight;
+      }
+      if(temp == null){
+        root.right.nextRight = null;
+      }
+      else if(temp.left != null){
+        root.right.nextRight = temp.left;
+      }
+      else if(temp.right != null){
+        root.right.nextRight = temp.right;
+      }
+    }
+    if(root.right == null){
+      Node temp = root.nextRight;
+      while(temp != null
+          && temp.left == null
+          && temp.right == null){
+        temp = temp.nextRight;
+      }
+      if(temp == null){
+        root.left.nextRight = null;
+      }
+      else if(temp.left != null){
+        root.left.nextRight = temp.left;
+      }
+      else if(temp.right != null){
+        root.left.nextRight = temp.right;
+      }
+    }
+    else if(root.left == null){
+      Node temp = root.nextRight;
+      while(temp != null
+          && temp.left == null
+          && temp.right == null){
+        temp = temp.nextRight;
+      }
+      if(temp == null){
+        root.right.nextRight = null;
+      }
+      else if(temp.left != null){
+        root.right.nextRight = temp.left;
+      }
+      else if(temp.right != null){
+        root.right.nextRight = temp.right;
+      }
+    }
+    connectEditorial(root.left);
+    connectEditorial(root.right);
+  }
+
+
+  /**
    *
    * @param args
    */
