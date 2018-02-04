@@ -53,11 +53,13 @@ int count() number of components
    * @param q
    */
    public void union(int p,int q){
+     int pId = idArray[p];
+     int qId = idArray[q];
      if(p < idArray.length && q < idArray.length) {
        for (int i = 0; i < idArray.length; i++) {
          // Update id of q to p to represent connection
-         if (idArray[i] == idArray[q]) {
-           idArray[i] = idArray[p];
+         if (idArray[i] == qId) {
+           idArray[i] = pId;
          }
        }
      }
