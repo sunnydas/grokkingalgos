@@ -56,6 +56,27 @@ public class MatrixMultiplicationSequential {
     return product;
   }
 
+  /**
+   *
+   * @param a
+   * @param b
+   * @return
+   */
+  public static int[][] multiplyALternate(int[][] a, int[][] b){
+    int[][] product = new int[a.length][b[0].length];
+    //The rows of a
+    for(int i = 0 ; i < a.length ; i++){
+      //The columns of b
+      for(int j = 0; j < b[0].length ; j++){
+        //The columns of a
+        for(int k = 0 ; k < a[0].length; k++){
+          product[i][j] += a[i][k]*b[k][j];
+        }
+      }
+    }
+    return product;
+  }
+
   public static void print2DMatrix(int[][] input){
     for(int i = 0 ; i < input.length ; i++){
       for(int j = 0 ; j < input[i].length ; j++){
@@ -84,6 +105,9 @@ public class MatrixMultiplicationSequential {
     };
     print2DMatrix(b);
     int[][] product = multiply(a,b);
+    print2DMatrix(product);
+    System.out.println("######################");
+    product = multiplyALternate(a,b);
     print2DMatrix(product);
   }
 
