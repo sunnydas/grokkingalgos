@@ -20,6 +20,58 @@ public class ConvertNumbersToWords {
 
 
   /**
+   *
+   * @param number
+   * @return
+   */
+  public static String convertNumberToStringsAlternate(int number){
+    StringBuilder converted = new StringBuilder();
+    String strRepOfNumber = String.valueOf(number);
+    String[] base = new String[]{"one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve",
+        "thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"};
+    String[] decades = new String[]{"ten","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
+    if(number < 20){
+      converted.append(base[number - 1]);
+    }
+    else {
+      int index = 0;
+      int powerCount = strRepOfNumber.length();
+      while(index < strRepOfNumber.length()){
+        char curNumber = strRepOfNumber.charAt(index);
+        int numValue = Character.getNumericValue(curNumber);
+        if(numValue > 0) {
+          if (powerCount >= 4) {
+            if(powerCount == 5){
+              converted.append(decades[numValue - 1]);
+            }
+            else if(powerCount == 6){
+              converted.append(base[numValue - 1] + "hundred");
+            }
+            else{
+              converted.append(base[numValue - 1]);
+            }
+            if(powerCount == 4){
+              converted.append("thousand");
+            }
+          } else if (powerCount == 3) {
+            converted.append(base[numValue - 1] + "hundred");
+          } else if (powerCount == 2) {
+            converted.append(decades[numValue - 1]);
+          } else if (powerCount == 1) {
+            converted.append(base[numValue - 1]);
+          }
+        }
+        if(powerCount == 4 && numValue == 0){
+          converted.append("thousand");
+        }
+        powerCount--;
+        index++;
+      }
+    }
+    return converted.toString();
+  }
+
+  /**
    * A hack way to convert integer to words within a range
    *
    * @param number
@@ -153,8 +205,33 @@ public class ConvertNumbersToWords {
     System.out.println(convertNumberToWords(110));
     System.out.println(convertNumberToWords(21000));
 
+    System.out.println("########################################### new method ########");
+    System.out.println(convertNumberToStringsAlternate(999));
+    System.out.println(convertNumberToStringsAlternate(123));
+    System.out.println(convertNumberToStringsAlternate(10));
+    System.out.println(convertNumberToStringsAlternate(100));
+    System.out.println(convertNumberToStringsAlternate(999));
+    System.out.println(convertNumberToStringsAlternate(21));
+    System.out.println(convertNumberToStringsAlternate(30));
+    System.out.println(convertNumberToStringsAlternate(31));
+    System.out.println(convertNumberToStringsAlternate(91));
+    System.out.println(convertNumberToStringsAlternate(1100));
+    System.out.println(convertNumberToStringsAlternate(12000));
+    System.out.println(convertNumberToStringsAlternate(44500));
+    System.out.println(convertNumberToStringsAlternate(100000));
+    System.out.println(convertNumberToStringsAlternate(10000));
+    System.out.println(convertNumberToStringsAlternate(1000));
+    System.out.println(convertNumberToStringsAlternate(40000));
+    /*System.out.println(convertNumberToStringsAlternate(123));
+    System.out.println(convertNumberToStringsAlternate(10));
+    System.out.println(convertNumberToStringsAlternate(100));
+    System.out.println(convertNumberToStringsAlternate(999));
+    System.out.println(convertNumberToStringsAlternate(21));
+    System.out.println(convertNumberToStringsAlternate(30));
+    System.out.println(convertNumberToStringsAlternate(31));
+    System.out.println(convertNumberToStringsAlternate(91));*/
     // general JMX entries
-    Map<String, String> memoryMap = new HashMap<>();
+    /*Map<String, String> memoryMap = new HashMap<>();
     OperatingSystemMXBean osMxBean = ManagementFactory.getOperatingSystemMXBean();
 
     int count = 0;
@@ -185,7 +262,7 @@ public class ConvertNumbersToWords {
     memoryMap.put("nonHeapMax", String.valueOf(nonHeapUsage.getMax()));
     memoryMap.put("nonHeapCommit", String.valueOf(nonHeapUsage.getCommitted()));
     memoryMap.put("nonHeapUsed", String.valueOf(nonHeapUsage.getUsed()));
-    System.out.println(memoryMap);
+    System.out.println(memoryMap);*/
   }
 
 }
