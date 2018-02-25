@@ -21,6 +21,41 @@ public class ConvertNumbersToWords {
 
   /**
    *
+   *
+   * @param number
+   * @return
+   */
+  public static String convertNumberToWordsRecursive(int number){
+    /*
+    A better solution using recursion
+     */
+    String[] base = new String[]{"one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve",
+        "thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"};
+    String[] decades = new String[]{"ten","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
+    if(number < 0){
+      return "minus" + convertNumberToWordsRecursive(Math.abs(number));
+    }
+    if(number < 20){
+      return base[number - 1];
+    }
+    // Need to worry if remainder is zero
+    else if(number < 100){
+      return decades[number/10 - 1] + ((number%10 == 0)?"":base[number%10 - 1]);
+    }
+    else if(number < 1000){
+      return base[number/100 - 1] + "hundred" + ((number%100 == 0)?"":convertNumberToWordsRecursive(number%100));
+    }
+    else if(number < 100000){
+      return convertNumberToWordsRecursive(number/1000) + "thousand" + ((number%1000 == 0)?"":convertNumberToWordsRecursive(number%1000));
+    }
+    else if(number < 10000000){
+      return convertNumberToWordsRecursive(number/100000) + "lakhs" + ((number%100000 == 0)?"":convertNumberToWordsRecursive(number%100000));
+    }
+    return convertNumberToWordsRecursive(number/1000000) + "crores" + ((number%1000000 == 0)?"":convertNumberToWordsRecursive(number%1000000));
+  }
+
+  /**
+   *
    * @param number
    * @return
    */
@@ -222,6 +257,31 @@ public class ConvertNumbersToWords {
     System.out.println(convertNumberToStringsAlternate(10000));
     System.out.println(convertNumberToStringsAlternate(1000));
     System.out.println(convertNumberToStringsAlternate(40000));
+    System.out.println("############################################### recursive solution #####");
+    System.out.println(convertNumberToWordsRecursive(42));
+    System.out.println(convertNumberToWordsRecursive(99));
+    System.out.println(convertNumberToWordsRecursive(10));
+    System.out.println(convertNumberToWordsRecursive(21));
+    System.out.println(convertNumberToWordsRecursive(30));
+    System.out.println(convertNumberToWordsRecursive(21));
+    System.out.println(convertNumberToWordsRecursive(100));
+    System.out.println(convertNumberToWordsRecursive(101));
+    System.out.println(convertNumberToWordsRecursive(999));
+    System.out.println(convertNumberToWordsRecursive(556));
+    System.out.println(convertNumberToWordsRecursive(44500));
+    System.out.println(convertNumberToWordsRecursive(1000));
+    System.out.println(convertNumberToWordsRecursive(99000));
+    System.out.println(convertNumberToWordsRecursive(75461));
+    System.out.println(convertNumberToWordsRecursive(10000));
+    System.out.println(convertNumberToWordsRecursive(11000));
+    System.out.println(convertNumberToWordsRecursive(21011));
+    System.out.println(convertNumberToWordsRecursive(100000));
+    System.out.println(convertNumberToWordsRecursive(110000));
+    System.out.println(convertNumberToWordsRecursive(990000));
+    System.out.println(convertNumberToWordsRecursive(999999));
+    System.out.println(convertNumberToWordsRecursive(112001));
+    System.out.println(convertNumberToWordsRecursive(10000000));
+    System.out.println(convertNumberToWordsRecursive(-44500));
     /*System.out.println(convertNumberToStringsAlternate(123));
     System.out.println(convertNumberToStringsAlternate(10));
     System.out.println(convertNumberToStringsAlternate(100));
