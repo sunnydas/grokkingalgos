@@ -1,7 +1,6 @@
-package com.sunny.grokkingalgorithms.gfg.amz.util;
+package com.sunny.grokkingalgorithms.gfg.az.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 

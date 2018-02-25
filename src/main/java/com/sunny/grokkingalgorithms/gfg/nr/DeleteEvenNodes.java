@@ -1,4 +1,4 @@
-package com.sunny.grokkingalgorithms.gfg.ncr;
+package com.sunny.grokkingalgorithms.gfg.nr;
 
 class Node{
   int data;

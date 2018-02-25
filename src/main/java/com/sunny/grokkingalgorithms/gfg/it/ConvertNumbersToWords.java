@@ -1,10 +1,5 @@
-package com.sunny.grokkingalgorithms.gfg.intuit;
+package com.sunny.grokkingalgorithms.gfg.it;
 
-import sun.management.ManagementFactoryHelper;
-
-import java.lang.management.*;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Stack;
 
 /**

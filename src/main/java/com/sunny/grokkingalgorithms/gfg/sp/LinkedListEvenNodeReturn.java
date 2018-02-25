@@ -1,4 +1,4 @@
-package com.sunny.grokkingalgorithms.gfg.sap;
+package com.sunny.grokkingalgorithms.gfg.sp;
 
 /**
  * Created by sundas on 5/4/2017.

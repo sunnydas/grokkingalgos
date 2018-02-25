@@ -1,9 +1,5 @@
-package com.sunny.grokkingalgorithms.gfg.amz;
+package com.sunny.grokkingalgorithms.gfg.az;
 
-import com.sunny.grokkingalgorithms.gfg.amz.util.AlgoUtil;
-import com.sunny.grokkingalgorithms.gfg.amz.util.BinaryNode;
-
-import java.util.Scanner;
 class Node {
   int data;
   Node left;

@@ -1,4 +1,4 @@
-package com.sunny.grokkingalgorithms.gfg.sap;
+package com.sunny.grokkingalgorithms.gfg.sp;
 
 import java.util.Scanner;
 

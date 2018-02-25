@@ -1,4 +1,4 @@
-package com.sunny.grokkingalgorithms.gfg.amz;
+package com.sunny.grokkingalgorithms.gfg.az;
 
 import java.util.Stack;
 

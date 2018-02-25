@@ -1,4 +1,4 @@
-package com.sunny.grokkingalgorithms.gfg.amz.util;
+package com.sunny.grokkingalgorithms.gfg.az.util;
 
 /**
  * Created by sundas on 4/7/2017.

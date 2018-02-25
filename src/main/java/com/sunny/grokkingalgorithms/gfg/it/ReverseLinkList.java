@@ -1,4 +1,4 @@
-package com.sunny.grokkingalgorithms.gfg.intuit;
+package com.sunny.grokkingalgorithms.gfg.it;
 
 class Node{
   public int data;
