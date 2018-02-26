@@ -18,6 +18,24 @@ public class IsBTreeABST {
    */
 
 
+  boolean checkBSTAlternate(Node root){
+    return checkBSTAlternateUtil(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+  }
+
+
+  boolean checkBSTAlternateUtil(Node root,int min,int max){
+    if(root == null){
+      return true;
+    }
+
+    if(root.data < min || root.data > max){
+      return false;
+    }
+
+    return checkBSTAlternateUtil(root.left,min,root.data - 1) && checkBSTAlternateUtil(root.right,(root.data + 1),max);
+
+  }
+
   boolean checkBST(Node root) {
     if(root == null){
       return true;
