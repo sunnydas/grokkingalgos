@@ -18,6 +18,31 @@ public class IsBTreeABST {
    */
 
 
+
+  private static Node previous;
+  boolean checkBSTInorderOption(Node root) {
+    return checkBSTInorder(root);
+  }
+
+  boolean checkBSTInorder(Node root){
+    if(root == null){
+      return true;
+    }
+    boolean leftBST = checkBSTInorder(root.left);
+    if(leftBST){
+      if(previous != null && previous.data >= root.data){
+        return false;
+      }
+      previous = root;
+      boolean rightBST = checkBSTInorder(root.right);
+      if(leftBST && rightBST){
+        return true;
+      }
+    }
+    return false;
+  }
+
+
   boolean checkBSTAlternate(Node root){
     return checkBSTAlternateUtil(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
   }
