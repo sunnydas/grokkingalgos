@@ -1,8 +1,6 @@
 package com.sunny.grokkingalgorithms.gfg.mustdo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Find all subsets of a set
@@ -22,6 +20,21 @@ public class SubsetsOfASet {
   }
 
   public static List<String> findAllSubsetsRecursive(String masterSet){
+    /*
+    How does this work?
+    Let us take an example:
+
+    abc
+
+        step1: a taken out bc
+                step 2: b taken c
+                      step 3: c taken out ""
+                             step 4: base case hit add empty string to list
+                        back track to step 3 : add c to the list so now we have [c, ""]
+                    back track to step 2: add b to all elements to list [b,c,"",bc]
+                back track to step 1: add a to all elements to list [a,b,c,"",abc,ab,bc,ac]
+          done
+     */
     List<String> subsets = new ArrayList<>();
     if(masterSet == null || masterSet.length() == 0){
       subsets.add("");
@@ -31,7 +44,7 @@ public class SubsetsOfASet {
       char current = masterSet.charAt(0);
       String newStr = masterSet.substring(1);
       //System.out.println(newStr);
-      List<String> childSubSets = findAllSubsets(newStr);
+      List<String> childSubSets = findAllSubsetsRecursive(newStr);
       //System.out.println(" child subsets " + childSubSets);
       if(childSubSets.size() > 0){
         for(String s : childSubSets){
