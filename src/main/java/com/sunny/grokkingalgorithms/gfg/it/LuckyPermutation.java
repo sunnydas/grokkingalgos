@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by sundas on 2/28/2018.
@@ -44,16 +46,30 @@ The two possible lucky permutations are 1-2-3 and 3-2-1.
    */
   public static int countLuckyPermutation(int[][]  edgeMatrix){
     int luckyPermutation = 0;
-    if(edgeMatrix != null && edgeMatrix[0].length > 0) {
+    /*int[] inputVector = new int[edgeMatrix[0].length];
+    Integer[] converted = Arrays.stream(inputVector).boxed().toArray(Integer[]::new);*/
+    Integer[] converted = new Integer[edgeMatrix[0].length];
+    for(int i = 0 ; i < edgeMatrix[0].length ; i++){
+      converted[i] = i;
+    }
+    List<List<Integer>> allPermutations = generatePermutations(converted);
+    List<List<Integer>> permutationsOfLengthN = new ArrayList<>();
+    for(List<Integer> perm : allPermutations){
+      if(perm.size() == edgeMatrix[0].length){
+        permutationsOfLengthN.add(perm);
+      }
+    }
+    //System.out.println(permutationsOfLengthN);
+    for(List<Integer> perm : permutationsOfLengthN){
       boolean isLucky = true;
-      for (int i = 1; i < edgeMatrix[0].length; i++) {
-        if(edgeMatrix[i-1][i] != 1){
+      for(int i = 1 ; i < perm.size() ; i++){
+        if(edgeMatrix[perm.get(i)][perm.get(i-1)] != 1){
           isLucky = false;
           break;
         }
       }
       if(isLucky){
-        luckyPermutation = 2;
+        luckyPermutation++;
       }
     }
     return luckyPermutation;
@@ -142,10 +158,22 @@ The two possible lucky permutations are 1-2-3 and 3-2-1.
       edgeMatrix[target - 1][source - 1] = 1;
     }
     System.out.println(countLuckyPermutation(edgeMatrix));*/
-    Integer[]  inputVector = new Integer[]{1,2,3,4};
+    /*Integer[]  inputVector = new Integer[]{1,2,3,4};
     List<List<Integer>> permutations = generatePermutations(inputVector);
     System.out.println(permutations.size());
-    System.out.println(permutations);
+    System.out.println(permutations);*/
+    Scanner scanner = new Scanner(System.in);
+    int noOfVertices = scanner.nextInt();
+    int numberOfEdges = scanner.nextInt();
+    //This matrix will be used to check if path exists
+    int[][] edgeMatrix = new int[noOfVertices][noOfVertices];
+    for(int i = 0; i < numberOfEdges ; i++){
+      int source = scanner.nextInt();
+      int target = scanner.nextInt();
+      edgeMatrix[source - 1][target - 1] = 1;
+      edgeMatrix[target - 1][source - 1] = 1;
+    }
+    System.out.println(countLuckyPermutation(edgeMatrix));
   }
 
 }
