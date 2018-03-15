@@ -5,6 +5,8 @@ import com.sunny.grokkingalgorithms.ctc.c2.util.Node;
 
 /**
  * Created by sundas on 3/15/2018.
+ *
+ * where both numbers are of same length
  */
 public class AddTwoNumbers {
 
@@ -57,6 +59,59 @@ public class AddTwoNumbers {
     return sumRoot;
   }
 
+  /*
+  Add two numbers represented by linked list
+  6->1->7  + 2->9->5
+  617 + 295
+  912
+  stored as 9->1->2
+   */
+
+  private static Node sumNodeRoot = null;
+
+  /**
+   *
+   * @param numberA
+   * @param numberB
+   * @return
+   */
+  public static Node addTwoNumbersForward(Node numberA,Node numberB){
+    addTwoNumbersUsingBacktracking(numberA,numberB);
+    return sumNodeRoot;
+  }
+
+
+  /**
+   *
+   * @param numberA
+   * @param numberB
+   * @return
+   */
+  public static int addTwoNumbersUsingBacktracking(Node numberA,Node numberB){
+    /*
+       The return type integere rrpresents a carry from previous step. We navigate to end of the two lists and then keep
+        adding.
+     */
+    if(numberA == null && numberB == null){
+      return 0;
+    }
+    int previousCarry = addTwoNumbersUsingBacktracking(numberA.next,numberB.next);
+    int sum = numberA.data + numberB.data + previousCarry;
+    int currentDigitSum = sum%10;
+    int carry = sum/10;
+    if(sumNodeRoot == null){
+      sumNodeRoot = new Node();
+      sumNodeRoot.data = currentDigitSum;
+    }
+    else{
+      Node currentDigit = new Node();
+      currentDigit.data = currentDigitSum;
+      currentDigit.next = sumNodeRoot;
+      sumNodeRoot = currentDigit;
+    }
+    return carry;
+  }
+
   /**
    *
    * @param args
@@ -79,7 +134,15 @@ public class AddTwoNumbers {
     LinkedListUtil.printLinkedList(numberB);
     sumRoot = addTwoNumbers(numberA,numberB);
     LinkedListUtil.printLinkedList(sumRoot);
-
+    System.out.println("----now stored in forward order");
+    input = new int[]{6,1,7};
+    numberA = LinkedListUtil.createLinkedList(input);
+    LinkedListUtil.printLinkedList(numberA);
+    input = new int[]{2,9,5};
+    numberB = LinkedListUtil.createLinkedList(input);
+    LinkedListUtil.printLinkedList(numberB);
+    sumRoot = addTwoNumbersForward(numberA, numberB);
+    LinkedListUtil.printLinkedList(sumRoot);
   }
 
 }
