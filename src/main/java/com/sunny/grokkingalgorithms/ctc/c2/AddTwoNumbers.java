@@ -86,6 +86,17 @@ public class AddTwoNumbers {
    * @return
    */
   public static Node addTwoNumbersForward(Node numberA,Node numberB){
+    /*
+    Check if length of linked lists are different
+     */
+    int lengthA = LinkedListUtil.findLengthOfLinkedList(numberA);
+    int lengthB = LinkedListUtil.findLengthOfLinkedList(numberB);
+    if(lengthA < lengthB){
+      numberA = LinkedListUtil.padLinkedListWIthZerosFromFromHead(numberA,(lengthB - lengthA));
+    }
+    else{
+      numberB = LinkedListUtil.padLinkedListWIthZerosFromFromHead(numberB,(lengthA - lengthB));
+    }
     int carry = addTwoNumbersUsingBacktracking(numberA,numberB);
     if(carry > 0){
       Node node = new Node();
@@ -174,6 +185,16 @@ public class AddTwoNumbers {
     numberA = LinkedListUtil.createLinkedList(input);
     LinkedListUtil.printLinkedList(numberA);
     input = new int[]{9,9,5};
+    numberB = LinkedListUtil.createLinkedList(input);
+    LinkedListUtil.printLinkedList(numberB);
+    sumRoot = addTwoNumbersForward(numberA, numberB);
+    LinkedListUtil.printLinkedList(sumRoot);
+    System.out.println("next ----- ");
+    sumNodeRoot = null;
+    input = new int[]{9,1,7};
+    numberA = LinkedListUtil.createLinkedList(input);
+    LinkedListUtil.printLinkedList(numberA);
+    input = new int[]{9,9};
     numberB = LinkedListUtil.createLinkedList(input);
     LinkedListUtil.printLinkedList(numberB);
     sumRoot = addTwoNumbersForward(numberA, numberB);
