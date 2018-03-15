@@ -33,8 +33,14 @@ public class AddTwoNumbers {
     /*
     Assuming that both the linked lists are of same size
      */
-    while(aRunner != null && bRunner != null){
-      int tempSum = aRunner.data + bRunner.data + previousCarry;
+    while(aRunner != null || bRunner != null){
+      int tempSum = previousCarry;
+      if(aRunner != null){
+        tempSum += aRunner.data;
+      }
+      if(bRunner != null){
+        tempSum += bRunner.data;
+      }
       int currentDigit = tempSum%10;
       previousCarry = tempSum/10;
       Node currentdigitNode = new Node();
@@ -46,8 +52,12 @@ public class AddTwoNumbers {
         previousDigitNode.next = currentdigitNode;
       }
       previousDigitNode = currentdigitNode;
-      aRunner = aRunner.next;
-      bRunner = bRunner.next;
+      if(aRunner != null){
+        aRunner = aRunner.next;
+      }
+      if(bRunner != null){
+        bRunner = bRunner.next;
+      }
     }
     if(previousCarry > 0){
       Node currentDigitNode = new Node();
@@ -136,6 +146,15 @@ public class AddTwoNumbers {
     numberA = LinkedListUtil.createLinkedList(input);
     LinkedListUtil.printLinkedList(numberA);
     input = new int[]{5,9,9};
+    numberB = LinkedListUtil.createLinkedList(input);
+    LinkedListUtil.printLinkedList(numberB);
+    sumRoot = addTwoNumbers(numberA,numberB);
+    LinkedListUtil.printLinkedList(sumRoot);
+    System.out.println("next.......");
+    input = new int[]{7,1,9};
+    numberA = LinkedListUtil.createLinkedList(input);
+    LinkedListUtil.printLinkedList(numberA);
+    input = new int[]{9,9};
     numberB = LinkedListUtil.createLinkedList(input);
     LinkedListUtil.printLinkedList(numberB);
     sumRoot = addTwoNumbers(numberA,numberB);
