@@ -41,6 +41,9 @@ public class ThreesStacksWithOneArray {
   Divide stack into three portions
   0,n/3 -1 : n/3 -> (2n/3 - 1) : 2n/3 -> n - 1
    */
+/*
+Head stays one step ahead of tail. Head refers to the next available slot and tail refers to the latest data.
+ */
 
   /**
    *
