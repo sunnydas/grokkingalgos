@@ -32,6 +32,23 @@ public class LinkedListUtil {
     return head;
   }
 
+  public static NodeGeneric createLinkedList(String[] input){
+    NodeGeneric head = null;
+    NodeGeneric previous = null;
+    for(int i = 0 ; i < input.length ; i++){
+      NodeGeneric node = new NodeGeneric();
+      node.data = input[i];
+      if(head == null){
+        head = node;
+      }
+      if(previous != null){
+        previous.next = node;
+      }
+      previous = node;
+    }
+    return head;
+  }
+
 
   /**
    *
@@ -39,6 +56,21 @@ public class LinkedListUtil {
    */
   public static void printLinkedList(Node root){
     Node current = root;
+    System.out.println();
+    while(current != null){
+      System.out.print(current.data);
+      System.out.print("->");
+      current = current.next;
+    }
+    System.out.println();
+  }
+
+  /**
+   *
+   * @param root
+   */
+  public static void printLinkedList(NodeGeneric root){
+    NodeGeneric current = root;
     System.out.println();
     while(current != null){
       System.out.print(current.data);
