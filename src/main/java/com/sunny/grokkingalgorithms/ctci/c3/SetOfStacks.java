@@ -144,6 +144,7 @@ public class SetOfStacks {
     for(int i = 0 ; i < input.length ; i++){
       System.out.println(setOfStacks.pop());
     }
+    System.out.println("done");
   }
 
 }
