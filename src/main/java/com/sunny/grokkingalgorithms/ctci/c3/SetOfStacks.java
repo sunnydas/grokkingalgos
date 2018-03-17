@@ -98,34 +98,39 @@ public class SetOfStacks {
     int elem = Integer.MAX_VALUE;
     if(stackIndex < stacks.length && stacks[stackIndex] != null && !stacks[stackIndex].isEmpty()){
       elem = stacks[stackIndex].pop();
-      /*
-      Now if we have stacks fater this which are full, we have essentially created the hole. SO we need to shift one
-      element from next stack to this stack and repeat until we have done this for all stacks
-       */
-      int stackPointer = stackIndex;
+      shiftElementsFromNextStacks(stackIndex);
+
+    }
+    return elem;
+  }
+
+  private void shiftElementsFromNextStacks(int stackIndex) {
+  /*
+  Now if we have stacks fater this which are full, we have essentially created the hole. SO we need to shift one
+  element from next stack to this stack and repeat until we have done this for all stacks
+   */
+    int stackPointer = stackIndex;
       /*
       If there are next stacks which have elements in them
        */
-      while((stackPointer+1) < stacks.length
-          && stacks[stackPointer+1] != null && !stacks[stackPointer+1].isEmpty()){
-        Stack<Integer> auxillaryStack = new Stack<>();
-        //Copy next stack elements to auxillary stack
-        while(!stacks[stackPointer+1].isEmpty()){
-          auxillaryStack.push(stacks[stackPointer+1].pop());
-        }
-        // push last element of next stack to current stack
-        if(!auxillaryStack.isEmpty()){
-          stacks[stackPointer].push(auxillaryStack.pop());
-        }
-        //Copy back the auxillary elements to next stack
-        while(!auxillaryStack.isEmpty()){
-          stacks[stackPointer+1].push(auxillaryStack.pop());
-        }
-        //Repeat
-        stackPointer++;
+    while((stackPointer+1) < stacks.length
+        && stacks[stackPointer+1] != null && !stacks[stackPointer+1].isEmpty()){
+      Stack<Integer> auxillaryStack = new Stack<>();
+      //Copy next stack elements to auxillary stack
+      while(!stacks[stackPointer+1].isEmpty()){
+        auxillaryStack.push(stacks[stackPointer+1].pop());
       }
+      // push last element of next stack to current stack
+      if(!auxillaryStack.isEmpty()){
+        stacks[stackPointer].push(auxillaryStack.pop());
+      }
+      //Copy back the auxillary elements to next stack
+      while(!auxillaryStack.isEmpty()){
+        stacks[stackPointer+1].push(auxillaryStack.pop());
+      }
+      //Repeat
+      stackPointer++;
     }
-    return elem;
   }
 
   /**
