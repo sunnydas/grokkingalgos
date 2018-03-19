@@ -88,5 +88,52 @@ public class TreeUtils {
     }
   }
 
+  /**
+   *
+   * @return
+   */
+  public static BinaryTreeNode createBST(){
+    BinaryTreeNode seven = new BinaryTreeNode();
+    seven.data = 7;
+    BinaryTreeNode five = new BinaryTreeNode();
+    five.data = 5;
+    seven.left = five;
+    BinaryTreeNode nine = new BinaryTreeNode();
+    nine.data = 9;
+    seven.right = nine;
+    BinaryTreeNode four = new BinaryTreeNode();
+    four.data = 4;
+    five.left = four;
+    BinaryTreeNode six = new BinaryTreeNode();
+    six.data = 6;
+    five.right = six;
+    BinaryTreeNode eight = new BinaryTreeNode();
+    eight.data = 8;
+    nine.left = eight;
+    BinaryTreeNode ten = new BinaryTreeNode();
+    ten.data = 10;
+    nine.right = ten;
+    BinaryTreeNode three = new BinaryTreeNode();
+    three.data = 3;
+    four.left = three;
+    BinaryTreeNode eleven = new BinaryTreeNode();
+    eleven.data = 11;
+    ten.right = eleven;
+    return seven;
+  }
+
+  /**
+   *
+   * @param root
+   */
+  public static void inorder(BinaryTreeNode root){
+    if(root == null){
+      return;
+    }
+    inorder(root.left);
+    System.out.println(root.data);
+    inorder(root.right);
+  }
+
 
 }
