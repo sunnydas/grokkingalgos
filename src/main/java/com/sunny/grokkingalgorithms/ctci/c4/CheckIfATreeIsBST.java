@@ -66,6 +66,28 @@ public class CheckIfATreeIsBST {
     return min;
   }
 
+
+  /**
+   * Alternate implementation
+   *
+   * @param root
+   * @param min
+   * @param max
+   * @return
+   */
+  public static boolean isBST(BinaryTreeNode root, int min,int max){
+    if(root == null){
+      return true;
+    }
+    if(root.data < min || root.data > max){
+      return false;
+    }
+    /*
+    BST invariant
+     */
+    return isBST(root.left,min,(root.data - 1)) && isBST(root.right,(root.data+1), max);
+  }
+
   /**
    *
    * @param args
@@ -75,9 +97,12 @@ public class CheckIfATreeIsBST {
     TreeUtils.inorder(root);
     TreeUtils.performBfs(root);
     System.out.println(isBST(root));
+    System.out.println(isBST(root,Integer.MIN_VALUE,Integer.MAX_VALUE));
     root = TreeUtils.createBalancedBinaryTree();
     System.out.println(isBST(root));
+    System.out.println(isBST(root,Integer.MIN_VALUE,Integer.MAX_VALUE));
     root = TreeUtils.createUnBalancedBinaryTree();
     System.out.println(isBST(root));
+    System.out.println(isBST(root,Integer.MIN_VALUE,Integer.MAX_VALUE));
   }
 }
