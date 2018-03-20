@@ -90,6 +90,35 @@ public class TreeUtils {
 
   /**
    *
+   * @param root
+   */
+  public static void performBfsLevelMarker(BinaryTreeNode root){
+    Queue<BinaryTreeNode> queue = new LinkedList<>();
+    queue.add(root);
+    BinaryTreeNode level = new BinaryTreeNode();
+    queue.add(level);
+    while(!queue.isEmpty()){
+      BinaryTreeNode current = queue.poll();
+      if(current == level){
+        System.out.println();
+        if(!queue.isEmpty()){
+          queue.add(level);
+        }
+      }
+      else {
+        System.out.print(current.data + " ");
+        if (current.left != null) {
+          queue.add(current.left);
+        }
+        if (current.right != null) {
+          queue.add(current.right);
+        }
+      }
+    }
+  }
+
+  /**
+   *
    * @return
    */
   public static BinaryTreeNode createBST(){
@@ -133,6 +162,15 @@ public class TreeUtils {
     inorder(root.left);
     System.out.println(root.data);
     inorder(root.right);
+  }
+
+  public static void performPostOrder(BinaryTreeNode root){
+    if(root == null){
+      return;
+    }
+    performPostOrder(root.left);
+    performPostOrder(root.right);
+    System.out.println(root.data);
   }
 
 
