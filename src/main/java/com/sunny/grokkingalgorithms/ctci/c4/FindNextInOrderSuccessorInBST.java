@@ -66,15 +66,15 @@ public class FindNextInOrderSuccessorInBST {
     }
     BinaryTreeNode succesor = null;
     /*
-    If root has right child then succesor is the right child
+    If root has right child then succesor is the min of right subtree
      */
     if(root.right != null){
-      if(root.right.left != null){
-        succesor = root.right.left;
-      }
-      else{
-        succesor = root.right;
-      }
+      /*
+      dirty hack too lazy to change return type
+       */
+      int min = CheckIfATreeIsBST.min(root.right);
+      succesor = new BinaryTreeNode();
+      succesor.data = min;
     }
     /*
     else if root ahs no right child but is the left child of its parent, then parent is the succesor
@@ -93,8 +93,7 @@ public class FindNextInOrderSuccessorInBST {
         The right child should not be the current node.
          */
         if(parent != null
-            && parent.right != null
-            && parent.right != root){
+            && parent.left == root){
           succesor = parent;
           break;
         }
