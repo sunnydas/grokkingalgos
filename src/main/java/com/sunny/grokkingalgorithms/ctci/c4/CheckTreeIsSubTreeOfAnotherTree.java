@@ -42,13 +42,19 @@ public class CheckTreeIsSubTreeOfAnotherTree {
     /*
     Not sure of this base conditions
      */
+    /*
+    Bothe nodes are leaf
+     */
     if(t1 == null && t2 == null){
       return true;
     }
+    /*
+    We have reached end of t2 and no violations so far
+     */
     if(t2 == null){
       return true;
     }
-    if(t1 == null){
+    if(t1 == null && t2 != null){
       return false;
     }
     if(t1.data != t2.data){
