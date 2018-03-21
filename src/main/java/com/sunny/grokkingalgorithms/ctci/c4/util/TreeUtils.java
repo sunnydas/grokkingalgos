@@ -117,6 +117,37 @@ public class TreeUtils {
     }
   }
 
+
+
+  /**
+   *
+   * @return
+   */
+  public static BinaryTreeNode createT2AsSubsetOfBalancedTree(){
+    BinaryTreeNode two = new BinaryTreeNode();
+    two.data = 2;
+    BinaryTreeNode four = new BinaryTreeNode();
+    four.data = 4;
+    two.left = four;
+    BinaryTreeNode five = new BinaryTreeNode();
+    five.data = 5;
+    two.right = five;
+    return two;
+  }
+
+  /**
+   *
+   * @return
+   */
+  public static BinaryTreeNode createT2AsSubsetOfBalancedTreeAlt(){
+    BinaryTreeNode three = new BinaryTreeNode();
+    three.data = 3;
+    BinaryTreeNode seven = new BinaryTreeNode();
+    seven.data = 7;
+    three.right = seven;
+    return three;
+  }
+
   /**
    *
    * @return
