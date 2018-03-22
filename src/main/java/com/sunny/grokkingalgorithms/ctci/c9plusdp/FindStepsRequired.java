@@ -65,7 +65,15 @@ public class FindStepsRequired {
     possibleWays = 0;
     findPossibleSteps(3);
     System.out.println(possibleWays);
+    possibleWays = 0;
+    long start = System.currentTimeMillis();
+    findPossibleSteps(30);
+    System.out.println(possibleWays);
+    System.out.println(" Time taken = " + ((System.currentTimeMillis() - start))/100 + " seconds");
     System.out.println(findPossibleStepsDP(4, new int[5]));
     System.out.println(findPossibleStepsDP(3,new int[4]));
+    start = System.currentTimeMillis();
+    System.out.println(findPossibleStepsDP(30,new int[31]));
+    System.out.println(" Time taken = " + ((System.currentTimeMillis() - start))/100 + " seconds");
   }
 }
