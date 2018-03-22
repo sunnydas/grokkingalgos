@@ -12,6 +12,30 @@ public class FindStepsRequired {
 
   public static int possibleWays = 0;
 
+
+  /**
+   *
+   * @param n
+   * @param map
+   * @return
+   */
+  public static int findPossibleStepsDP(int n,int[] map){
+    if(n == 0){
+      return 1;
+    }
+    if(n < 0){
+      return 0;
+    }
+    if(map[n] > 0){
+      return map[n];
+    }
+    else {
+      map[n] = findPossibleStepsDP(n - 1, map) + findPossibleStepsDP(n - 2, map) + findPossibleStepsDP(n - 3, map);
+    }
+    return map[n];
+  }
+
+
   /**
    *
    * @param n
@@ -38,5 +62,10 @@ public class FindStepsRequired {
   public static void main(String[] args) {
     findPossibleSteps(4);
     System.out.println(possibleWays);
+    possibleWays = 0;
+    findPossibleSteps(3);
+    System.out.println(possibleWays);
+    System.out.println(findPossibleStepsDP(4, new int[5]));
+    System.out.println(findPossibleStepsDP(3,new int[4]));
   }
 }
