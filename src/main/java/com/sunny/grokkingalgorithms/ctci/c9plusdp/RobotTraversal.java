@@ -3,6 +3,18 @@ package com.sunny.grokkingalgorithms.ctci.c9plusdp;
 import java.util.ArrayList;
 import java.util.List;
 
+class Point{
+  int x;
+  int y;
+
+  @Override
+  public String toString() {
+    return "Point{" +
+        "x=" + x +
+        ", y=" + y +
+        '}';
+  }
+}
 /**
  * Created by sundas on 3/23/2018.
  */
@@ -11,6 +23,44 @@ public class RobotTraversal {
   /*
   A robot can move down or right , find number of ways it can reacha  point (x,y) fro (0,0)
    */
+
+  public static boolean findPathFromBottomLeftToTopRight(int[][] matrix,List<Point> paths,int x,int y){
+    if(x == 0 && y == 0){
+      Point point = new Point();
+      point.x = x;
+      point.y = y;
+      paths.add(point);
+      return true;
+    }
+    boolean success = false;
+    /*
+    Go left
+     */
+    if(x >= 0 && y-1 >= 0 && isFree(matrix,x,y)){
+      Point point = new Point();
+      point.x = x;
+      point.y = y;
+      paths.add(point);
+      success = findPathFromBottomLeftToTopRight(matrix,paths,x,y-1);
+      if(!success){
+        paths.remove(point);
+      }
+    }
+    /*
+    Go up
+     */
+    if(!success && x-1 >= 0 && y >= 0 && isFree(matrix,x,y)){
+      Point point = new Point();
+      point.x = x;
+      point.y = y;
+      paths.add(point);
+      success = findPathFromBottomLeftToTopRight(matrix,paths,x-1,y);
+      if(!success){
+        paths.remove(point);
+      }
+    }
+    return success;
+  }
 
   /**
    *
@@ -124,5 +174,10 @@ public class RobotTraversal {
         {0,0,0,0}
     };
     System.out.println(findPathFromTopLevelToBottomLevelWithCertainCellsOffLimits(robotPath));
+    List<Point> paths = new ArrayList<>();
+    boolean found = findPathFromBottomLeftToTopRight(robotPath, paths,robotPath.length - 1,
+        robotPath[0].length - 1);
+    System.out.println(found);
+    System.out.println(paths);
   }
 }
