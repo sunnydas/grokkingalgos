@@ -1,5 +1,8 @@
 package com.sunny.grokkingalgorithms.ctci.c9plusdp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sundas on 3/23/2018.
  */
@@ -48,6 +51,60 @@ public class RobotTraversal {
     return count;
   }
 
+
+  /**
+   *
+   * @param matrix
+   */
+  public static List<String> findPathFromTopLevelToBottomLevelWithCertainCellsOffLimits(int[][] matrix){
+    /*
+    Certain paths are offlimits denoted by 1s
+     */
+    List<String> paths = new ArrayList<>();
+    findPathsFromTopToBottomRecursive(matrix,paths,"",0,0);
+    return paths;
+  }
+
+  /**
+   *
+   * @param matrix
+   * @param paths
+   */
+  public static void findPathsFromTopToBottomRecursive(int[][] matrix,List<String> paths,String path,int x, int y){
+    if(x == (matrix.length - 1) && y == (matrix[x].length - 1)){
+      /*
+      Path found
+       */
+      path += "-> " + x+" "+ y + " ";
+      paths.add(path);
+    }
+    path += "-> " + x+" "+ y + " ";
+    /*
+    Go right
+     */
+    if(x < matrix.length && y+1 < matrix[x].length && isFree(matrix,x,y+1)){
+      findPathsFromTopToBottomRecursive(matrix,paths,path,x,y+1);
+    }
+    /*
+    Go down
+     */
+    if(x+1 < matrix.length && y < matrix[x].length && isFree(matrix,x+1,y)){
+      findPathsFromTopToBottomRecursive(matrix,paths,path,x+1,y);
+    }
+  }
+
+  /**
+   *
+   * @param matrix
+   * @param x
+   * @param y
+   * @return
+   */
+  public static boolean isFree(int[][] matrix,int x, int y){
+    boolean free = matrix[x][y] == 0;
+    return free;
+  }
+
   /**
    *
    * @param args
@@ -60,5 +117,12 @@ public class RobotTraversal {
         {0,0,0,0}
     };
     System.out.println(countWaysToReachXY(robotPath,2,3));
+    robotPath = new int[][]{
+        {0,1,0,0},
+        {0,1,0,0},
+        {0,0,1,0},
+        {0,0,0,0}
+    };
+    System.out.println(findPathFromTopLevelToBottomLevelWithCertainCellsOffLimits(robotPath));
   }
 }
