@@ -2,10 +2,30 @@ package com.sunny.grokkingalgorithms.ctci.c9plusdp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 class Point{
   int x;
   int y;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Point point = (Point) o;
+
+    if (x != point.x) return false;
+    return y == point.y;
+
+  }
+
+  @Override
+  public int hashCode() {
+    int result = x;
+    result = 31 * result + y;
+    return result;
+  }
 
   @Override
   public String toString() {
@@ -24,7 +44,10 @@ public class RobotTraversal {
   A robot can move down or right , find number of ways it can reacha  point (x,y) fro (0,0)
    */
 
-  public static boolean findPathFromBottomLeftToTopRight(int[][] matrix,List<Point> paths,int x,int y){
+  /**
+   * This methods one path not all paths
+   */
+  public static boolean findPathFromBottomRightToTopLeft(int[][] matrix, List<Point> paths, int x, int y){
     if(x == 0 && y == 0){
       Point point = new Point();
       point.x = x;
@@ -41,7 +64,7 @@ public class RobotTraversal {
       point.x = x;
       point.y = y;
       paths.add(point);
-      success = findPathFromBottomLeftToTopRight(matrix,paths,x,y-1);
+      success = findPathFromBottomRightToTopLeft(matrix, paths, x, y - 1);
       if(!success){
         paths.remove(point);
       }
@@ -54,11 +77,51 @@ public class RobotTraversal {
       point.x = x;
       point.y = y;
       paths.add(point);
-      success = findPathFromBottomLeftToTopRight(matrix,paths,x-1,y);
+      success = findPathFromBottomRightToTopLeft(matrix, paths, x - 1, y);
       if(!success){
         paths.remove(point);
       }
     }
+    return success;
+  }
+
+
+  /**
+   * This methods one path not all paths
+   */
+  public static boolean findPathFromBottomRightToTopLeftDP(int[][] matrix, List<Point> paths, int x, int y,
+                                                           Map<Point,Boolean> cache){
+    Point point = new Point();
+    point.x = x;
+    point.y = y;
+    paths.add(point);
+    if(x == 0 && y == 0){
+      cache.put(point,true);
+      return true;
+    }
+    if(cache.containsKey(point)){
+      return cache.get(point);
+    }
+    boolean success = false;
+    /*
+    Go left
+     */
+    if(x >= 0 && y-1 >= 0 && isFree(matrix,x,y)){
+      success = findPathFromBottomRightToTopLeftDP(matrix, paths, x, y - 1,cache);
+      if(!success){
+        paths.remove(point);
+      }
+    }
+    /*
+    Go up
+     */
+    if(!success && x-1 >= 0 && y >= 0 && isFree(matrix,x,y)){
+      success = findPathFromBottomRightToTopLeftDP(matrix, paths, x - 1, y,cache);
+      if(!success){
+        paths.remove(point);
+      }
+    }
+    cache.put(point,success);
     return success;
   }
 
@@ -175,7 +238,12 @@ public class RobotTraversal {
     };
     System.out.println(findPathFromTopLevelToBottomLevelWithCertainCellsOffLimits(robotPath));
     List<Point> paths = new ArrayList<>();
-    boolean found = findPathFromBottomLeftToTopRight(robotPath, paths,robotPath.length - 1,
+    boolean found = findPathFromBottomRightToTopLeft(robotPath, paths,robotPath.length - 1,
+        robotPath[0].length - 1);
+    System.out.println(found);
+    System.out.println(paths);
+    paths = new ArrayList<>();
+    found = findPathFromBottomRightToTopLeft(robotPath, paths, robotPath.length - 1,
         robotPath[0].length - 1);
     System.out.println(found);
     System.out.println(paths);
