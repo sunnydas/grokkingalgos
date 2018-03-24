@@ -25,10 +25,12 @@ public class MagicNumber {
       return mid;
     }
     else if(input[mid] < mid){
-      return findMagicNumberRecursive(input, mid + 1, end);
+      int beg = Math.max(mid+1,input[mid]);
+      return findMagicNumberRecursive(input, beg, end);
     }
     else{
-      return findMagicNumberRecursive(input, start, mid - 1);
+      int endian = Math.min(mid-1,input[mid]);
+      return findMagicNumberRecursive(input, start, endian);
     }
   }
 
@@ -93,6 +95,8 @@ public class MagicNumber {
     System.out.println(findMagicNumberRecursive(input, 0, input.length - 1));
     input = new int[]{-3,-2,-1,0,4};
     System.out.println(findMagicNumberRecursive(input,0,input.length-1));
+    input = new int[]{-10,-5,2,2,2,3,4,7,9,12,13};
+    System.out.println(findMagicNumberRecursive(input, 0, input.length - 1));
   }
 
 }
