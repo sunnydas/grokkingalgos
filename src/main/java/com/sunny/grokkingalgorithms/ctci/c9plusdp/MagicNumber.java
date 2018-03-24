@@ -24,14 +24,16 @@ public class MagicNumber {
     if(input[mid] == mid){
       return mid;
     }
-    else if(input[mid] < mid){
-      int beg = Math.max(mid+1,input[mid]);
-      return findMagicNumberRecursive(input, beg, end);
+    /*
+    There is no if else because we do not know for sure whether magic nuner
+    is on left or right.
+     */
+    int found = findMagicNumberRecursive(input,Math.max(mid + 1, input[mid]),end);
+    if(found >= 0){
+      return found;
     }
-    else{
-      int endian = Math.min(mid-1,input[mid]);
-      return findMagicNumberRecursive(input, start, endian);
-    }
+    found = findMagicNumberRecursive(input,start,Math.min(mid - 1,input[mid]));
+    return found;
   }
 
 
@@ -96,6 +98,8 @@ public class MagicNumber {
     input = new int[]{-3,-2,-1,0,4};
     System.out.println(findMagicNumberRecursive(input,0,input.length-1));
     input = new int[]{-10,-5,2,2,2,3,4,7,9,12,13};
+    System.out.println(findMagicNumberRecursive(input, 0, input.length - 1));
+    input = new int[]{-10,-5,2,2,2,3,4,8,9,12,13};
     System.out.println(findMagicNumberRecursive(input, 0, input.length - 1));
   }
 
