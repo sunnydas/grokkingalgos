@@ -43,8 +43,9 @@ public class ZeroOneKnapSackProblem {
       }
     }
     print2DMatrix(itemMatrix);
-    //printPath(pathMatrix,weights,capacity);
     max = itemMatrix[values.length - 1][capacity];
+    //printPath(pathMatrix,weights,capacity);
+    /*max = itemMatrix[values.length - 1][capacity];
     int i = itemMatrix.length - 1;
     int j = itemMatrix[i].length - 1;
     System.out.println("Path:");
@@ -64,7 +65,7 @@ public class ZeroOneKnapSackProblem {
       else{
         i = i - 1;
       }
-    }
+    }*/
     return max;
   }
 
