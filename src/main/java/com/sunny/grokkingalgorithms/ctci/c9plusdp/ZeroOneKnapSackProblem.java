@@ -21,6 +21,27 @@ public class ZeroOneKnapSackProblem {
    * @param capacity
    * @return
    */
+  public static int knapSackBruteForce(int[] weights,int[] values,int capacity,int n){
+    if(n == 0 || capacity == 0){
+      return 0;
+    }
+    else if(weights[n] > capacity){
+      return knapSackBruteForce(weights,values,capacity,n-1);
+    }
+    else{
+       int tmp1 = knapSackBruteForce(weights,values,capacity,n-1);
+       int tmp2 = values[n] + knapSackBruteForce(weights,values,capacity - weights[n],n-1);
+       return Math.max(tmp1,tmp2);
+    }
+  }
+
+  /**
+   *
+   * @param weights
+   * @param values
+   * @param capacity
+   * @return
+   */
   public static int knapSack(int[] weights,int[] values,int capacity){
     int max = Integer.MIN_VALUE;
     int[][] itemMatrix = new int[values.length][capacity+1];
@@ -98,6 +119,9 @@ public class ZeroOneKnapSackProblem {
     int max = knapSack(weights,values,capacity);
     System.out.println(" max " + max);
     //System.out.println(getItemsInOptimalSolution());
+    weights = new int[]{-1,1,3,4,5};
+    values = new int[]{-1,1,4,5,7};
+    System.out.println("max via brute force = " + knapSackBruteForce(weights,values,capacity,weights.length - 1));
   }
 
 
