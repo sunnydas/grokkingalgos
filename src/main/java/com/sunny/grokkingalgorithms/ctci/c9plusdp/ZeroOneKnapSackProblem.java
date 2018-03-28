@@ -24,14 +24,16 @@ public class ZeroOneKnapSackProblem {
   public static int knapSack(int[] weights,int[] values,int capacity){
     int max = Integer.MIN_VALUE;
     int[][] itemMatrix = new int[values.length][capacity+1];
-    //boolean[][] pathMatrix = new boolean[values.length][capacity+1];
+    boolean[][] pathMatrix = new boolean[values.length][capacity+1];
     for(int i = 0 ; i < itemMatrix.length ; i++){
       for(int j = 1 ; j < itemMatrix[i].length ; j++){
         if((i-1) < 0){
           itemMatrix[i][j] = values[i];
+          pathMatrix[i][j] = true;
         }
         else if(weights[i] > j){
           itemMatrix[i][j] = itemMatrix[i-1][j];
+          pathMatrix[i][j] = false;
         }
         else{
           int includeValue = values[i];
@@ -39,37 +41,41 @@ public class ZeroOneKnapSackProblem {
             includeValue += itemMatrix[i-1][j - weights[i]];
           }
           itemMatrix[i][j] = Math.max(includeValue,itemMatrix[i-1][j]);
+          if(includeValue >= itemMatrix[i-1][j]){
+            pathMatrix[i][j] = true;
+          }
+          else{
+            pathMatrix[i][j] = false;
+          }
         }
       }
     }
     print2DMatrix(itemMatrix);
-    max = itemMatrix[values.length - 1][capacity];
-    //printPath(pathMatrix,weights,capacity);
-    /*max = itemMatrix[values.length - 1][capacity];
-    int i = itemMatrix.length - 1;
-    int j = itemMatrix[i].length - 1;
-    System.out.println("Path:");
+    System.out.println();
+    print2DMatrix(pathMatrix);
+    System.out.println();
     int runCapacity = capacity;
-    while(i >= 0 && j >=0){
-      if(i-1 < 0){
-        System.out.println("item = " + i + " weight = " + weights[i] + " values = " + values[i]);
-        i = i - 1;
+    for(int i = itemMatrix.length - 1,j = itemMatrix[i].length - 1 ; i >= 0 && j >= 0 ; i--){
+      if(pathMatrix[i][j]){
+        System.out.println(i + " " + j);
+        int diff = weights[i];
+        j = runCapacity - diff;
+        runCapacity = runCapacity - diff;
       }
-      else if(itemMatrix[i][j] != itemMatrix[i-1][j]){
-        System.out.println(" item = " + i + " weight = " + weights[i] + " value " + values[i]);
-        j = runCapacity - weights[i];
-        runCapacity = runCapacity - weights[i];
-        i = i - 1;
-        //System.out.println(j);
-      }
-      else{
-        i = i - 1;
-      }
-    }*/
+    }
+    max = itemMatrix[values.length - 1][capacity];
     return max;
   }
 
 
+  public static void print2DMatrix(boolean[][] input){
+    for(int i = 0; i < input.length ; i++){
+      for(int j = 0 ; j < input[i].length ; j++){
+        System.out.print(input[i][j] + " ");
+      }
+      System.out.println();
+    }
+  }
 
   public static void print2DMatrix(int[][] input){
     for(int i = 0; i < input.length ; i++){
