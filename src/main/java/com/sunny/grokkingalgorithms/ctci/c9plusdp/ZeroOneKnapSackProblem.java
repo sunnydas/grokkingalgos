@@ -22,6 +22,9 @@ public class ZeroOneKnapSackProblem {
    * @return
    */
   public static int knapSackBruteForce(int[] weights,int[] values,int capacity,int n){
+    /*
+    Reverse order progress
+     */
     if(n == 0 || capacity == 0){
       return 0;
     }
