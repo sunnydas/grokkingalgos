@@ -1,9 +1,6 @@
 package com.sunny.grokkingalgorithms.ctci.c9plusdp;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +15,46 @@ public class FindAllValidPairOfParenthesis {
   n = 2
   (()) ()()
    */
+
+  public static Set<String> findAllValidaPairOfParenthesisAlternate(int n){
+    if(n <= 0){
+      return null;
+    }
+    if(n == 1){
+      String pair = "()";
+      Set<String> set = new HashSet<>();
+      set.add(pair);
+      return set;
+    }
+    Set<String> currentSet = new HashSet<>();
+    List<String> childList = findAllValidPairOfParenthesis(n-1);
+    if(childList != null && !childList.isEmpty()){
+      for(String parenthesis : childList){
+        for(int i = 0 ; i < parenthesis.length() ; i++){
+          //if(parenthesis.charAt(i) == '('){
+          String newParenthesis = insertAtIndex(parenthesis,i);
+          currentSet.add(newParenthesis);
+          //}
+        }
+        currentSet.add("()" + parenthesis);
+      }
+      //currentList.addAll(childList);
+    }
+    return currentSet;
+  }
+
+
+  /**
+   *
+   * @param s
+   * @param index
+   * @return
+   */
+  public static String insertAtIndex(String s, int index){
+    StringBuilder builder = new StringBuilder(s);
+    builder.insert(index,"()");
+    return builder.toString();
+  }
 
   /**
    *
@@ -95,7 +132,7 @@ public class FindAllValidPairOfParenthesis {
 
   public static void populateAndPrintValidNPairParenthesisCombinations(String s,int n,List<String> combinations){
     if(s != null && s.length() == n){
-      System.out.println(s);
+      //System.out.println(s);
       combinations.add(s);
       return;
     }
@@ -115,5 +152,6 @@ public class FindAllValidPairOfParenthesis {
     int n = 6;
     System.out.println(findAllValidPairOfParenthesis(n));
     //System.out.println(isValidCombination("())("));
+    System.out.println(findAllValidaPairOfParenthesisAlternate(n));
   }
 }
