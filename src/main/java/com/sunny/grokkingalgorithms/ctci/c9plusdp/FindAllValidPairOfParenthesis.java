@@ -112,7 +112,7 @@ public class FindAllValidPairOfParenthesis {
    * @param args
    */
   public static void main(String[] args) {
-    int n = 3;
+    int n = 6;
     System.out.println(findAllValidPairOfParenthesis(n));
     //System.out.println(isValidCombination("())("));
   }
