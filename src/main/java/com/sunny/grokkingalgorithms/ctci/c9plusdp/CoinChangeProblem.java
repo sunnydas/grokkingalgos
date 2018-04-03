@@ -1,5 +1,7 @@
 package com.sunny.grokkingalgorithms.ctci.c9plusdp;
 
+import java.util.Arrays;
+
 /**
  * Created by sundas on 4/3/2018.
  */
@@ -46,6 +48,46 @@ public class CoinChangeProblem {
 
   /**
    *
+   * @param coins
+   * @param value
+   * @param curValue
+   */
+  public static void printNumberOfWaysGreedy(int[] coins,int value,String curValue){
+    /*
+    Sort it to choose the max values
+     */
+    Arrays.sort(coins);
+    printNumberOfWaysGreedyRecursive(coins,value,curValue,coins.length - 1);
+  }
+
+  /**
+   *
+   * @param coins
+   * @param value
+   * @param curValue
+   */
+  public static void printNumberOfWaysGreedyRecursive(int[] coins,int value,String curValue,int currentCoinIdex){
+    if(value <= 0){
+      return;
+    }
+    else if(value%coins[currentCoinIdex] == 0){
+      curValue += coins[currentCoinIdex] + " * " + (value/coins[currentCoinIdex]);
+      System.out.println(curValue);
+    }
+    else if(coins[currentCoinIdex] > value) {
+      printNumberOfWaysGreedyRecursive(coins,value,curValue,--currentCoinIdex);
+    }
+    else{
+      int rem = value%coins[currentCoinIdex];
+      int div = value/coins[currentCoinIdex];
+      curValue += (div) +  " * " + coins[currentCoinIdex] + "-->";
+      printNumberOfWaysGreedyRecursive(coins,value - div*coins[currentCoinIdex],curValue,--currentCoinIdex);
+    }
+  }
+
+
+  /**
+   *
    * @param args
    */
   public static void main(String[] args) {
@@ -53,6 +95,7 @@ public class CoinChangeProblem {
     int value = 20;
     printNumberOfWays(coins,value,"",0);
     System.out.println(totalCount);
+    printNumberOfWaysGreedy(coins,value,"");
   }
 
 }
