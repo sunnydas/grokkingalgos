@@ -16,6 +16,42 @@ public class FindAllValidPairOfParenthesis {
   (()) ()()
    */
 
+
+  /**
+   *
+   * @param curParenthesis
+   * @param count
+   * @param lefParenCount
+   * @param rightparenCount
+   * @param parenthesis
+   */
+  public static void findValidParenthesisOptimized(char[] curParenthesis,int count,int lefParenCount,int rightparenCount,
+                                                    List<String> parenthesis){
+    if(lefParenCount < 0  || rightparenCount < 0){
+      return;
+    }
+    if(rightparenCount == 0 && lefParenCount == 0){
+      String val = String.valueOf(curParenthesis);
+      parenthesis.add(val);
+    }
+    else{
+      if(lefParenCount > 0){
+        curParenthesis[count] = '(';
+        findValidParenthesisOptimized(curParenthesis,count+1,lefParenCount-1,rightparenCount,parenthesis);
+      }
+      if(rightparenCount >  lefParenCount){
+        curParenthesis[count] = ')';
+        findValidParenthesisOptimized(curParenthesis,count+1,lefParenCount,rightparenCount-1,parenthesis);
+      }
+    }
+  }
+
+
+  /**
+   *
+   * @param n
+   * @return
+   */
   public static Set<String> findAllValidaPairOfParenthesisAlternate(int n){
     if(n <= 0){
       return null;
@@ -153,5 +189,9 @@ public class FindAllValidPairOfParenthesis {
     System.out.println(findAllValidPairOfParenthesis(n));
     //System.out.println(isValidCombination("())("));
     System.out.println(findAllValidaPairOfParenthesisAlternate(n));
+    List<String> validParenthesis = new ArrayList<>();
+    char[] currentStr = new char[2*n];
+    findValidParenthesisOptimized(currentStr,0,n,n,validParenthesis);
+    System.out.println(validParenthesis);
   }
 }
