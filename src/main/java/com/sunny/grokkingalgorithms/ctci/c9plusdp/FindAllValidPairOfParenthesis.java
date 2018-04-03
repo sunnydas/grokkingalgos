@@ -39,6 +39,9 @@ public class FindAllValidPairOfParenthesis {
         curParenthesis[count] = '(';
         findValidParenthesisOptimized(curParenthesis,count+1,lefParenCount-1,rightparenCount,parenthesis);
       }
+      /*
+      Most important point
+       */
       if(rightparenCount >  lefParenCount){
         curParenthesis[count] = ')';
         findValidParenthesisOptimized(curParenthesis,count+1,lefParenCount,rightparenCount-1,parenthesis);
