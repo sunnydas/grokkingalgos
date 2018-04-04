@@ -36,6 +36,24 @@ public class CoinChangeProblem {
     return count;
   }
 
+  public static long countTotalNumberOfWaysAlternate(int[] coins,int value,int curIndex,String curValue){
+    if(value == 0){
+      System.out.println(curValue);
+      return 1;
+    }
+    if(value < 0){
+      return 0;
+    }
+    if(curIndex < 0 && value >= 1){
+      return 0;
+    }
+    long count = 0;
+    count = countTotalNumberOfWaysAlternate(coins,value,curIndex - 1,curValue)
+        + countTotalNumberOfWaysAlternate(coins,value - coins[curIndex],curIndex,curValue + "->" + coins[curIndex]);
+    return count;
+  }
+
+
   /**
    *
    * @param coins
@@ -106,11 +124,12 @@ public class CoinChangeProblem {
    */
   public static void main(String[] args) {
     int[] coins = new int[]{5,2,1};
-    int value = 20;
+    int value = 10;
     printNumberOfWays(coins,value,"",0);
     System.out.println(totalCount);
     printNumberOfWaysGreedy(coins, value, "");
-    System.out.println(countTotalNumberOfWays(coins,20,""));
+    System.out.println(countTotalNumberOfWays(coins, value, ""));
+    System.out.println(countTotalNumberOfWaysAlternate(coins,value,coins.length - 1,""));
   }
 
 }
