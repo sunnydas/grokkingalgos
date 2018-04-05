@@ -124,7 +124,7 @@ public class CoinChangeProblem {
    */
   public static void main(String[] args) {
     int[] coins = new int[]{5,2,1};
-    int value = 10;
+    int value = 20;
     printNumberOfWays(coins,value,"",0);
     System.out.println(totalCount);
     printNumberOfWaysGreedy(coins, value, "");
