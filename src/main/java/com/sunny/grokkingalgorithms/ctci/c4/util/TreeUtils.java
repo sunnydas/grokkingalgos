@@ -65,6 +65,9 @@ public class TreeUtils {
     seven.data = 7;
     //three.right = seven;
     six.right = seven;
+    BinaryTreeNode eight = new BinaryTreeNode();
+    eight.data = 8;
+    six.left = eight;
     return one;
   }
 
