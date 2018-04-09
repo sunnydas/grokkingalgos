@@ -1,5 +1,7 @@
 package com.sunny.grokkingalgorithms.ctci.c9plusdp;
 
+import java.util.*;
+
 /**
  * Created by sundas on 4/9/2018.
  */
@@ -16,6 +18,51 @@ Examples:
 LCS for input Sequences “ABCDGH” and “AEDFHR” is “ADH” of length 3.
 LCS for input Sequences “AGGTAB” and “GXTXAYB” is “GTAB” of length 4.
    */
+
+  /**
+   *
+   * @param str1
+   * @param str2
+   * @return
+   */
+  public static int findLengthOfLongestCommonSubsequenceBruteForce(String str1,String str2){
+    int length = Integer.MIN_VALUE;
+    Set<String> allSubsequences1 = findAllSubsequences(str1);
+    Set<String> allSubsequences2 = findAllSubsequences(str2);
+    Iterator<String> iterator = allSubsequences1.iterator();
+    while(iterator.hasNext()){
+      String subsequence = iterator.next();
+      if(allSubsequences2.contains(subsequence) && subsequence.length() > length){
+        length = subsequence.length();
+      }
+    }
+    return length;
+  }
+
+  /**
+   *
+   * @param str
+   * @return
+   */
+  public static Set<String> findAllSubsequences(String str){
+    if(str.equals("")){
+      Set<String> subsequences = new HashSet<>();
+      subsequences.add(str);
+      return subsequences;
+    }
+    Set<String> subsequences = new HashSet<>();
+    char current = str.charAt(0);
+    str = new StringBuilder(str).deleteCharAt(0).toString();
+    Set<String> childSubsequences = findAllSubsequences(str);
+    for(String subsequence: childSubsequences){
+      StringBuilder newSequence = new StringBuilder();
+      newSequence.append(current);
+      newSequence.append(subsequence);
+      subsequences.add(newSequence.toString());
+    }
+    subsequences.addAll(childSubsequences);
+    return subsequences;
+  }
 
 
   /**
@@ -40,10 +87,14 @@ LCS for input Sequences “AGGTAB” and “GXTXAYB” is “GTAB” of length 4.
         /*
         Very important
          */
+        /*
+        If match then add max from previous + 1
+         */
         if(str2.charAt(i-1) == str1.charAt(j - 1)){
           matrix[i][j] = matrix[i-1][j-1] + 1;
         }
         else{
+          // previous left or before.
           matrix[i][j] = Math.max(matrix[i-1][j],matrix[i][j-1]);
         }
       }
@@ -61,6 +112,7 @@ LCS for input Sequences “AGGTAB” and “GXTXAYB” is “GTAB” of length 4.
     String str2 = "acbcf";
     System.out.println();
     System.out.println(findLengthOfLongestCommonSubsequence(str1,str2));
+    System.out.println(findLengthOfLongestCommonSubsequenceBruteForce(str1,str2));
   }
 
 
