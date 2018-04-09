@@ -21,7 +21,7 @@ public class CustomKeyToBeUsedForMap {
    * @return
    */
   public int hashCode(){
-    int hashCode = 31 + id;
+    int hashCode = 31 * id;
     hashCode += 31 + ((lName != null)?lName.hashCode():17);
     hashCode += 31 + ((fName != null)?fName.hashCode():21);
     hashCode += 31 + ((values != null)?values.hashCode():32);
