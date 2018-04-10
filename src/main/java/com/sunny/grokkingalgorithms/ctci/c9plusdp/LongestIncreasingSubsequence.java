@@ -28,9 +28,13 @@ public class LongestIncreasingSubsequence {
     }
     for(int i = 1 ; i < input.length ; i++){
       for(int j = 0 ; j < i ; j++){
+        /*
+        This is essentially the forumal
+         */
         if(input[i] > input[j]){
           if(stage[j] + 1 > stage[i]){
             stage[i] = stage[j] + 1;
+            //Store the previosu index here, this keeps track of path
             path[i] = j;
           }
         }
@@ -54,13 +58,58 @@ public class LongestIncreasingSubsequence {
 
   /**
    *
+   * @param input
+   * @return
+   */
+  public static int findLongestIncreasingSubsequenceRecursive(int[] input){
+    int maxLength = Integer.MIN_VALUE;
+    /*
+    The sequence will either start from any of the indexes.
+     */
+    for(int i = 0 ; i < input.length - 1 ; i++){
+      int length = findLongestIncreasingSubsequenceRecursive(input,i+1,input[i]);
+      if(length > maxLength){
+        maxLength = length;
+      }
+    }
+    return maxLength+1;
+  }
+
+
+  /**
+   *
+   * @param input
+   * @param position
+   * @param lastNumber
+   * @return
+   */
+  public static int findLongestIncreasingSubsequenceRecursive(int[] input,int position,int lastNumber){
+    if(position == input.length){
+      return 0;
+    }
+    int l1 = 0;
+    int l2 = 0;
+    if(input[position] > lastNumber){
+      l1 = findLongestIncreasingSubsequenceRecursive(input,position+1,input[position]) + 1;
+    }
+    //else{
+    l2 = findLongestIncreasingSubsequenceRecursive(input,position+1,lastNumber);
+    //}
+    return Math.max(l1,l2);
+  }
+
+  /**
+   *
+   *
    * @param args
    */
   public static void main(String[] args) {
     int[] input = {3,4,-1,0,6,2,3};
     System.out.println(" max length = " + findLengthOfLongestIncreasingSubequence(input));
+    System.out.println(" max length recursive = " + findLongestIncreasingSubsequenceRecursive(input));
     input =  new int[]{10, 22, 9, 33, 21, 50, 41, 60, 80};
     System.out.println(" max length = " + findLengthOfLongestIncreasingSubequence(input));
+    System.out.println(" max length recursive = " + findLongestIncreasingSubsequenceRecursive(input));
   }
 
 }
