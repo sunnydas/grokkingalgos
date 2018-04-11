@@ -1,7 +1,7 @@
-package com.sunny.grokkingalgorithms.design_patterns.Observer;
+package com.sunny.grokkingalgorithms.design_patterns.observer;
 
-import com.sunny.grokkingalgorithms.design_patterns.Observer.impl.SimpleObserver;
-import com.sunny.grokkingalgorithms.design_patterns.Observer.impl.Subject;
+import com.sunny.grokkingalgorithms.design_patterns.observer.impl.SimpleObserver;
+import com.sunny.grokkingalgorithms.design_patterns.observer.impl.Subject;
 
 /**
  * Created by sundas on 4/10/2018.

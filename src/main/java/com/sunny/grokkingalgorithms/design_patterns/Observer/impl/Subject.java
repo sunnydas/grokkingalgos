@@ -1,8 +1,8 @@
-package com.sunny.grokkingalgorithms.design_patterns.Observer.impl;
+package com.sunny.grokkingalgorithms.design_patterns.observer.impl;
 
-import com.sunny.grokkingalgorithms.design_patterns.Observer.INotif;
-import com.sunny.grokkingalgorithms.design_patterns.Observer.IObserver;
-import com.sunny.grokkingalgorithms.design_patterns.Observer.ISubject;
+import com.sunny.grokkingalgorithms.design_patterns.observer.INotif;
+import com.sunny.grokkingalgorithms.design_patterns.observer.IObserver;
+import com.sunny.grokkingalgorithms.design_patterns.observer.ISubject;
 
 import java.util.ArrayList;
 import java.util.List;
