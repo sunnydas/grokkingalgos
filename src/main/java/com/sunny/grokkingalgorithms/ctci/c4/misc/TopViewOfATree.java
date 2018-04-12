@@ -66,35 +66,43 @@ Top view of the above binary tree is
    * @param root
    */
   public static void printVerticalTraversalBFS(BinaryTreeNode root){
+    Map<Integer,List<BinaryTreeNode>> verticalTraversal = new HashMap<>();
     Queue<BinaryTreeNode> queue = new LinkedList<>();
     BinaryTreeNode levelMarker = new BinaryTreeNode();
     queue.add(root);
     queue.add(levelMarker);
-    int level = 0;
     while(!queue.isEmpty()){
       BinaryTreeNode node = queue.poll();
       if(node == levelMarker){
-        level++;
         if(!queue.isEmpty()){
           queue.add(levelMarker);
         }
       }
       else{
-        if(verticalTraversal.containsKey(level)){
-          List<BinaryTreeNode> nodes = verticalTraversal.get(level);
+        int hd = node.horizontalDIstance;
+        if(verticalTraversal.containsKey(hd)){
+          List<BinaryTreeNode> nodes = verticalTraversal.get(hd);
           nodes.add(node);
         }
         else{
           List<BinaryTreeNode> nodes = new ArrayList<>();
           nodes.add(node);
-          verticalTraversal.put(level,nodes);
+          verticalTraversal.put(hd,nodes);
         }
-        
+        if(node.left != null){
+          node.left.horizontalDIstance = hd - 1;
+          queue.add(node.left);
+        }
+        if(node.right != null){
+          node.right.horizontalDIstance = hd + 1;
+          queue.add(node.right);
+        }
       }
     }
+    printVerticalTraversal(verticalTraversal);
   }
 
-  public static void printVerticalTraversal(){
+  public static void printVerticalTraversal(Map<Integer,List<BinaryTreeNode>> verticalTraversal){
     Iterator<Map.Entry<Integer,List<BinaryTreeNode>>> iterator = verticalTraversal.entrySet().iterator();
     while(iterator.hasNext()){
       Map.Entry<Integer,List<BinaryTreeNode>> entry = iterator.next();
@@ -118,11 +126,10 @@ Top view of the above binary tree is
     //printTopViewOfTree(0, 0, true, 0, t1);
     printVerticalTraversal(t1, 0);
     //System.out.println(verticalTraversal);
-    printVerticalTraversal();
+    printVerticalTraversal(verticalTraversal);
     verticalTraversal.clear();
     System.out.println("level order");
     printVerticalTraversalBFS(t1);
-    printVerticalTraversal();
     System.out.println();
     BinaryTreeNode one = new BinaryTreeNode();
     one.data = 1;
@@ -149,12 +156,11 @@ Top view of the above binary tree is
     verticalTraversal.clear();
     printVerticalTraversal(one, 0);
     //System.out.println(verticalTraversal);
-    printVerticalTraversal();
+    printVerticalTraversal(verticalTraversal);
     System.out.println();
     verticalTraversal.clear();
     System.out.println("level order");
-    printVerticalTraversalBFS(t1);
-    printVerticalTraversal();
+    printVerticalTraversalBFS(one);
     System.out.println();
   }
 
