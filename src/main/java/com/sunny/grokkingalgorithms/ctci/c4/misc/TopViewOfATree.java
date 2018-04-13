@@ -97,7 +97,7 @@ Top view of the above binary tree is
    * @param root
    */
   public static Map<Integer,List<BinaryTreeNode>> populateVerticalTraversalRouteBFS(BinaryTreeNode root){
-    Map<Integer,List<BinaryTreeNode>> verticalTraversal = new HashMap<>();
+    Map<Integer,List<BinaryTreeNode>> verticalTraversal = new TreeMap<>();
     Queue<BinaryTreeNode> queue = new LinkedList<>();
     BinaryTreeNode levelMarker = new BinaryTreeNode();
     queue.add(root);
