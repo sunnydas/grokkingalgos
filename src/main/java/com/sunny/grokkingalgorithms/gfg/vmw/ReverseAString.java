@@ -35,6 +35,20 @@ Output : arr[] = {2, 1, 5, 4}
     return input;
   }
 
+  public static String reverse(String str){
+    char[] input = str.toCharArray();
+    int i = 0;
+    int j = input.length - 1;
+    while(i < j){
+      char tmp = input[i];
+      input[i] = input[j];
+      input[j] = tmp;
+      i++;
+      j--;
+    }
+    return String.valueOf(input);
+  }
+
 
   /**
    *
@@ -52,5 +66,10 @@ Output : arr[] = {2, 1, 5, 4}
     for(int i = 0 ; i < output.length ; i++){
       System.out.print(output[i] + " ");
     }
+    String str = "testuser";
+    System.out.println("");
+    String rev = reverse(str);
+    System.out.println(rev);
+    System.out.println(reverse(rev));
   }
 }
