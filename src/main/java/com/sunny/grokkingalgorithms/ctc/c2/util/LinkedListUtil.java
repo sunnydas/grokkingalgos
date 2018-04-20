@@ -159,5 +159,40 @@ public class LinkedListUtil {
     return root;
   }
 
+  public static Node createCircularListProper(){
+    Node root = null;
+    int[] input = new int[]{1,2,3,4,5,6,7,8,9};
+    Node prev = null;
+    for(int i = 0 ; i < input.length ; i++){
+      Node node = new Node();
+      node.data = input[i];
+      if(root == null){
+        root = node;
+      }
+      if(prev != null){
+        prev.next = node;
+      }
+      if(node.data == 9){
+        node.next = root;
+      }
+      prev = node;
+    }
+    return root;
+  }
+
+
+  /**
+   *
+   * @param root
+   */
+  public static void printCircularList(Node root){
+    Node current = root.next;
+    System.out.println(root.data);
+    while(current != root){
+      System.out.println(current.data);
+      current = current.next;
+    }
+  }
+
 
 }
