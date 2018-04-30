@@ -65,6 +65,38 @@ bsxz
     return finalStr;
   }
 
+
+  /**
+   *
+   * @param s1
+   * @param s2
+   * @return
+   */
+  public static String removeAndConcatenateAlternate(String s1,String s2){
+    String s3 = s1.concat(s2);
+    Map<Character,List<Integer>> tracker = new HashMap<>();
+    for(int i = 0 ; i < s3.length() ; i++){
+      char c = s3.charAt(i);
+      if(tracker.containsKey(c)){
+        tracker.get(c).add(i);
+      }
+      else{
+        List<Integer> indexes = new ArrayList<>();
+        indexes.add(i);
+        tracker.put(c,indexes);
+      }
+    }
+    StringBuilder builder = new StringBuilder();
+    Iterator<Map.Entry<Character,List<Integer>>> iterator = tracker.entrySet().iterator();
+    while(iterator.hasNext()){
+      Map.Entry<Character,List<Integer>> entry = iterator.next();
+      if(entry.getValue().size() == 1){
+        builder.append(entry.getKey());
+      }
+    }
+    return builder.toString();
+  }
+
   /**
    *
    * @param args
@@ -73,8 +105,10 @@ bsxz
     String s1 = "aacdb";
     String s2 = "gafd";
     System.out.println(removeAndConcatenate(s1,s2));
+    System.out.println(removeAndConcatenateAlternate(s1,s2));
     s1 = "abcs";
     s2 = "cxzca";
     System.out.println(removeAndConcatenate(s1,s2));
+    System.out.println(removeAndConcatenateAlternate(s1,s2));
   }
 }
