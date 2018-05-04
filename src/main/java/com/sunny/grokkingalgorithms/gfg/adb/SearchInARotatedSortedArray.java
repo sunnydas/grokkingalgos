@@ -138,6 +138,9 @@ Output
     input = new int[]{3,5,1,2};
     k = 5;
     System.out.println(searchInARotatedArray(input,k));
+    input = new int[]{5, 6, 7, 8, 9, 10, 1, 2, 3};
+    k = 3;
+    System.out.println(searchInARotatedArray(input,k));
   }
 
 }
