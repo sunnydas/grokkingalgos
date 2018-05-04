@@ -113,6 +113,9 @@ Output
     if(mid - 1 >= 0 && input[mid] < input[mid - 1]){
       return mid;
     }
+    else if(mid + 1 < input.length - 1 && input[mid] > input[mid+1]){
+      return mid;
+    }
     int rotationPoint = findRotationPoint(input,start,mid);
     if(rotationPoint < 0){
       rotationPoint = findRotationPoint(input,mid+1,end);
