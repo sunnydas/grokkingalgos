@@ -121,6 +121,53 @@ public class TreeUtils {
   }
 
 
+  /**
+   *
+   * @param root
+   */
+  public static void levelOrderTraversalUsingRecursion(BinaryTreeNode root){
+    /*
+    Get height of tree
+     */
+    int height = height(root);
+    for(int i = 1; i <= height; i++){
+      printLevelOrder(root,i);
+    }
+  }
+
+  /**
+   *
+   * @param root
+   * @param i
+   */
+  public static void printLevelOrder(BinaryTreeNode root,int i){
+    if(root == null){
+      return;
+    }
+    if(i == 1){
+      System.out.println(root.data);
+    }
+    else{
+      printLevelOrder(root.left,i-1);
+      printLevelOrder(root.right,i-1);
+    }
+  }
+
+  /**
+   *
+   * @param root
+   * @return
+   */
+  public static int height(BinaryTreeNode root){
+    if(root == null){
+      return 0;
+    }
+    int lHeight = height(root.left);
+    int rHeight = height(root.right);
+    return Math.max(lHeight,rHeight) + 1;
+  }
+
+
 
   /**
    *
@@ -205,6 +252,18 @@ public class TreeUtils {
     performPostOrder(root.left);
     performPostOrder(root.right);
     System.out.println(root.data);
+  }
+
+
+  /**
+   *
+   * @param args
+   */
+  public static void main(String[] args) {
+    BinaryTreeNode root = TreeUtils.createUnBalancedBinaryTree();
+    TreeUtils.performBfs(root);
+    System.out.println("############################");
+    TreeUtils.levelOrderTraversalUsingRecursion(root);
   }
 
 
