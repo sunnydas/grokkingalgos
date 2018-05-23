@@ -40,6 +40,15 @@ Binary representation of 13 is 1101 and has 3 set bits
     return setBits;
   }
 
+  public static int countSetBitsBrianKerninghanApproach(int n){
+    int setBits = 0;
+    while(n > 0){
+      n = n&(n-1);
+      setBits++;
+    }
+    return setBits;
+  }
+
   /**
    *
    * @param args
@@ -51,6 +60,13 @@ Binary representation of 13 is 1101 and has 3 set bits
     System.out.println(countSetBits(8));
     System.out.println(countSetBits(16));
     System.out.println(countSetBits(17));
+    System.out.println("#######");
+    System.out.println(countSetBitsBrianKerninghanApproach(6));
+    System.out.println(countSetBitsBrianKerninghanApproach(13));
+    System.out.println(countSetBitsBrianKerninghanApproach(5));
+    System.out.println(countSetBitsBrianKerninghanApproach(8));
+    System.out.println(countSetBitsBrianKerninghanApproach(16));
+    System.out.println(countSetBitsBrianKerninghanApproach(17));
   }
 
 }
