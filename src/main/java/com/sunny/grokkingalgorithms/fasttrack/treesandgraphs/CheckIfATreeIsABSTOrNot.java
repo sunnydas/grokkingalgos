@@ -21,6 +21,39 @@ public class CheckIfATreeIsABSTOrNot {
 
   public static Map<BinaryTreeNode,BSTPlaceHolder> minMaxHolder = new HashMap<>();
 
+
+  static BinaryTreeNode previous;
+
+  /**
+   *
+   * @param root
+   * @return
+   */
+  public static boolean isBSTUsingInorderTraversal(BinaryTreeNode root){
+    /*
+    An empty tree is BST
+     */
+    if(root == null){
+      return true;
+    }
+    //Go left
+    boolean left = isBSTUsingInorderTraversal(root.left);
+    if(left) {
+      //Now previous has been populated
+      if (previous == null
+          || root.data > previous.data) {
+        previous = root;
+        //Go right now current root will be the predecessor to the next node
+        boolean right = isBSTUsingInorderTraversal(root.right);
+        if(right){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+
   /**
    *
    * @param root
@@ -178,11 +211,13 @@ public class CheckIfATreeIsABSTOrNot {
     TreeUtils.performBfsLevelMarker(root);
     System.out.println(isBSTBruteForce(root));
     System.out.println(isBST(root));
+    System.out.println(isBSTUsingInorderTraversal(root));
     System.out.println("########");
     root = TreeUtils.createUnBalancedBinaryTree();
     TreeUtils.performBfsLevelMarker(root);
     System.out.println(isBSTBruteForce(root));
     System.out.println(isBST(root));
+    System.out.println(isBSTUsingInorderTraversal(root));
   }
 
 }
