@@ -5,12 +5,11 @@ import com.sunny.grokkingalgorithms.ctci.c4.util.TreeUtils;
 import com.tangosol.util.Binary;
 import sun.reflect.generics.tree.Tree;
 
-class SearchHolder{
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-  BinaryTreeNode a;
-  BinaryTreeNode b;
-
-}
 /**
  * Created by sundas on 6/9/2018.
  */
@@ -25,6 +24,63 @@ public class FindLowestCommonAncerstorBetweenTwoNodes {
   Given two nodes, you have to find the lowest common ancestor
   between two nodes. Assume that both nodes exist in the tree.
    */
+
+  /**
+   *
+   * @param root
+   * @param a
+   * @param b
+   * @return
+   */
+  public static int findLCAAlt(BinaryTreeNode root,int a,int b){
+    Set pathA = new LinkedHashSet<>();
+    findPath(root, a, pathA);
+    Set pathB = new LinkedHashSet<>();
+    findPath(root, b, pathB);
+    //System.out.println(pathA);
+    //System.out.println(pathB);
+    /*
+    Now we have to find the last common elemnt i  the union of the two paths
+     */
+    int ancestor = -1;
+   Iterator iterator = pathA.iterator();
+    while(iterator.hasNext()){
+      int pathAElem = (Integer) iterator.next();
+      if(pathB.contains(pathAElem)){
+        ancestor = pathAElem;
+        break;
+      }
+    }
+    return ancestor;
+  }
+
+  /**
+   *
+    * @param root
+   * @param data
+   * @return
+   */
+  public static void findPath(BinaryTreeNode root,int data,Set path){
+    if(root == null) {
+      return;
+    }
+    if(root.data == data){
+      path.add(data);
+      return;
+    }
+    findPath(root.left,data,path);
+    if(!path.isEmpty()){
+      path.add(root.data);
+      return;
+    }
+    else {
+      findPath(root.right, data, path);
+      if(!path.isEmpty()){
+        path.add(root.data);
+      }
+    }
+
+  }
 
   /**
    *
@@ -93,6 +149,21 @@ public class FindLowestCommonAncerstorBetweenTwoNodes {
     System.out.println(findLCA(root, 4, 11).data);
     System.out.println(findLCA(root, 7, 11).data);
     System.out.println(findLCA(root, 5, 6).data);
+    System.out.println("######");
+    System.out.println(findLCAAlt(root, 4, 7));
+    //System.out.println(findLCA(root,2,3).data);
+    //System.out.println(findLCA(root,2,4).data);
+    System.out.println(findLCAAlt(root, 3, 6));
+    //System.out.println(findLCA(root,1,7).data);
+    System.out.println(findLCAAlt(root, 3, 11));
+    System.out.println(findLCAAlt(root, 6, 8));
+    System.out.println(findLCAAlt(root, 8, 10));
+    System.out.println(findLCAAlt(root, 8, 11));
+    System.out.println(findLCAAlt(root, 5, 9));
+    System.out.println(findLCAAlt(root, 8, 9));
+    System.out.println(findLCAAlt(root, 4, 11));
+    System.out.println(findLCAAlt(root, 7, 11));
+    System.out.println(findLCAAlt(root, 5, 6));
   }
 
 }
