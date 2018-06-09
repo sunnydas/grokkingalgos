@@ -27,6 +27,25 @@ public class CheckIfATreeIsABSTOrNot {
   /**
    *
    * @param root
+   * @param min
+   * @param max
+   * @return
+   */
+  public static boolean isBSTOptimized(BinaryTreeNode root,int min,int max){
+    if(root == null){
+      return true;
+    }
+    if(root.data < min
+        || root.data > max){
+      return false;
+    }
+    return (isBSTOptimized(root.left,min,root.data) && isBSTOptimized(root.right,root.data,max));
+  }
+
+
+  /**
+   *
+   * @param root
    * @return
    */
   public static boolean isBSTUsingInorderTraversal(BinaryTreeNode root){
@@ -212,12 +231,14 @@ public class CheckIfATreeIsABSTOrNot {
     System.out.println(isBSTBruteForce(root));
     System.out.println(isBST(root));
     System.out.println(isBSTUsingInorderTraversal(root));
+    System.out.println(isBSTOptimized(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
     System.out.println("########");
     root = TreeUtils.createUnBalancedBinaryTree();
     TreeUtils.performBfsLevelMarker(root);
     System.out.println(isBSTBruteForce(root));
     System.out.println(isBST(root));
     System.out.println(isBSTUsingInorderTraversal(root));
+    System.out.println(isBSTOptimized(root,Integer.MIN_VALUE,Integer.MAX_VALUE));
   }
 
 }
