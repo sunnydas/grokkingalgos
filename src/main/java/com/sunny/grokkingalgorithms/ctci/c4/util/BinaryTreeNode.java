@@ -5,6 +5,7 @@ public class BinaryTreeNode{
   public BinaryTreeNode right;
   public int data;
   public int horizontalDIstance;
+  public BinaryTreeNode parent;
 
   @Override
   public String toString() {
