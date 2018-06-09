@@ -28,7 +28,7 @@ public class FindInOrderSuccessorInABST {
       If current node has a right child, find leftmost node
       in right subtree
        */
-      if(root.right != null){
+      if(root.parent== null || root.right != null){
          return findLeftMostNodeInTree(root.right);
       }
       else {
@@ -42,9 +42,9 @@ public class FindInOrderSuccessorInABST {
         return currentParent;
       }
     }
-    BinaryTreeNode found = findInOrderSuccessor(root.left,data);
+    BinaryTreeNode found = findInOrderSuccessorAlt(root.left,data);
     if(found == null){
-      found = findInOrderSuccessor(root.right,data);
+      found = findInOrderSuccessorAlt(root.right,data);
     }
     return found;
   }
@@ -155,7 +155,7 @@ public class FindInOrderSuccessorInABST {
     System.out.println("######");
     TreeUtils.inorder(root);
     System.out.println("#########");
-    System.out.println(findInOrderSuccessor(root, 7).data);
+    /*System.out.println(findInOrderSuccessor(root, 7).data);
     System.out.println(findInOrderSuccessor(root, 8).data);
     System.out.println(findInOrderSuccessor(root, 9).data);
     System.out.println(findInOrderSuccessor(root, 10).data);
@@ -163,7 +163,7 @@ public class FindInOrderSuccessorInABST {
     System.out.println(findInOrderSuccessor(root, 3).data);
     System.out.println(findInOrderSuccessor(root, 4).data);
     System.out.println(findInOrderSuccessor(root, 5).data);
-    System.out.println(findInOrderSuccessor(root, 6).data);
+    System.out.println(findInOrderSuccessor(root, 6).data);*/
     System.out.println("#######Alternate############");
     System.out.println(findInOrderSuccessorAlt(root, 7).data);
     System.out.println(findInOrderSuccessorAlt(root, 8).data);
