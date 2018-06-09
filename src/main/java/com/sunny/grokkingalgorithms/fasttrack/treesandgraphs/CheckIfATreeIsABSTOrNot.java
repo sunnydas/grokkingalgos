@@ -3,6 +3,13 @@ package com.sunny.grokkingalgorithms.fasttrack.treesandgraphs;
 import com.sunny.grokkingalgorithms.ctci.c4.util.BinaryTreeNode;
 import com.sunny.grokkingalgorithms.ctci.c4.util.TreeUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
+class BSTPlaceHolder{
+  int max = Integer.MIN_VALUE;
+  int min = Integer.MAX_VALUE;
+}
 /**
  * Created by sundas on 6/9/2018.
  */
@@ -11,6 +18,95 @@ public class CheckIfATreeIsABSTOrNot {
   /*
   Check if a given binary tree is a BST or not.
    */
+
+  public static Map<BinaryTreeNode,BSTPlaceHolder> minMaxHolder = new HashMap<>();
+
+  /**
+   *
+   * @param root
+   * @return
+   */
+  public static boolean isBST(BinaryTreeNode root){
+    if(root == null){
+      return true;
+    }
+    int maxOfLeftSubTree = findMaxAlt(root.left);
+    int minOfRightSubTree = findMinAlt(root.right);
+    if(root.data >= maxOfLeftSubTree
+        && root.data < minOfRightSubTree){
+      /*
+      Check if subtrees are bst or not, bST condition for this node has been validated.The BST condition should hold true
+       for every node in the tree.
+       */
+      return (isBST(root.left) && isBST(root.right));
+    }
+    /*
+    Failed BST condistion so false,no need to check further.
+     */
+    return false;
+  }
+
+
+  /**
+   *
+   * @param root
+   * @return
+   */
+  public static int findMaxAlt(BinaryTreeNode root){
+    if(root == null){
+      return Integer.MIN_VALUE;
+    }
+    if(minMaxHolder.containsKey(root) && minMaxHolder.get(root).max > Integer.MIN_VALUE){
+      return minMaxHolder.get(root).max;
+    }
+    int left = findMaxAlt(root.left);
+    int right = findMaxAlt(root.right);
+    int max = Math.max(left,right);
+    max = Math.max(root.data,max);
+    BSTPlaceHolder bstPlaceHolder = null;
+    if(minMaxHolder.get(root) != null){
+      bstPlaceHolder = minMaxHolder.get(root);
+    }
+    else{
+      bstPlaceHolder = new BSTPlaceHolder();
+      minMaxHolder.put(root,bstPlaceHolder);
+    }
+    bstPlaceHolder.max = max;
+    return max;
+  }
+
+  /**
+   *
+   * @param root
+   * @return
+   */
+  public static int findMinAlt(BinaryTreeNode root){
+    if(root == null){
+      return Integer.MAX_VALUE;
+    }
+    if(minMaxHolder.containsKey(root) && minMaxHolder.get(root).min < Integer.MAX_VALUE){
+      return minMaxHolder.get(root).min;
+    }
+    int left = findMinAlt(root.left);
+    int right = findMinAlt(root.right);
+    int min = Math.min(left, right);
+    min = Math.min(root.data,min);
+    BSTPlaceHolder bstPlaceHolder = null;
+    if(minMaxHolder.get(root) != null){
+      bstPlaceHolder = minMaxHolder.get(root);
+    }
+    else{
+      bstPlaceHolder = new BSTPlaceHolder();
+      minMaxHolder.put(root,bstPlaceHolder);
+    }
+    bstPlaceHolder.min = min;
+    return min;
+  }
+
+
+
+
+
 
   /**
    *
@@ -81,10 +177,12 @@ public class CheckIfATreeIsABSTOrNot {
     BinaryTreeNode root = TreeUtils.createBST();
     TreeUtils.performBfsLevelMarker(root);
     System.out.println(isBSTBruteForce(root));
+    System.out.println(isBST(root));
     System.out.println("########");
     root = TreeUtils.createUnBalancedBinaryTree();
     TreeUtils.performBfsLevelMarker(root);
     System.out.println(isBSTBruteForce(root));
+    System.out.println(isBST(root));
   }
 
 }
