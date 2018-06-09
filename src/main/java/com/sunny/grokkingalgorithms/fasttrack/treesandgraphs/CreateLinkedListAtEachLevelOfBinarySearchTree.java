@@ -92,6 +92,43 @@ public class CreateLinkedListAtEachLevelOfBinarySearchTree {
 
   /**
    *
+   * @param root
+   * @param linkedLists
+   * @param level
+   */
+  public static void createLinkedListAtEachLevelUsingDFS(BinaryTreeNode root,
+                                                         List<LinkedList> linkedLists,
+                                                         int level){
+    if(root == null){
+      return;
+    }
+    /*
+    The idea is that each level represents an index on the linkedLists. The linked list cannot
+    be null. We we visit left or right child , we essentially increase the level count by 1
+     */
+    if(level == linkedLists.size()){
+      /*
+      New level
+       */
+      LinkedList linkedList = new LinkedList();
+      linkedList.add(root.data);
+      linkedLists.add(linkedList);
+    }
+    else{
+      /*
+      The level is already contained in the list, just fetch it at the index
+       */
+      LinkedList linkedList = linkedLists.get(level);
+      if(linkedList != null){
+        linkedList.add(root.data);
+      }
+    }
+    createLinkedListAtEachLevelUsingDFS(root.left,linkedLists,level+1);
+    createLinkedListAtEachLevelUsingDFS(root.right,linkedLists,level+1);
+  }
+
+  /**
+   *
    * @param args
    */
   public static void main(String[] args) {
@@ -101,6 +138,13 @@ public class CreateLinkedListAtEachLevelOfBinarySearchTree {
     List<Node> linkedLists = createLinkedListAtEachLevel(root);
     for(Node head : linkedLists){
       LinkedListUtil.printLinkedList(head);
+    }
+    System.out.println("#########");
+    List<LinkedList> lists = new ArrayList<>();
+    createLinkedListAtEachLevelUsingDFS(root, lists,0);
+    for(LinkedList linkedList : lists){
+      System.out.println(linkedList);
+      System.out.println("---------");
     }
   }
 
