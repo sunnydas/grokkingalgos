@@ -9,7 +9,7 @@ import com.sunny.grokkingalgorithms.ctci.c4.util.TreeUtils;
 public class CheckTreeIsSubTreeOfAnotherTree {
 
   /*
-  Given tow binary trees T1 and T2 , check if T2 is subtree of T1. subtree means they should be identical in value
+  Given tow binary treesandgraphs T1 and T2 , check if T2 is subtree of T1. subtree means they should be identical in value
   and shape
    */
 

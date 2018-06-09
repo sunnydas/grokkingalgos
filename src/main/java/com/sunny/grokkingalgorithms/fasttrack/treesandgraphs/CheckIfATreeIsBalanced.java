@@ -1,4 +1,4 @@
-package com.sunny.grokkingalgorithms.fasttrack.trees;
+package com.sunny.grokkingalgorithms.fasttrack.treesandgraphs;
 
 import com.sunny.grokkingalgorithms.ctci.c4.util.BinaryTreeNode;
 import com.sunny.grokkingalgorithms.ctci.c4.util.TreeUtils;
