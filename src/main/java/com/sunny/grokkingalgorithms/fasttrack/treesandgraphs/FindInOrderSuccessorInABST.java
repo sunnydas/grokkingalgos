@@ -17,10 +17,64 @@ public class FindInOrderSuccessorInABST {
   /**
    *
    * @param root
+   * @return
+   */
+  public static BinaryTreeNode findInOrderSuccessorAlt(BinaryTreeNode root,int data){
+    if(root == null){
+      return  null;
+    }
+    if(root.data == data){
+      /*
+      If current node has a right child, find leftmost node
+      in right subtree
+       */
+      if(root.right != null){
+         return findLeftMostNodeInTree(root.right);
+      }
+      else {
+        BinaryTreeNode currentParent = root.parent;
+        BinaryTreeNode son = root;
+        while(currentParent != null
+            && currentParent.left != son){
+          son = currentParent;
+          currentParent = son.parent;
+        }
+        return currentParent;
+      }
+    }
+    BinaryTreeNode found = findInOrderSuccessor(root.left,data);
+    if(found == null){
+      found = findInOrderSuccessor(root.right,data);
+    }
+    return found;
+  }
+
+  /**
+   *
+   * @param root
+   * @return
+   */
+  public static BinaryTreeNode findLeftMostNodeInTree(BinaryTreeNode root){
+    if(root == null){
+      return null;
+    }
+    BinaryTreeNode current = root;
+    while(current != null
+        && current.left != null){
+      current = current.left;
+    }
+    return  current;
+  }
+
+  /**
+   * This implementation is incorrect
+   *
+   * @param root
    * @param data
    * @return
    */
   public static BinaryTreeNode findInOrderSuccessor(BinaryTreeNode root,int data){
+    System.out.println("This implementation is incorrect");
     /*
     Not found: base case
      */
@@ -72,7 +126,8 @@ public class FindInOrderSuccessorInABST {
         BinaryTreeNode currentParent = root.parent;
         BinaryTreeNode son = root;
         while(currentParent != null){
-          if(currentParent.right != null && currentParent.right != son){
+          if(currentParent.right != null
+              && currentParent.right != son){
             return currentParent;
           }
           son = currentParent;
@@ -109,6 +164,16 @@ public class FindInOrderSuccessorInABST {
     System.out.println(findInOrderSuccessor(root, 4).data);
     System.out.println(findInOrderSuccessor(root, 5).data);
     System.out.println(findInOrderSuccessor(root, 6).data);
+    System.out.println("#######Alternate############");
+    System.out.println(findInOrderSuccessorAlt(root, 7).data);
+    System.out.println(findInOrderSuccessorAlt(root, 8).data);
+    System.out.println(findInOrderSuccessorAlt(root, 9).data);
+    System.out.println(findInOrderSuccessorAlt(root, 10).data);
+    System.out.println(findInOrderSuccessorAlt(root, 11));
+    System.out.println(findInOrderSuccessorAlt(root, 3).data);
+    System.out.println(findInOrderSuccessorAlt(root, 4).data);
+    System.out.println(findInOrderSuccessorAlt(root, 5).data);
+    System.out.println(findInOrderSuccessorAlt(root, 6).data);
   }
 
 }
