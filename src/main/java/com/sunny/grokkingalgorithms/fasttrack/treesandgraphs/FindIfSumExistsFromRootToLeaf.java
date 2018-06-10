@@ -17,6 +17,55 @@ public class FindIfSumExistsFromRootToLeaf {
    *
    * @param root
    * @param sum
+   * @return
+   */
+  public static boolean findIfAPathExistsFromRootToLeafAlternate(BinaryTreeNode root,
+                                                                 int sum){
+    /*
+    Might not need this
+     */
+    if(root == null){
+      return false;
+    }
+    /**
+     * subtract current root's value from sum
+     */
+    sum -= root.data;
+    /*
+    Found child node
+     */
+    if(root.left == null
+        && root.right == null){
+      /*
+      Time to check if path exists
+       */
+      if(sum == 0){
+        /*
+        Remember to print this node as well.
+         */
+        System.out.print(root.data + " ");
+        return true;
+      }
+      return false;
+    }
+    boolean lFound = findIfAPathExistsFromRootToLeafAlternate(root.left,sum);
+    if(lFound){
+      System.out.print(root.data + " ");
+    }
+    boolean rFound = findIfAPathExistsFromRootToLeafAlternate(root.right,sum);
+    if(rFound){
+      System.out.print(root.data + " ");
+    }
+    /*
+    Crucial check
+     */
+    return (lFound || rFound);
+  }
+
+  /**
+   *
+   * @param root
+   * @param sum
    * @param path
    * @param curSum
    */
@@ -64,7 +113,18 @@ public class FindIfSumExistsFromRootToLeaf {
     findIfPathExistsFromRootToLeaf(root,18,"",0);
     findIfPathExistsFromRootToLeaf(root,19,"",0);
     findIfPathExistsFromRootToLeaf(root,24,"",0);
-    findIfPathExistsFromRootToLeaf(root,10,"",0);
+    findIfPathExistsFromRootToLeaf(root, 10, "", 0);
+    System.out.println("##########################");
+    findIfAPathExistsFromRootToLeafAlternate(root, 37);
+    System.out.println();
+    findIfAPathExistsFromRootToLeafAlternate(root, 18);
+    System.out.println();
+    findIfAPathExistsFromRootToLeafAlternate(root, 19);
+    System.out.println();
+    findIfAPathExistsFromRootToLeafAlternate(root, 24);
+    System.out.println();
+    findIfAPathExistsFromRootToLeafAlternate(root, 10);
+    System.out.println();
   }
 
 }
