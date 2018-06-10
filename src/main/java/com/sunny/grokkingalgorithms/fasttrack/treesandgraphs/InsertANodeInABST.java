@@ -15,6 +15,52 @@ public class InsertANodeInABST {
   /**
    *
    * @param root
+   * @param key
+   * @return
+   */
+  public static BinaryTreeNode insertIntoBSTIterative(BinaryTreeNode root,int key){
+    BinaryTreeNode node = new BinaryTreeNode();
+    node.data = key;
+    if(root == null){
+      return node;
+    }
+    BinaryTreeNode current = root;
+    boolean left = false;
+    BinaryTreeNode parent = null;
+    /*
+    Find slot for insertion
+     */
+    while(current != null){
+      if(key == current.data){
+        return root;
+      }
+      if(key < current.data){
+        parent = current;
+        current = current.left;
+        left = true;
+      }
+      else{
+        parent = current;
+        current = current.right;
+        left = false;
+      }
+    }
+    /*
+    Found insertion point
+     */
+    if(parent != null) {
+      if (left) {
+        parent.left = node;
+      } else {
+        parent.right = node;
+      }
+    }
+    return root;
+  }
+
+  /**
+   *
+   * @param root
    */
    public static void insertIntoBST(BinaryTreeNode root,int key,BinaryTreeNode parent,boolean leftChild){
      /*
@@ -84,6 +130,29 @@ public class InsertANodeInABST {
     TreeUtils.performBfsLevelMarker(root);
     System.out.println("############################");
     System.out.println("Inorder traversal");
+    TreeUtils.inorder(root);
+    System.out.println("################## Iterative ##########");
+    root = TreeUtils.createBST();
+    System.out.println("Insert 12");
+    root = insertIntoBSTIterative(root, 12);
+    TreeUtils.performBfsLevelMarker(root);
+    System.out.println("#####################");
+    TreeUtils.inorder(root);
+    //root = TreeUtils.createBST();
+    System.out.println("Insert 2");
+    root = insertIntoBSTIterative(root, 2);
+    TreeUtils.performBfsLevelMarker(root);
+    System.out.println("#####################");
+    TreeUtils.inorder(root);
+    System.out.println("Insert 1");
+    root = insertIntoBSTIterative(root, 1);
+    TreeUtils.performBfsLevelMarker(root);
+    System.out.println("#####################");
+    TreeUtils.inorder(root);
+    System.out.println("Insert 1");
+    root = insertIntoBSTIterative(root, 100);
+    TreeUtils.performBfsLevelMarker(root);
+    System.out.println("#####################");
     TreeUtils.inorder(root);
   }
 
