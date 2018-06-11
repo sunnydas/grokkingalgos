@@ -33,7 +33,8 @@ public class FindSizeOfLargestBSTInBinaryTree {
         currentSizeOfBST = size;
       }
     }
-    return;
+    findSizeOfLargestBSTBruteForce(root.left);
+    findSizeOfLargestBSTBruteForce(root.right);
   }
 
 
