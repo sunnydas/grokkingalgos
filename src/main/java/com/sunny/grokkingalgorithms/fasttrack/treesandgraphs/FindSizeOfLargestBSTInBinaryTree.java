@@ -1,5 +1,6 @@
 package com.sunny.grokkingalgorithms.fasttrack.treesandgraphs;
 
+import com.sunny.grokkingalgorithms.ctci.c4.CheckIfATreeIsBST;
 import com.sunny.grokkingalgorithms.ctci.c4.util.BinaryTreeNode;
 import com.sunny.grokkingalgorithms.ctci.c4.util.TreeUtils;
 
@@ -13,6 +14,29 @@ class BSTChecker{
   int max;
 }
 public class FindSizeOfLargestBSTInBinaryTree {
+
+
+  static int currentSizeOfBST = Integer.MIN_VALUE;
+
+  /**
+   *
+   * @param root
+   * @return
+   */
+  public static void findSizeOfLargestBSTBruteForce(BinaryTreeNode root){
+    if(root == null){
+      return;
+    }
+    if(CheckIfATreeIsBST.isBST(root)){
+      int size;
+      if((size = SizeOfABinaryTree.sizeOf(root)) > currentSizeOfBST){
+        currentSizeOfBST = size;
+      }
+    }
+    return;
+  }
+
+
 
   /**
    *
@@ -77,6 +101,9 @@ public class FindSizeOfLargestBSTInBinaryTree {
     TreeUtils.performBfsLevelMarker(root);
     System.out.println("####################");
     System.out.println(findLargestBST(root).size);
+    System.out.println("#####################");
+    findSizeOfLargestBSTBruteForce(root);
+    System.out.println(currentSizeOfBST);
   }
 
 }
