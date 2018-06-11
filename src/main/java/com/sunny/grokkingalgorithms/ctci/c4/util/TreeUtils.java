@@ -40,6 +40,19 @@ public class TreeUtils {
 
   /**
    *
+   * @param root
+   */
+  public static void preOrder(BinaryTreeNode root){
+    if(root == null){
+      return;
+    }
+    System.out.println(root.data);
+    preOrder(root.left);
+    preOrder(root.right);
+  }
+
+  /**
+   *
    * @return
    */
   public static BinaryTreeNode createUnBalancedBinaryTree(){
