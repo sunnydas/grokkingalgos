@@ -3,6 +3,7 @@ package com.sunny.grokkingalgorithms.fasttrack.treesandgraphs;
 import com.sunny.grokkingalgorithms.ctci.c4.util.BinaryTreeNode;
 import com.sunny.grokkingalgorithms.ctci.c4.util.TreeUtils;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -19,6 +20,67 @@ public class LevelOrderTraversalSpiralOrder {
   L-R
   ...
    */
+
+  /**
+   *
+   * @param root
+   */
+  public static void spiralOrderTraversalUsingDequeue(BinaryTreeNode root){
+    if(root == null){
+      return;
+    }
+    /*
+    This technique is similar to two stacks but uses deque which simulates two
+    stacks
+     */
+    /*
+    Using linked list since we dont want to call sizeOf(tree) to use array based
+    dequeue.
+     */
+    Deque<BinaryTreeNode> deque = new LinkedList<>();
+    /*
+    This marker provides the barrier between the two stacks
+     */
+    BinaryTreeNode marker = new BinaryTreeNode();
+    deque.add(marker);
+    /*
+    Front of dequeue = stack1
+    end of dequeue = stack2
+     */
+    deque.addFirst(root);
+    /*
+    If the only element in the dequeue is the marker , then we have
+    processed the entire tree
+     */
+    while(deque.size() > 1){
+      /*
+      s1 processing
+       */
+      while(deque.peekFirst() != marker){
+        BinaryTreeNode current = deque.pollFirst();
+        System.out.print(current.data + " ");
+        if(current.left != null){
+          deque.addLast(current.left);
+        }
+        if(current.right != null){
+          deque.addLast(current.right);
+        }
+      }
+      /*
+      s2 processing
+       */
+      while(deque.peekLast() != marker){
+        BinaryTreeNode current = deque.pollLast();
+        System.out.print(current.data + " ");
+        if(current.right != null){
+          deque.addFirst(current.right);
+        }
+        if(current.left != null){
+          deque.addFirst(current.left);
+        }
+      }
+    }
+  }
 
   /**
    *
@@ -119,6 +181,8 @@ public class LevelOrderTraversalSpiralOrder {
     spiralOrderTraversal(root);
     System.out.println("################");
     spiralOrderTraversalUsingTwoStacks(root);
+    System.out.println("##################");
+    spiralOrderTraversalUsingDequeue(root);
   }
 
 }
