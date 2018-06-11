@@ -24,6 +24,45 @@ public class LevelOrderTraversalSpiralOrder {
    *
    * @param root
    */
+  public static void spiralOrderTraversalUsingTwoStacks(
+      BinaryTreeNode root){
+    if(root == null){
+      return;
+    }
+    Stack<BinaryTreeNode> s1 = new Stack<>();
+    Stack<BinaryTreeNode> s2 = new Stack<>();
+    s1.push(root);
+    System.out.println();
+    while(!s1.isEmpty()
+        || !s2.isEmpty()){
+      while(!s1.isEmpty()){
+        BinaryTreeNode current = s1.pop();
+        System.out.print(current.data + " ");
+        if(current.left != null){
+          s2.push(current.left);
+        }
+        if(current.right != null){
+          s2.push(current.right);
+        }
+      }
+      while(!s2.isEmpty()){
+        BinaryTreeNode current = s2.pop();
+        System.out.print(current.data + " ");
+        if(current.right != null){
+          s1.push(current.right);
+        }
+        if(current.left != null){
+          s1.push(current.left);
+        }
+      }
+    }
+    System.out.println();
+  }
+
+  /**
+   *
+   * @param root
+   */
   public static void spiralOrderTraversal(BinaryTreeNode root){
     if(root == null){
       return;
@@ -78,6 +117,8 @@ public class LevelOrderTraversalSpiralOrder {
     TreeUtils.performBfsLevelMarker(root);
     System.out.println("###############");
     spiralOrderTraversal(root);
+    System.out.println("################");
+    spiralOrderTraversalUsingTwoStacks(root);
   }
 
 }
