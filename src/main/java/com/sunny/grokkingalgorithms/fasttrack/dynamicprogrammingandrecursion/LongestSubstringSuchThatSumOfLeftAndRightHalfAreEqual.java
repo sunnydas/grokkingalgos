@@ -11,6 +11,31 @@ public class LongestSubstringSuchThatSumOfLeftAndRightHalfAreEqual {
    * sum of right half of subsequence are equal.
    */
 
+  public static String longestSubsequenceOptimized(String s){
+    int len = s.length();
+    int maxLength = 0;
+    String longestSubsequence = "";
+    for(int i = 0; i < len - 2 ; i++){
+      int left = i;
+      int right = i + 1;
+      int leftSum = 0;
+      int rightSum = 0;
+      while(right < len && left >= 0){
+        leftSum += s.charAt(left) - '0';
+        rightSum += s.charAt(right) - '0';
+        if(leftSum == rightSum){
+          if((right - left + 1) > maxLength){
+            maxLength = (right - left + 1);
+            longestSubsequence = s.substring(left,right+1);
+          }
+        }
+        left--;
+        right++;
+      }
+    }
+    return longestSubsequence;
+  }
+
   /**
    *
    * @param s
@@ -96,6 +121,11 @@ public class LongestSubstringSuchThatSumOfLeftAndRightHalfAreEqual {
     System.out.println(findLongestSubsequence(s2));
     System.out.println(findLongestSubsequence(s3));
     System.out.println(findLongestSubsequence(s5));
+    System.out.println("################## optimized");
+    System.out.println(longestSubsequenceOptimized(s1));
+    System.out.println(longestSubsequenceOptimized(s2));
+    System.out.println(longestSubsequenceOptimized(s3));
+    System.out.println(longestSubsequenceOptimized(s5));
   }
 
 }
