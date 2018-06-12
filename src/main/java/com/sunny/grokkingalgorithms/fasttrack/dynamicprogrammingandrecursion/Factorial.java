@@ -5,6 +5,23 @@ package com.sunny.grokkingalgorithms.fasttrack.dynamicprogrammingandrecursion;
  */
 public class Factorial {
 
+  /**
+   *
+   * @param n
+   * @return
+   */
+  public static long factorialIterative(int n){
+    if(n <= 1){
+      return 1;
+    }
+    int fact = 1;
+    int index = 2;
+    while(index <= n){
+      fact *= index;
+      index++;
+    }
+    return fact;
+  }
 
   /**
    *
@@ -32,6 +49,13 @@ public class Factorial {
     System.out.println(factorial(4));
     System.out.println(factorial(5));
     System.out.println(factorial(10));
+    System.out.println("################");
+    System.out.println(factorialIterative(1));
+    System.out.println(factorialIterative(2));
+    System.out.println(factorialIterative(3));
+    System.out.println(factorialIterative(4));
+    System.out.println(factorialIterative(5));
+    System.out.println(factorialIterative(10));
   }
 
 }
