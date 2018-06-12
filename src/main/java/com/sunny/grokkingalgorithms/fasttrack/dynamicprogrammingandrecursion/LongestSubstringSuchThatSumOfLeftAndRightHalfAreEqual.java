@@ -23,7 +23,7 @@ public class LongestSubstringSuchThatSumOfLeftAndRightHalfAreEqual {
       while(right < len && left >= 0){
         leftSum += s.charAt(left) - '0';
         rightSum += s.charAt(right) - '0';
-        if(leftSum == rightSum){
+        if(leftSum == rightSum && (right - left + 1)%2 == 0){
           if((right - left + 1) > maxLength){
             maxLength = (right - left + 1);
             longestSubsequence = s.substring(left,right+1);
