@@ -16,6 +16,8 @@ public class FibonacciNumbers {
 
   public static long fibonacciUsingMemoization(int n){
     if(n == 1 || n <= 0){
+      memoizationCache.put(1,1L);
+      memoizationCache.put(0,1L);
       return 1;
     }
     if(memoizationCache.containsKey(n)){
