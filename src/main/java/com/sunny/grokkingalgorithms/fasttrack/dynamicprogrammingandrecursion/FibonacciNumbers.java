@@ -14,6 +14,23 @@ public class FibonacciNumbers {
 
   static Map<Integer,Long> memoizationCache = new HashMap<>();
 
+  public static long fibonacciIterative(int n){
+    if(n <= 0 || n == 1){
+      return 1;
+    }
+    long a = 1;
+    long b = 1;
+    long c = 0;
+    int index = 2;
+    while(index <= n){
+      c = a + b;
+      a = b;
+      b = c;
+      index++;
+    }
+    return c;
+  }
+
   public static long fibonacciUsingMemoization(int n){
     if(n == 1 || n <= 0){
       memoizationCache.put(1,1L);
@@ -57,6 +74,10 @@ public class FibonacciNumbers {
     begin = System.currentTimeMillis();
     System.out.println(fibonacciUsingMemoization(50));
     System.out.println("time taken = " + (System.currentTimeMillis() - begin));
+    System.out.println(fibonacciIterative(5));
+    System.out.println(fibonacciIterative(6));
+    System.out.println(fibonacciIterative(7));
+    System.out.println(fibonacciIterative(50));
   }
 
 }
