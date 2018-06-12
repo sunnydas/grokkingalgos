@@ -11,6 +11,38 @@ public class MinimumCostOfTravelBetweenStations {
   Find minimum cost of reaching n-1th  station from 0th station
    */
 
+  /**
+   *
+    * @param costmatrix
+   * @return
+   */
+  public static int findMinCostDP(int[][] costmatrix){
+    int[] minCost = new int[costmatrix.length];
+    /*
+    Cost of going to same station is 0
+     */
+    minCost[0] = 0;
+    /*
+    There is only one way to reach first stations
+     */
+    minCost[1] = costmatrix[0][1];
+    for(int i = 2; i < costmatrix.length ;i++){
+      /*
+      Try direct path
+       */
+      minCost[i] = costmatrix[0][i];
+      /*
+      try intermediate path. We start from 1 since 0,i has already been considerd
+       */
+      for(int j = 1; j <= i ; j++){
+        int tempCost = minCost[j] + costmatrix[j][i];
+        if(tempCost < minCost[i]){
+          minCost[i] = tempCost;
+        }
+      }
+    }
+    return minCost[costmatrix.length - 1];
+  }
 
   /**
    *
@@ -114,6 +146,7 @@ public class MinimumCostOfTravelBetweenStations {
     };
     System.out.println(findMinimumCostUsingMemoization(costMatrix,0,
         costMatrix.length - 1,costCache));
+    System.out.println(findMinCostDP(costMatrix));
   }
 
 }
