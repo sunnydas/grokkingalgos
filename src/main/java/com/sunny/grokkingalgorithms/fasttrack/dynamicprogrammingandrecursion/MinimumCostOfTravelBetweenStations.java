@@ -11,6 +11,50 @@ public class MinimumCostOfTravelBetweenStations {
   Find minimum cost of reaching n-1th  station from 0th station
    */
 
+
+  /**
+   *
+   * @param costMatrix
+   * @param s
+   * @param d
+   * @param costCache
+   * @return
+   */
+  public static int findMinimumCostUsingMemoization(int[][] costMatrix,
+                                    int s,
+                                    int d,
+                                    int[][] costCache){
+    /*
+    If last but one station , only one way to go from s to d
+     */
+    if(s == d || s == (d-1)){
+      return costMatrix[s][d];
+    }
+    int minCost = 0;
+    if(costCache[s][d] == 0) {
+    /*
+    Try the direct cost
+     */
+      minCost = costMatrix[s][d];
+    /*
+    Try intermediate cost.
+     */
+      for (int i = s + 1; i < d; i++) {
+        int curCost = findMinimumCost(costMatrix, s, i)
+            + findMinimumCost(costMatrix, i, d);
+        if (curCost < minCost) {
+          minCost = curCost;
+        }
+      }
+      costCache[s][d] = minCost;
+    }
+    else{
+      minCost = costCache[s][d];
+    }
+    return minCost;
+  }
+
+
   /**
    *
    * @param costMatrix
@@ -61,7 +105,15 @@ public class MinimumCostOfTravelBetweenStations {
         {-1,-1,0,80},
         {-1,-1,-1,0}
     };
-    System.out.println(findMinimumCost(costMatrix,0,costMatrix.length - 1));
+    System.out.println(findMinimumCost(costMatrix, 0, costMatrix.length - 1));
+    int[][] costCache = new int[][]{
+        {0,0,0,0},
+        {0,0,0,0},
+        {0,0,0,0},
+        {0,0,0,0}
+    };
+    System.out.println(findMinimumCostUsingMemoization(costMatrix,0,
+        costMatrix.length - 1,costCache));
   }
 
 }
