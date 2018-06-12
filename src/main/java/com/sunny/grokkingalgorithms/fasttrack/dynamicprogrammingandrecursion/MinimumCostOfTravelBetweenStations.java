@@ -13,7 +13,7 @@ public class MinimumCostOfTravelBetweenStations {
 
   /**
    *
-    * @param costmatrix
+   * @param costmatrix
    * @return
    */
   public static int findMinCostDP(int[][] costmatrix){
@@ -45,7 +45,7 @@ public class MinimumCostOfTravelBetweenStations {
   }
 
   /**
-   *
+   j*
    * @param costMatrix
    * @param s
    * @param d
