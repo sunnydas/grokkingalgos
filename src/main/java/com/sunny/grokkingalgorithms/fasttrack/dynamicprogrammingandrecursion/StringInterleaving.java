@@ -18,6 +18,34 @@ public class StringInterleaving {
    * @param c
    * @return
    */
+  public static boolean isInterLeavingRecursion(String a,String b,String c){
+    if(a.equals("") && b.equals("") && c.equals("")){
+      return true;
+    }
+    if(c.equals("")){
+      return false;
+    }
+    if(a.equals("") && b.equals("")){
+      return false;
+    }
+    boolean first = false;
+    boolean second = false;
+    if(a.charAt(0) == c.charAt(0)){
+      first = isInterLeaving(a.substring(1),b,c.substring(1));
+    }
+    if(b.charAt(0) == c.charAt(0)){
+      second = isInterLeaving(a,b.substring(1),c.substring(1));
+    }
+    return first || second;
+  }
+
+  /**
+   *
+   * @param a
+   * @param b
+   * @param c
+   * @return
+   */
   public static boolean isInterLeaving(String a,String b,String c){
     boolean interLeaved = false;
     if(a == null || b == null || c == null){
@@ -54,13 +82,18 @@ public class StringInterleaving {
     String b = "abcd";
     String c = "xabyczd";
     System.out.println(isInterLeaving(a,b,c));
+    System.out.println(isInterLeavingRecursion(a, b, c));
+    System.out.println();
     a = "sunny";
     b = "das";
     c = "sdaunnys";
     System.out.println(isInterLeaving(a,b,c));
+    System.out.println(isInterLeavingRecursion(a, b, c));
+    System.out.println();
     a = "ten";
     b = "twenty";
     c = "tentwentu";
     System.out.println(isInterLeaving(a,b,c));
+    System.out.println(isInterLeavingRecursion(a, b, c));
   }
 }
