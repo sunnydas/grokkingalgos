@@ -19,6 +19,39 @@ public class CostOfPath {
    * @param costMatrix
    * @param i
    * @param j
+   * @param curCost
+   * @return
+   */
+  public static int findMinCost(int[][] costMatrix,
+                                int i,
+                                int j,
+                                int curCost){
+    curCost += costMatrix[i][j];
+    if(i == costMatrix.length -1 &&
+        j == costMatrix[i].length - 1){
+      /*
+      Reached end
+       */
+      return curCost;
+    }
+    int minCost = Integer.MAX_VALUE;
+    if(i+1 < costMatrix.length){
+      int tempCost = findMinCost(costMatrix,i+1,j,curCost);
+      minCost = Math.min(tempCost,minCost);
+    }
+    if(j+1 < costMatrix[i].length){
+      int tempCost = findMinCost(costMatrix,i,j+1,curCost);
+      minCost = Math.min(tempCost,minCost);
+    }
+    return minCost;
+  }
+
+
+  /**
+   *
+   * @param costMatrix
+   * @param i
+   * @param j
    * @return
    */
   public static void findMinCost(int[][] costMatrix,
@@ -63,6 +96,8 @@ public class CostOfPath {
            };
     findMinCost(costMatrix,0,0,0,"");
     System.out.println(minCost);
+    System.out.println("#########");
+    System.out.println(findMinCost(costMatrix,0,0,0));
   }
 
 }
