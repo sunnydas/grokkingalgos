@@ -13,6 +13,33 @@ public class EditDistance {
   one string to another
    */
 
+  public static int findMinimumEditDistanceUsingRecursion(String s1,
+                                                          String s2){
+    if(s1 == null && s2 == null){
+      return 0;
+    }
+    if(s1 == null || s1.equals("")){
+      return s2.length();
+    }
+    if(s2 == null || s2.equals("")){
+      return s1.length();
+    }
+    /*
+    Both characters are ewual check for min edit distance next
+     */
+    if(s1.charAt(0) == s2.charAt(0)){
+      return findMinimumEditDistanceUsingRecursion(s1.substring(1),
+          s2.substring(1));
+    }
+    int i = Integer.MAX_VALUE;
+    int d = Integer.MAX_VALUE;
+    int u = Integer.MAX_VALUE;
+    i = findMinimumEditDistanceUsingRecursion(s2.charAt(0) + s1,s2);
+    d = findMinimumEditDistanceUsingRecursion(s1.substring(1),s2);
+    u = findMinimumEditDistanceUsingRecursion(s1.substring(1),s2.substring(1));
+    return Math.min(Math.min(i,d),u) + 1;
+  }
+
   /**
    * Minimum edit distance to convert s1 to s2
    *
@@ -86,6 +113,17 @@ public class EditDistance {
     System.out.println(minEditDistance("XYZ","ABCD"));
     System.out.println(minEditDistance("ABCD","AYZ"));
     System.out.println(minEditDistance("BARK","ARK"));
+    System.out.println("#######");
+    System.out.println(findMinimumEditDistanceUsingRecursion("SUNDAY", "SATURDAY"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("CAT", "CAR"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("MATE", "SALT"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("SORT", "SPORT"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("SPORT", "SORT"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("RETURNY", "REB"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("ABCD", "XYZ"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("XYZ", "ABCD"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("ABCD", "AYZ"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("BARK","ARK"));
   }
 
 }
