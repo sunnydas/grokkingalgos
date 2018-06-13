@@ -14,6 +14,26 @@ public class MaximumContigousSum {
    * @param input
    * @return
    */
+  public static int maximumContigousSubArrayUsingKadanes(int[] input){
+    int maxEndingSoFar = 0;
+    int maxSumSoFar = 0;
+    for(int i = 0 ; i < input.length ; i++){
+      maxEndingSoFar += input[i];
+      if(maxEndingSoFar < 0){
+        maxEndingSoFar = 0;
+      }
+      if(maxEndingSoFar > maxSumSoFar){
+        maxSumSoFar = maxEndingSoFar;
+      }
+    }
+    return maxSumSoFar;
+  }
+
+  /**
+   *
+   * @param input
+   * @return
+   */
   public static String maximumContigousSubArray(int[] input){
     String maximumSubArray = null;
     int maxSum = Integer.MIN_VALUE;
@@ -45,5 +65,6 @@ public class MaximumContigousSum {
   public static void main(String[] args) {
     int[] input = new int[]{-2,-3,4,-1,-2,1,5,-3};
     System.out.println(maximumContigousSubArray(input));
+    System.out.println(maximumContigousSubArrayUsingKadanes(input));
   }
 }
