@@ -16,6 +16,41 @@ public class CostOfPath {
 
   static int[][] minCostCache;
 
+  public static int findMinimumCostUsingDP(int[][] costMatrix){
+    /*
+    This 2d array stores the minim values
+     */
+    int[][] dpmatrix = new int[costMatrix.length][costMatrix[0].length];
+    dpmatrix[0][0] = costMatrix[0][0];
+    /*
+     Populate top row cumulative sum
+      */
+    for(int j = 1 ; j < dpmatrix[0].length ; j++){
+      dpmatrix[0][j] = dpmatrix[0][j - 1] + costMatrix[0][j];
+    }
+    /*
+    Populate top column, cumulative sum
+     */
+    for(int i = 1 ; i < dpmatrix.length ; i++){
+      dpmatrix[i][0] = dpmatrix[i - 1][0] + costMatrix[i][0];
+    }
+    /*
+    Populate rest of the matrix
+     */
+    for(int i = 1; i < dpmatrix.length ; i++){
+      for(int j = 1; j < dpmatrix[i].length ; j++){
+        dpmatrix[i][j] = Math.min(dpmatrix[i - 1][j],dpmatrix[i][j - 1]) + costMatrix[i][j];
+      }
+    }
+    for(int i = 0 ; i < dpmatrix.length ; i++){
+      for(int j = 0 ; j < dpmatrix[i].length ; j++){
+        System.out.print(dpmatrix[i][j] + " ");
+      }
+      System.out.println();
+    }
+    return dpmatrix[dpmatrix.length - 1][dpmatrix[dpmatrix.length - 1].length - 1];
+  }
+
   public static int findMinimumCostMemoized(int[][] costMatrix,int i,int j){
     /*
     Cache call
@@ -162,6 +197,8 @@ public class CostOfPath {
     minCostCache = new int[costMatrix.length][costMatrix[0].length];
     System.out.println(findMinimumCostMemoized(costMatrix,costMatrix.length - 1,
         costMatrix[costMatrix.length - 1].length - 1));
+    System.out.println("##################");
+    System.out.println(findMinimumCostUsingDP(costMatrix));
   }
 
 }
