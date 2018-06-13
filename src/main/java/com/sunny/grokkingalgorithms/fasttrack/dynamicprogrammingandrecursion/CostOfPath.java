@@ -14,6 +14,36 @@ public class CostOfPath {
 
   static  int minCost = Integer.MAX_VALUE;
 
+  static int[][] minCostCache;
+
+  public static int findMinimumCostMemoized(int[][] costMatrix,int i,int j){
+    /*
+    Cache call
+     */
+    if(minCostCache[i][j] != 0){
+      return minCostCache[i][j];
+    }
+    //curSum += costMatrix[i][j];
+    /*
+    Found cell
+     */
+    if(i == 0
+        && j == 0){
+      minCostCache[0][0] = costMatrix[0][0];
+      return minCostCache[0][0];
+    }
+    int x = Integer.MAX_VALUE;
+    int y = Integer.MAX_VALUE;
+    if(i - 1 >= 0){
+      x = findMinimumCostMemoized(costMatrix,i - 1,j);
+    }
+    if(j - 1 >= 0){
+      y = findMinimumCostMemoized(costMatrix,i,j - 1);
+    }
+    minCostCache[i][j] = Math.min(x,y) + costMatrix[i][j];
+    return minCostCache[i][j];
+  }
+
   public static int findMinCostBottomUp(int[][] costMatrix,
                                         int i,
                                         int j,
@@ -128,6 +158,10 @@ public class CostOfPath {
         costMatrix.length - 1,
         costMatrix[costMatrix.length - 1].length - 1,
         0,""));
+    System.out.println("###############");
+    minCostCache = new int[costMatrix.length][costMatrix[0].length];
+    System.out.println(findMinimumCostMemoized(costMatrix,costMatrix.length - 1,
+        costMatrix[costMatrix.length - 1].length - 1));
   }
 
 }
