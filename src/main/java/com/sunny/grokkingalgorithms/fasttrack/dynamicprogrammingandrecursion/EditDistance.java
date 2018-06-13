@@ -8,6 +8,47 @@ import java.util.Set;
  */
 public class EditDistance {
 
+  /**
+   *
+   * @param s1
+   * @param s2
+   * @return
+   */
+  public static int findMinimumEditDistanceDP(String s1,String s2){
+    int[][] editDP = new int[s1.length() + 1][s2.length() + 1];
+    /*
+    Populate row 1
+     */
+    for(int j = 0 ; j < editDP[0].length ; j++){
+      editDP[0][j] = j;
+    }
+    /*
+    Populate column 1
+     */
+    for(int i = 1; i < editDP.length ; i++){
+      editDP[i][0] = i;
+    }
+    for(int i = 1; i < editDP.length ;i++){
+      for(int j = 1 ; j < editDP[i].length ; j++){
+        if(s1.charAt(i - 1) == s2.charAt(j - 1)){
+          editDP[i][j] = editDP[i - 1][j - 1];
+        }
+        else{
+          editDP[i][j] = Math.min(Math.min(editDP[i - 1][j - 1],
+              editDP[i - 1][j]),
+              editDP[i][j-1]) + 1;
+        }
+      }
+    }
+    for(int i = 0 ; i < editDP.length ; i++){
+      for(int j = 0 ; j < editDP[i].length ; j++){
+        System.out.print(editDP[i][j] + " ");
+      }
+      System.out.println();
+    }
+    return editDP[editDP.length - 1][editDP[0].length - 1];
+  }
+
   /*
   Calculate minimu edit distance (inder/replace/remove) of changing
   one string to another
@@ -123,7 +164,18 @@ public class EditDistance {
     System.out.println(findMinimumEditDistanceUsingRecursion("ABCD", "XYZ"));
     System.out.println(findMinimumEditDistanceUsingRecursion("XYZ", "ABCD"));
     System.out.println(findMinimumEditDistanceUsingRecursion("ABCD", "AYZ"));
-    System.out.println(findMinimumEditDistanceUsingRecursion("BARK","ARK"));
+    System.out.println(findMinimumEditDistanceUsingRecursion("BARK", "ARK"));
+    System.out.println("######################");
+    System.out.println(findMinimumEditDistanceDP("SUNDAY", "SATURDAY"));
+    System.out.println(findMinimumEditDistanceDP("CAT", "CAR"));
+    System.out.println(findMinimumEditDistanceDP("MATE", "SALT"));
+    System.out.println(findMinimumEditDistanceDP("SORT", "SPORT"));
+    System.out.println(findMinimumEditDistanceDP("SPORT", "SORT"));
+    System.out.println(findMinimumEditDistanceDP("RETURNY", "REB"));
+    System.out.println(findMinimumEditDistanceDP("ABCD", "XYZ"));
+    System.out.println(findMinimumEditDistanceDP("XYZ", "ABCD"));
+    System.out.println(findMinimumEditDistanceDP("ABCD", "AYZ"));
+    System.out.println(findMinimumEditDistanceDP("BARK","ARK"));
   }
 
 }
