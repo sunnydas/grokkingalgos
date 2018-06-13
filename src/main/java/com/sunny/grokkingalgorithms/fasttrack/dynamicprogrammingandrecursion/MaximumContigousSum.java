@@ -6,7 +6,7 @@ package com.sunny.grokkingalgorithms.fasttrack.dynamicprogrammingandrecursion;
 public class MaximumContigousSum {
 
   /*
-  Maximum contigous sub array
+  Maximum contigious sub array
    */
 
   /**
