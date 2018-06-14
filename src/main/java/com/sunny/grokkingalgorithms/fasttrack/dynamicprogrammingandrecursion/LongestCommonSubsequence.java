@@ -56,7 +56,43 @@ public class LongestCommonSubsequence {
       }
       System.out.println();
     }
+    printLCS(dp,s1,s2);
     return dp[s1.length()][s2.length()];
+  }
+
+  /**
+   *
+   * @param dp
+   */
+  public static void printLCS(int[][] dp,String str1,String str2){
+    int i = dp.length - 1;
+    int j = dp[i].length - 1;
+    while(i >= 1 && j >= 1){
+      int curVal = dp[i][j];
+      if(str1.charAt(i - 1)
+          == str2.charAt(j - 1)){
+        /*
+        definitely coming from diagonal
+         */
+        System.out.print(str1.charAt(i - 1) + " ");
+        i = i - 1;
+        j = j - 1;
+      }
+      else{
+        /*
+        Coming from  either right or left
+         */
+        if(curVal > dp[i][j - 1]){
+          i--;
+        }
+        else{
+          j--;
+        }
+        //System.out.print(str1.charAt() + " ");
+      }
+      //System.out.println();
+    }
+    System.out.println();
   }
 
 
