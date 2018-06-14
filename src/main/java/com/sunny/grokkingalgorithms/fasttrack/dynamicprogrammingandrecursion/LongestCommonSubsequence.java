@@ -1,8 +1,6 @@
 package com.sunny.grokkingalgorithms.fasttrack.dynamicprogrammingandrecursion;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by sundas on 6/14/2018.
@@ -12,6 +10,41 @@ public class LongestCommonSubsequence {
   /*
   Given two strings find count of the longest common subsequence
    */
+
+  /**
+   * Memoized cache for storing results.
+   */
+  public static Map<String,Integer> cachedSizesOfLCS = new HashMap<>();
+
+  /**
+   *
+   * @param s1
+   * @param s2
+   * @return
+   */
+  public static int findLCSRecursiveMemoized(String s1,
+                                     String s2){
+    if(cachedSizesOfLCS.containsKey(s1 + ":" + s2)){
+      return cachedSizesOfLCS.get(s1 + ":" + s2);
+    }
+    if(s1.length() == 0
+        || s2.length() == 0){
+      return 0;
+    }
+    if(s1.charAt(0)
+        == s2.charAt(0)){
+      int size = findLCSRecursiveMemoized(s1.substring(1),s2.substring(1)) + 1;
+      cachedSizesOfLCS.put(s1 + ":" + s2,size);
+      return size;
+    }
+    else{
+      int size1 = findLCSRecursiveMemoized(s1,s2.substring(1));
+      int size2 = findLCSRecursiveMemoized(s1.substring(1),s2);
+      int max = Math.max(size1,size2);
+      cachedSizesOfLCS.put(s1 + ":" + s2,max);
+      return max;
+    }
+  }
 
   /**
    *
@@ -86,15 +119,18 @@ public class LongestCommonSubsequence {
     String s1 = "ABCDGH";
     String s2 = "AEDFHR";
     //LCS = ADH
-    System.out.println(findLongestCommonSubsequence(s1,s2));
-    System.out.println(findLCSRecursive(s1,s2));
+    System.out.println(findLongestCommonSubsequence(s1, s2));
+    System.out.println(findLCSRecursive(s1, s2));
+    System.out.println(findLCSRecursiveMemoized(s1,s2));
     /*
     “AGGTAB” and “GXTXAYB”
      */
+    cachedSizesOfLCS = new HashMap<>();
     s1 = "AGGTAB";
     s2 = "GXTXAYB";
     System.out.println(findLongestCommonSubsequence(s1,s2));
-    System.out.println(findLCSRecursive(s1,s2));
+    System.out.println(findLCSRecursive(s1, s2));
+    System.out.println(findLCSRecursiveMemoized(s1,s2));
   }
 
 }
