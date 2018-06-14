@@ -18,6 +18,28 @@ public class CoinChangeProblem {
    * @param k
    * @return
    */
+  public static int coinChange(int[] coins,int k){
+    if(k == 0){
+      return 0;
+    }
+    int count  = Integer.MAX_VALUE;
+    for(int i = 0 ; i < coins.length ; i++){
+      if(coins[i] <= k) {
+        int found = coinChange(coins, k - coins[i]);
+        if (found < count) {
+          count = found + 1;
+        }
+      }
+    }
+    return count;
+  }
+
+  /**
+   *
+   * @param coins
+   * @param k
+   * @return
+   */
   public static String coinChangeGreedy(int[] coins,int k){
     Arrays.sort(coins);
     StringBuilder coinChange = new StringBuilder();
@@ -44,12 +66,15 @@ public class CoinChangeProblem {
     int[] coins = new int[]{1,2,5,10,20,50};
     int k = 65;
     System.out.println(coinChangeGreedy(coins,k));
+    //System.out.println(coinChange(coins, k));
     coins = new int[]{1,2,5,10,12,20,50};
     k = 65;
     System.out.println(coinChangeGreedy(coins,k));
+    //System.out.println(coinChange(coins, k));
     coins = new int[]{1,5,6,9};
     k = 11;
     System.out.println(coinChangeGreedy(coins,k));
+    System.out.println(coinChange(coins, k));
   }
 
 }
