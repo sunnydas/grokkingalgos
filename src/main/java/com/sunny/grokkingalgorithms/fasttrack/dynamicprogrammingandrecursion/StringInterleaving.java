@@ -13,6 +13,57 @@ public class StringInterleaving {
 
   /**
    *
+   * @param str1
+   * @param str2
+   * @param str3
+   * @return
+   */
+  public static boolean isInterLeaving(char[] str1,char[] str2,char[] str3){
+    if(str3.length != (str1.length + str2.length)){
+      return false;
+    }
+    boolean[][] dp = new boolean[str1.length + 1][str2.length + 1];
+    System.out.println();
+    for(int i = 0 ; i < dp.length ; i++){
+      for(int j = 0 ; j < dp[i].length ; j++){
+        int l = i + j - 1; // very important
+        /*
+        This will aslo take care if i is less than zeor or j is less than zero
+         */
+        if(i == 0 && j == 0){
+          dp[i][j] = true;
+        }
+        else if(i == 0){
+          if(str2[j -  1] == str3[l]){
+            dp[i][j] = dp[i][j - 1];
+          }
+        }
+        else if(j == 0){
+          if(str1[i - 1] == str3[l]){
+            dp[i][j] = dp[i - 1][j];
+          }
+        }
+        else{
+          if(str1[i-1] == str3[l]){
+            dp[i][j] = dp[i - 1][j];
+          }
+          if(str2[j - 1] == str3[l]){
+            dp[i][j] = dp[i][j - 1];
+          }
+        }
+      }
+    }
+    for(int i = 0 ; i < dp.length ; i++){
+      for(int j = 0 ; j < dp[i].length ; j++){
+        System.out.print(dp[i][j] + " ");
+      }
+      System.out.println();
+    }
+    return dp[str1.length][str2.length];
+  }
+
+  /**
+   *
    * @param a
    * @param b
    * @param c
@@ -83,17 +134,42 @@ public class StringInterleaving {
     String c = "xabyczd";
     System.out.println(isInterLeaving(a,b,c));
     System.out.println(isInterLeavingRecursion(a, b, c));
+    System.out.println(isInterLeaving(a.toCharArray(),
+        b.toCharArray(),
+        c.toCharArray()));
     System.out.println();
     a = "sunny";
     b = "das";
     c = "sdaunnys";
-    System.out.println(isInterLeaving(a,b,c));
+    System.out.println(isInterLeaving(a, b, c));
     System.out.println(isInterLeavingRecursion(a, b, c));
+    System.out.println(isInterLeaving(a.toCharArray(),
+        b.toCharArray(),
+        c.toCharArray()));
     System.out.println();
     a = "ten";
     b = "twenty";
     c = "tentwentu";
+    System.out.println(isInterLeaving(a, b, c));
+    System.out.println(isInterLeavingRecursion(a, b, c));
+    System.out.println(isInterLeaving(a.toCharArray(),
+        b.toCharArray(),
+        c.toCharArray()));
+    System.out.println("######");
+    a = "axy";
+    b = "aab";
+    c = "aaxaby";
     System.out.println(isInterLeaving(a,b,c));
     System.out.println(isInterLeavingRecursion(a, b, c));
+    System.out.println(isInterLeaving(a.toCharArray(),
+        b.toCharArray(),
+        c.toCharArray()));
+    System.out.println("##########");
+    a = "XXYM";
+    b = "XXZT";
+    c = "XXXZXYTM";
+    System.out.println(isInterLeaving(a.toCharArray(),
+        b.toCharArray(),
+        c.toCharArray()));
   }
 }
