@@ -18,6 +18,26 @@ public class SubSetSum {
 
   /**
    *
+   * @param input
+   * @param k
+   * @return
+   */
+  public static boolean isSubSetPossible(List<Integer> input,int k){
+    if(k == 0){
+      return true;
+    }
+    if(input == null || input.size() <= 0){
+      return false;
+    }
+    List<Integer> cloned = new ArrayList<>(input);
+    int current = cloned.remove(0);
+    boolean possible1 = isSubSetPossible(cloned,k - current);
+    boolean possible2 = isSubSetPossible(cloned,k);
+    return possible1 || possible2;
+  }
+
+  /**
+   *
    *
    * @param input
    * @return
@@ -103,5 +123,7 @@ public class SubSetSum {
     input.add(1);
     int k = 6;
     System.out.println(findAllSubsetsEqualToSum(input,k));
+    System.out.println(isSubSetPossible(input, 6));
+    System.out.println(isSubSetPossible(input,100));
   }
 }
