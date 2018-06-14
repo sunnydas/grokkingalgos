@@ -24,6 +24,48 @@ public class LongestCommonSubsequence {
    * @param s2
    * @return
    */
+  public static int findLongestCommonSubsequenceDP(String s1,
+                                                   String s2){
+    int[][] dp = new int[s1.length() + 1][s2.length() + 1];
+    /*
+    Populate first row with zeros
+     */
+    for(int j = 0; j < dp[0].length ; j++){
+      dp[0][j] = 0;
+    }
+    /*
+    Populate first column with zero
+     */
+    for(int i = 0; i < dp.length ; i++){
+      dp[i][0] = 0;
+    }
+    for(int i = 1; i < dp.length ; i++){
+      for(int j = 1; j < dp[i].length ; j++){
+        if(s1.charAt(i - 1)
+            == s2.charAt(j - 1)){
+          dp[i][j] = 1 + dp[i - 1][j - 1];
+        }
+        else{
+          dp[i][j] = Math.max(dp[i - 1][j],dp[i][j - 1]);
+        }
+      }
+    }
+    for(int i = 0 ; i < dp.length ; i++){
+      for(int j = 0 ; j < dp[i].length ; j++){
+        System.out.print(dp[i][j] + " ");
+      }
+      System.out.println();
+    }
+    return dp[s1.length()][s2.length()];
+  }
+
+
+  /**
+   *
+   * @param s1
+   * @param s2
+   * @return
+   */
   public static int findLCSRecursiveMemoizedAlternate(String s1,
                                      String s2,int x,int y){
     if(s1.length() == 0
@@ -157,7 +199,8 @@ public class LongestCommonSubsequence {
     System.out.println(findLCSRecursive(s1, s2));
     System.out.println(findLCSRecursiveMemoized(s1, s2));
     memoizationCache = new int[s1.length()][s2.length()];
-    System.out.println(findLCSRecursiveMemoizedAlternate(s1,s2,0,0));
+    System.out.println(findLCSRecursiveMemoizedAlternate(s1, s2, 0, 0));
+    System.out.println(findLongestCommonSubsequenceDP(s1,s2));
     /*
     “AGGTAB” and “GXTXAYB”
      */
@@ -170,6 +213,19 @@ public class LongestCommonSubsequence {
     memoizationCache = new int[s1.length()][s2.length()];
     System.out.println(
         findLCSRecursiveMemoizedAlternate(s1,s2,0,0));
+    System.out.println(findLongestCommonSubsequenceDP(s1, s2));
+    System.out.println("#############");
+    cachedSizesOfLCS = new HashMap<>();
+    s1 = "ABCDAF";
+    s2 = "ACBCF";
+    System.out.println(findLongestCommonSubsequence(s1, s2));
+    System.out.println(findLCSRecursive(s1, s2));
+    System.out.println(findLCSRecursiveMemoized(s1, s2));
+    memoizationCache = new int[s1.length()][s2.length()];
+    System.out.println(
+        findLCSRecursiveMemoizedAlternate(s1, s2, 0, 0));
+    System.out.println(findLongestCommonSubsequenceDP(s1,s2));
+
   }
 
 }
