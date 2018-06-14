@@ -16,6 +16,59 @@ public class SubSetSum {
   subset = 3,2,1
    */
 
+
+  /**
+   *
+   * @param input
+   * @param k
+   * @return
+   */
+  public static boolean isSubSetPossibleDP(int[] input,int k){
+    boolean[][] dp = new boolean[input.length][k + 1];
+    /*
+    First column will always be true
+     */
+    for(int i = 0 ; i < dp.length ; i++){
+      dp[i][0] = true;
+    }
+    /*
+    First row will be true only when input[0] ==  j
+     */
+    for(int j = 1; j < dp[0].length ; j++){
+      if(j == input[0]){
+        dp[0][j] = true;
+      }
+    }
+    /*
+    Now first row and firs columns are populated correctly.
+    Time to process
+     */
+    for(int i = 1 ; i < dp.length ; i++){
+      int v = input[i];
+      for(int j = 1 ; j < dp[i].length ; j++){
+        if(v > j){
+          /*
+          Take from previous row
+           */
+          dp[i][j] = dp[i - 1][j];
+        }
+        else{
+          /*
+          Subtract current value and see if previous subset was valid
+           */
+          dp[i][j] = dp[i-1][j] || dp[i - 1][j - v];
+        }
+      }
+    }
+    for(int i = 0; i < dp.length ; i++){
+      for(int j = 0 ; j < dp[i].length ; j++){
+        System.out.print(dp[i][j] + " ");
+      }
+      System.out.println();
+    }
+    return dp[input.length - 1][k];
+  }
+
   /**
    *
    * @param input
@@ -124,6 +177,12 @@ public class SubSetSum {
     int k = 6;
     System.out.println(findAllSubsetsEqualToSum(input,k));
     System.out.println(isSubSetPossible(input, 6));
-    System.out.println(isSubSetPossible(input,100));
+    System.out.println(isSubSetPossible(input, 100));
+    System.out.println("##### dp #####:wq" +
+        "");
+    int[] input1 = new int[]{3,2,7,1};
+    System.out.println(isSubSetPossibleDP(input1,6));
+    input1 = new int[]{2, 3, 7, 8};
+    System.out.println(isSubSetPossibleDP(input1,11));
   }
 }
