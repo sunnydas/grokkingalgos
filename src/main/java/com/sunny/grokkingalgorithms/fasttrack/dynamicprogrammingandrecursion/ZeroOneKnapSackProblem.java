@@ -14,6 +14,40 @@ public class ZeroOneKnapSackProblem {
 
   /**
    *
+   * @param weights
+   * @param values
+   * @param k
+   * @param n
+   * @return
+   */
+  public static int knapSackDP(int[] values,int[] weights,int k,int n){
+    int[][] dp = new int[n + 1][k+1];
+    for(int i = 0; i < dp.length ; i++){
+      for(int j = 0; j < dp[i].length ; j++){
+        if(i == 0 || j== 0){
+          dp[i][j] = 0;
+          continue;
+        }
+        if(j  >= weights[i - 1]){
+          dp[i][j] = Math.max(dp[i - 1][j],
+              values[i - 1] + dp[i - 1][j - weights[i - 1]]);
+        }
+        else{
+          dp[i][j] = dp[i - 1][j];
+        }
+      }
+    }
+    for(int i = 0 ; i < dp.length ; i++){
+      for(int j = 0; j < dp[i].length ; j++){
+        System.out.print(dp[i][j] + " ");
+      }
+      System.out.println();
+    }
+    return dp[n][k];
+  }
+
+  /**
+   *
    * @param values
    * @param weights
    * @param k
@@ -46,6 +80,12 @@ public class ZeroOneKnapSackProblem {
     int[] weights = new int[]{10,20,30};
     int k = 50;
     System.out.println(knapSack(values,weights,k,3));
+    System.out.println(knapSackDP(values,weights,k,3));
+    int val[] = {22, 20, 15, 30, 24, 54, 21, 32, 18, 25};
+    int wt[] = {4, 2, 3, 5, 5, 6, 9, 7, 8, 10};
+    k = 30;
+    System.out.println(knapSack(val,wt,k,val.length));
+    System.out.println(knapSackDP(val,wt,k,val.length));
   }
 
 }
