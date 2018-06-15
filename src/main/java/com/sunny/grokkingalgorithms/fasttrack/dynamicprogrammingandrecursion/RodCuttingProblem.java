@@ -18,6 +18,30 @@ public class RodCuttingProblem {
 
   static int[] rodCuttingCache;
 
+  /**
+   *
+   * @param length
+   * @param price
+   * @param rodLength
+   * @return
+   */
+  public static int rodCuttingDP(int[] length,int[] price,int rodLength){
+    int[] maxValues = new int[rodLength + 1];
+    for(int i = 1; i <= rodLength ; i++){
+      maxValues[i] = Integer.MIN_VALUE;
+      for(int j = 1; j <= i ; j++){
+        maxValues[i] = Math.max(maxValues[i],
+            price[j] +
+        maxValues[i - j]);
+      }
+    }
+    for(int i = 0 ; i < maxValues.length ;i++){
+      System.out.print(maxValues[i] + " ");
+    }
+    System.out.println();
+    return maxValues[rodLength];
+  }
+
   public static int
   rodCuttingMemoized(int[] length,int[] price,int rodLength){
     if(rodCuttingCache[rodLength] >= 0){
@@ -82,6 +106,9 @@ public class RodCuttingProblem {
     System.out.println(rodCutting(length, price, 4));
     //System.out.println(rodCuttingAlternate(length,price,4,0));
     System.out.println(rodCuttingMemoized(length,price,4));
+    //length = new int[]{1,2,3,4,5,6,7,8};
+    //price = new int[]{1,5,8,9,10,17,17,20};
+    System.out.println(rodCuttingDP(length,price,4));
   }
 
 }
