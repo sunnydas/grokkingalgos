@@ -20,6 +20,16 @@ public class SwapTwoVariablesWithoutTemp {
     System.out.println("swap");
     System.out.println(a);
     System.out.println(b);
+    a = 9;
+    b = 4;
+    System.out.println(a);
+    System.out.println(b);
+    a += b;
+    b = a - b;
+    a -= b;
+    System.out.println("swap");
+    System.out.println(a);
+    System.out.println(b);
   }
 
 }
