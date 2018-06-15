@@ -30,6 +30,17 @@ public class SwapTwoVariablesWithoutTemp {
     System.out.println("swap");
     System.out.println(a);
     System.out.println(b);
+    System.out.println("xor");
+    a = 5;
+    b = 6;
+    System.out.println(a);
+    System.out.println(b);
+    a = a^b;
+    b = a^b;
+    a = a^b;
+    System.out.println("swap");
+    System.out.println(a);
+    System.out.println(b);
   }
 
 }
