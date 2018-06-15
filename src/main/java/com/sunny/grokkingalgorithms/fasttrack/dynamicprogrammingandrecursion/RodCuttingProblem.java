@@ -16,12 +16,35 @@ public class RodCuttingProblem {
   we get 10
    */
 
+  static int[] rodCuttingCache;
+
+  public static int
+  rodCuttingMemoized(int[] length,int[] price,int rodLength){
+    if(rodCuttingCache[rodLength] >= 0){
+      return rodCuttingCache[rodLength];
+    }
+    if(rodLength == 0){
+      //System.out.println(path);
+      //System.out.println(currentPrice);
+      return 0;
+    }
+    //System.out.println(currentLength);
+    //currentPrice += price[currentLength];
+    int maxPrice = Integer.MIN_VALUE;
+    for(int i = 1; i <= rodLength ; i++){
+      maxPrice = Math.max(maxPrice,rodCuttingMemoized(length,price,
+          rodLength - length[i]) + price[length[i]]);
+    }
+    rodCuttingCache[rodLength] = maxPrice;
+    return maxPrice;
+  }
+
+
   /**
    *
    * @param length
    * @param price
    * @param rodLength
-   * @param currentPrice
    * @return
    */
   public static int
@@ -52,7 +75,13 @@ public class RodCuttingProblem {
     For rod of length 4
     we can get 10 (2*5)
      */
-    System.out.println(rodCutting(length,price,4));
+    rodCuttingCache = new int[length.length];
+    for(int i = 0 ; i < rodCuttingCache.length ; i++){
+      rodCuttingCache[i] = -1;
+    }
+    System.out.println(rodCutting(length, price, 4));
+    //System.out.println(rodCuttingAlternate(length,price,4,0));
+    System.out.println(rodCuttingMemoized(length,price,4));
   }
 
 }
