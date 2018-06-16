@@ -22,7 +22,7 @@ class Score{
 public class MasterMind {
 
   /*
-  copmpuer 4 slots:
+  computer 4 slots:
   each slot might have:
   red,yellow,green blue  balls (RYGB)
   user is trying to guess which slot has what color for example:
@@ -32,8 +32,66 @@ public class MasterMind {
    if computer = RGBY
    your guess = GGRR
    one hit and one pseudo hit.
-   A hit sloy cannot be pseudo hit
+   A hit slot cannot be pseudo hit
    */
+
+  /**
+   *
+   * @param c
+   * @return
+   */
+  private static int getCode(char c){
+     int code = -1;
+     switch(c){
+       case 'R':
+         code = 0;
+         break;
+       case 'Y':
+         code = 1;
+         break;
+       case 'G':
+         code = 2;
+         break;
+       case 'B':
+         code = 3;
+         break;
+     }
+     return code;
+  }
+
+  /**
+   *
+   * @param actual
+   * @param guess
+   * @return
+   */
+  public static Score getScoreOptimized(char[] actual,char[] guess){
+    if(guess.length != actual.length){
+      return null;
+    }
+    char[] frequencies = new char[4];
+    Score score = new Score();
+    int hitCounter = 0;
+    int pseudoHitCounter = 0;
+     for(int i = 0 ; i < guess.length ; i++){
+       if(actual[i] == guess[i]){
+         hitCounter++;
+       }
+       else{
+         frequencies[getCode(actual[i])]++;
+       }
+     }
+    for(int i = 0 ; i < guess.length ; i++){
+      if(guess[i] != actual[i] &&
+           frequencies[getCode(guess[i])] > 0){
+        pseudoHitCounter++;
+        frequencies[getCode(guess[i])]--;
+      }
+    }
+    score.hits = hitCounter;
+    score.pseudoHits = pseudoHitCounter;
+    return score;
+  }
 
   /**
    *
@@ -81,5 +139,8 @@ public class MasterMind {
     char[] actual = new char[]{'R','G','B','Y'};
     char[] guess = new char[]{'G','G','R','R'};
     System.out.println(getScore(actual,guess));
+    actual = new char[]{'R','G','B','Y'};
+    guess = new char[]{'G','G','R','R'};
+    System.out.println(getScoreOptimized(actual,guess));
   }
 }
