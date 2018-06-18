@@ -16,6 +16,8 @@ public class Poweroftwo {
       a = a/2;
     }
 
-
+    a = 4;
+    int x = a&(a - 1);
+    System.out.println(x == 0);
   }
 }
