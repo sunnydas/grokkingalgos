@@ -1,5 +1,6 @@
 package com.sunny.grokkingalgorithms.fasttrack.week1;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,6 +8,29 @@ import java.util.Set;
  * Created by sundas on 6/20/2018.
  */
 public class LongestCommonSubsequence {
+
+  /**
+   *
+   * @param input
+   * @return
+   */
+  public static int longestCommonSubsequenceAlternate(int[] input){
+    Arrays.sort(input);
+    int curCount = 1;
+    int maxCount = 0;
+    for(int i = 1 ; i < input.length ; i++){
+      if(input[i] - input[i - 1] == 1){
+        curCount++;
+      }
+      else{
+        curCount = 1;
+      }
+      if(curCount > maxCount){
+        maxCount = curCount;
+      }
+    }
+    return maxCount;
+  }
 
    /*
    LCS:
@@ -46,6 +70,7 @@ public class LongestCommonSubsequence {
     output 1,2,3,4
      */
     System.out.println(findLCSConsecutive(input));
+    System.out.println(longestCommonSubsequenceAlternate(input));
   }
 
 }
