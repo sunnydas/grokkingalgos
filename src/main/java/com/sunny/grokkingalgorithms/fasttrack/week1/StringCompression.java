@@ -5,6 +5,8 @@ package com.sunny.grokkingalgorithms.fasttrack.week1;
  */
 public class StringCompression {
 
+
+
   /**
    *
    * @param s
@@ -45,9 +47,12 @@ public class StringCompression {
     should become : A3B2C1D5
      */
     System.out.println(compress(s));
+    //System.out.println(compressAlternate(s));
     s = "ABCD";
     System.out.println(compress(s));
+    //System.out.println(compressAlternate(s));
     s = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
     System.out.println(compress(s));
+    //System.out.println(compressAlternate(s));
   }
 }
