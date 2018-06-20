@@ -25,6 +25,18 @@ public class SumOfUpperPyramindInAMatrix {
     return sum;
   }
 
+  public static int findSUmOfUpperPyramidAlternate(int[][] matrix){
+    int sum = 0;
+    for(int i = 0 ; i < matrix.length ; i++){
+      for(int j = i ; j < matrix[i].length ; j++){
+        //if(i >= j){
+        sum += matrix[i][j];
+        //}
+      }
+    }
+    return sum;
+  }
+
   /**
    *
    * @param args
@@ -40,6 +52,7 @@ public class SumOfUpperPyramindInAMatrix {
     answer should be 43
      */
     System.out.println(findSUmOfUpperPyramid(matrix));
+    System.out.println(findSUmOfUpperPyramidAlternate(matrix));
   }
 
 }
