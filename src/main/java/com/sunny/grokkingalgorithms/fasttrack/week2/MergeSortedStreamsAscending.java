@@ -28,6 +28,23 @@ Output: 0 1 2 3 4 5 6 7 8 9 10 11
    * @param stream
    * @return
    */
+  public static int[] sortAlternate(int[][] stream){
+    int[] output = new int[stream.length*stream[0].length];
+    int index = 0;
+    for(int i = 0 ; i < stream.length ; i++){
+      for(int j = 0 ; j < stream[i].length ; j++){
+        output[index] = stream[i][j];
+      }
+    }
+    Arrays.sort(output);
+    return output;
+  }
+
+  /**
+   *
+   * @param stream
+   * @return
+   */
   public static int[] sort(int[][] stream){
     /*
     1. Create an output array of size n*k.
@@ -61,5 +78,6 @@ Output: 0 1 2 3 4 5 6 7 8 9 10 11
       {2, 4, 6, 8},
       {0, 9, 10, 11}} ;
     System.out.println(Arrays.toString(sort(input)));
+    System.out.println(Arrays.toString(sortAlternate(input)));
   }
 }
