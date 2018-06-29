@@ -25,15 +25,18 @@ Output:- 6
    * @return
    */
   public static int maxSongs(List<Integer> input,int journeyTime){
-    if(input.size() == 0){
+    if(input.size() == 0 && journeyTime >= 0){
       return 0;
     }
-    if(journeyTime < 0){
-      return Integer.MIN_VALUE;
-    }
     int cur = input.remove(0);
-    int included = maxSongs(input,journeyTime - cur) + 1;
-    int excluded = maxSongs(input,journeyTime);
+    int included = Integer.MIN_VALUE;
+    int excluded = Integer.MIN_VALUE;
+    if(journeyTime - cur >= 0) {
+      included = maxSongs(new ArrayList<Integer>(input), journeyTime - cur) + 1;
+    }
+    if(journeyTime >= 0) {
+      excluded = maxSongs(new ArrayList<Integer>(input), journeyTime);
+    }
     return Math.max(included,excluded);
   }
 
@@ -58,7 +61,7 @@ Output:- 6
         break;
       }
     }
-    System.out.println(builder.toString());
+    //System.out.println(builder.toString());
     max = i;
     return max;
   }
@@ -74,17 +77,41 @@ Output:- 6
       songs.add(i);
     }
     int journeyTime = 20;
-    System.out.println(maxSongs(songs,journeyTime));
-    System.out.println(maxSongs(input,20));
+    System.out.println("recursive " + maxSongs(songs,journeyTime));
+    System.out.println("sorting "+ maxSongs(input,20));
     input = new int[]{2, 4, 3, 5, 5, 2, 4, 3};
-    System.out.println(maxSongs(input,20));
-    //System.out.println(maxSongs(songs,journeyTime));
+    System.out.println("sorting " + maxSongs(input,20));
+    //System.out.println("recursive " + maxSongs(songs,journeyTime));
     input = new int[]{1,2,3,4};
     System.out.println(maxSongs(input,11));
     System.out.println(maxSongs(input,7));
     System.out.println(maxSongs(input,4));
     input = new int[]{50,2,1,3,4,5,80,19,23};
     System.out.println(maxSongs(input,100));
+    //System.out.println(maxSongs(songs,100));
+    System.out.println();
+    songs = new ArrayList<>();
+    for(int i : input){
+      songs.add(i);
+    }
+    System.out.println(maxSongs(songs,100));
+    System.out.println();
+    input = new int[]{1,2,3,4};
+    songs = new ArrayList<>();
+    for(int i : input){
+      songs.add(i);
+    }
+    System.out.println(maxSongs(songs,11));
+    songs = new ArrayList<>();
+    for(int i : input){
+      songs.add(i);
+    }
+    System.out.println(maxSongs(songs,7));
+    songs = new ArrayList<>();
+    for(int i : input){
+      songs.add(i);
+    }
+    System.out.println(maxSongs(songs,4));
   }
 
 }
