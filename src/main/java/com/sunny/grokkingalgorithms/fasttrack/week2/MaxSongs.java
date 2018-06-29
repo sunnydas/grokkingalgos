@@ -13,7 +13,7 @@ public class MaxSongs {
   Given an array of songs length and journey time, maximum number of songs that can be played during the journey.
 Constraint:- Either song should be completed or should not be played.
 Ex:- [2, 4, 3, 5, 5, 2, 4] and Journey time = 20
-Output: – 5
+Output: ï¿½ 5
 [2, 4, 3, 5, 5, 2, 4, 3] and Journey time = 20
 Output:- 6
    */
@@ -78,6 +78,13 @@ Output:- 6
     System.out.println(maxSongs(input,20));
     input = new int[]{2, 4, 3, 5, 5, 2, 4, 3};
     System.out.println(maxSongs(input,20));
+    //System.out.println(maxSongs(songs,journeyTime));
+    input = new int[]{1,2,3,4};
+    System.out.println(maxSongs(input,11));
+    System.out.println(maxSongs(input,7));
+    System.out.println(maxSongs(input,4));
+    input = new int[]{50,2,1,3,4,5,80,19,23};
+    System.out.println(maxSongs(input,100));
   }
 
 }
