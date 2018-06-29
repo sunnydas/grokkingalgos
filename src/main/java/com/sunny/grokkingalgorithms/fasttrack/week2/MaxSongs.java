@@ -1,0 +1,83 @@
+package com.sunny.grokkingalgorithms.fasttrack.week2;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Created by sundas on 6/29/2018.
+ */
+public class MaxSongs {
+
+  /*
+  Given an array of songs length and journey time, maximum number of songs that can be played during the journey.
+Constraint:- Either song should be completed or should not be played.
+Ex:- [2, 4, 3, 5, 5, 2, 4] and Journey time = 20
+Output: – 5
+[2, 4, 3, 5, 5, 2, 4, 3] and Journey time = 20
+Output:- 6
+   */
+
+  /**
+   *
+   * @param input
+   * @param journeyTime
+   * @return
+   */
+  public static int maxSongs(List<Integer> input,int journeyTime){
+    if(input.size() == 0){
+      return 0;
+    }
+    if(journeyTime < 0){
+      return Integer.MIN_VALUE;
+    }
+    int cur = input.remove(0);
+    int included = maxSongs(input,journeyTime - cur) + 1;
+    int excluded = maxSongs(input,journeyTime);
+    return Math.max(included,excluded);
+  }
+
+  /**
+   *
+   * @param input
+   * @param k
+   * @return
+   */
+  public static int maxSongs(int[] input,int k){
+    int max = 0;
+    Arrays.sort(input);
+    int curCount =  0;
+    int i = 0;
+    StringBuilder  builder = new StringBuilder();
+    for(;i < input.length; i++){
+      if(curCount + input[i] <= k) {
+        curCount += input[i];
+        builder.append(input[i]);
+      }
+      else{
+        break;
+      }
+    }
+    System.out.println(builder.toString());
+    max = i;
+    return max;
+  }
+
+  /**
+   *
+   * @param args
+   */
+  public static void main(String[] args) {
+    int[] input = new int[]{2, 4, 3, 5, 5, 2, 4};
+    List<Integer> songs = new ArrayList<>();
+    for(int i : input){
+      songs.add(i);
+    }
+    int journeyTime = 20;
+    System.out.println(maxSongs(songs,journeyTime));
+    System.out.println(maxSongs(input,20));
+    input = new int[]{2, 4, 3, 5, 5, 2, 4, 3};
+    System.out.println(maxSongs(input,20));
+  }
+
+}
