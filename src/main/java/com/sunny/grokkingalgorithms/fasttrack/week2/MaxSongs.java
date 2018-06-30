@@ -18,6 +18,7 @@ Output: � 5
 Output:- 6
    */
 
+
   /**
    *
    * @param input
