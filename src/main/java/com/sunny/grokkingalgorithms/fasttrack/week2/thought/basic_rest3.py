@@ -4,8 +4,8 @@ import json
 import datetime
 
 now = datetime.datetime.today()
-headers = {'userId' : 'r1QWH8Qzm'}
-url = 'https://http-hunt.thoughtworks-labs.net/challenge/input'
+headers = {'userId' : 'blank'}
+url = 'https://http-hunt.dummy-labs.net/challenge/input'
 req = urllib2.Request(url, None, headers)
 response = urllib2.urlopen(req)
 json_data = json.load(response)
@@ -24,9 +24,9 @@ for obj in json_data:
         
 dict['totalValue'] = totalvalue
         
-headers = {'userId' : 'r1QWH8Qzm',
+headers = {'userId' : 'blank',
 "content-type": "application/json" }
-url = 'https://http-hunt.thoughtworks-labs.net/challenge/output'
+url = 'https://http-hunt.dummy-labs.net/challenge/output'
 ##data = urllib.urlencode(jsonRequest)
 ##print jsonRequest
 req = urllib2.Request(url,data=json.dumps(dict),headers=headers)

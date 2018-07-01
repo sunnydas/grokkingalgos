@@ -41,12 +41,12 @@ public class BasicCountREST {
         return true;
       }
     };
-    URL url = new URL("https://http-hunt.thoughtworks-" +
+    URL url = new URL("https://http-hunt.dummy-" +
         "labs.net/challenge/input");
     HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
     conn.setRequestMethod("GET");
     conn.setRequestProperty("Content-Type", "application/json");
-    conn.setRequestProperty("userId", "r1QWH8Qzm");
+    conn.setRequestProperty("userId", "<>");
     //System.out.println(conn.getRequestProperty("userId"));
     conn.setDoInput(true);
     conn.setDoOutput(true);
