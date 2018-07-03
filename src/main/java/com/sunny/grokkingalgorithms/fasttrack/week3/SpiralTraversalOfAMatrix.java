@@ -31,10 +31,14 @@ public class SpiralTraversalOfAMatrix {
       }
       j--;
       i++;
+      int prevI = i;
       for(;i<rowBound;i++){
         System.out.print(input[i][j] + " ");
       }
       i--;
+      if(i <= prevI){
+        //break;
+      }
       j--;
       for(;j>=count;j--){
         System.out.print(input[i][j] + " ");
@@ -69,6 +73,7 @@ public class SpiralTraversalOfAMatrix {
     };
     spiralTraversal(input);
     System.out.println();
+    System.out.println();
     input = new int[][]{
         {1,2,3,4,5,6,7},
         {8,9,10,11,12,13,14},
@@ -78,6 +83,7 @@ public class SpiralTraversalOfAMatrix {
         {36,37,38,39,40,41,42}
     };
     spiralTraversal(input);
+    System.out.println();
     System.out.println();
     int a[][] = { {1,  2,  3,  4,  5,  6},
         {7,  8,  9,  10, 11, 12},
