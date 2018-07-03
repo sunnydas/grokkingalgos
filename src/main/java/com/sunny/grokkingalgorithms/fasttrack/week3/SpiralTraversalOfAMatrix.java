@@ -16,6 +16,9 @@ public class SpiralTraversalOfAMatrix {
    */
   public static void spiralTraversal(int[][] input){
     int layers = input.length/2;
+    if(input.length % 2 != 0){
+      layers = layers + 1;
+    }
     int count = 0;
     int i = 0;
     int j = 0;
@@ -75,6 +78,12 @@ public class SpiralTraversalOfAMatrix {
         {36,37,38,39,40,41,42}
     };
     spiralTraversal(input);
+    System.out.println();
+    int a[][] = { {1,  2,  3,  4,  5,  6},
+        {7,  8,  9,  10, 11, 12},
+        {13, 14, 15, 16, 17, 18}
+    };
+    spiralTraversal(a);
   }
 
 
