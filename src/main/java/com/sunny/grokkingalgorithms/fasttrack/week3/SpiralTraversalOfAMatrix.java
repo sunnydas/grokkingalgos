@@ -14,6 +14,39 @@ public class SpiralTraversalOfAMatrix {
    *
    * @param input
    */
+  public static void spiralTraversalAlternate(int[][] input){
+    int k = 0;
+    int l = 0;
+    int m = input.length - 1;
+    int n = input[0].length - 1;
+    while(k <= m && l <= n){
+      for(int j = l ; j <= n ; j++){
+        System.out.print(input[k][j] + " ");
+      }
+      k++;
+      for(int i = k; i <= m ; i++){
+        System.out.print(input[i][n] + " ");
+      }
+      n--;
+      if(k <= m){
+        for(int j = n ; j >= l ; j--){
+          System.out.print(input[m][j] + " ");
+        }
+        m--;
+      }
+      if(l <= n){
+        for(int i = m; i >= k; i--){
+          System.out.print(input[i][l] + " ");
+        }
+        l++;
+      }
+    }
+  }
+
+  /**
+   *
+   * @param input
+   */
   public static void spiralTraversal(int[][] input){
     int layers = input.length/2;
     if(input.length % 2 != 0){
@@ -90,6 +123,9 @@ public class SpiralTraversalOfAMatrix {
         {13, 14, 15, 16, 17, 18}
     };
     spiralTraversal(a);
+    System.out.println();
+    System.out.println();
+    spiralTraversalAlternate(a);
   }
 
 
