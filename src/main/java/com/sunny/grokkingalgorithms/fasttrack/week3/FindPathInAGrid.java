@@ -4,7 +4,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 
+enum PrevDir{
+  vert,
+  hor,
+  none
+}
 /**
  * Created by sundas on 7/7/2018.
  */
@@ -110,7 +116,7 @@ public class FindPathInAGrid {
     }
     consideredIndex.add(ph);
     int minSteps = Integer.MAX_VALUE;
-    int minStepsR = minSteps(grid,a,b,c,d,i,j+1);
+    int minStepsR = minSteps(grid, a, b, c, d, i, j + 1);
     int minStepsD = minSteps(grid, a, b, c, d, i + 1, j);
     int minStepsU = minSteps(grid,a,b,c,d,i - 1,j);
     int minStepsL = minSteps(grid,a,b,c,d,i,j - 1);
@@ -132,10 +138,22 @@ public class FindPathInAGrid {
     Iterator<PH> iterator = path.iterator();
     int prevI = -1;
     int prevJ = -1;
-    int prevDirection = -1; // 0 horizontal 1 vertical
+    PrevDir dir = PrevDir.none;
     while(iterator.hasNext()){
       PH ph = iterator.next();
       if(prevI >= 0 && prevJ >= 0){
+        PrevDir temp =  dir;
+        if(ph.i == prevI){
+          dir = PrevDir.hor;
+        }
+        if(ph.j == prevJ){
+          dir = PrevDir.vert;
+        }
+        if(temp != PrevDir.none && !dir.equals(temp)){
+          prevI = ph.i;
+          prevJ = ph.j;
+          continue;
+        }
         if(ph.i != prevI
             && ph.j == prevJ){
           normalizedSteps--;
