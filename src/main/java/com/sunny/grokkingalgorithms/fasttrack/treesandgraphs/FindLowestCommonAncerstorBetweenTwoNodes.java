@@ -2,10 +2,7 @@ package com.sunny.grokkingalgorithms.fasttrack.treesandgraphs;
 
 import com.sunny.grokkingalgorithms.ctci.c4.util.BinaryTreeNode;
 import com.sunny.grokkingalgorithms.ctci.c4.util.TreeUtils;
-import com.tangosol.util.Binary;
-import sun.reflect.generics.tree.Tree;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
