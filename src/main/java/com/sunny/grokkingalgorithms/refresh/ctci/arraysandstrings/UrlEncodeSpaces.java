@@ -6,6 +6,48 @@ public class UrlEncodeSpaces {
     Url encode strings, essentially replace spaces with %20.
      */
 
+
+    /**
+     *
+     * @param input
+     * @param actualLength
+     */
+    public static void encodeAlt(char[] input,
+                              int actualLength){
+        int spaceCount = countSpaces(input,actualLength);
+        int index = actualLength + 2*spaceCount - 1;
+        int i = actualLength - 1;
+        while(i >= 0){
+            if(input[i] == ' '){
+                input[index] = '0';
+                input[index - 1] = '2';
+                input[index - 2] = '%';
+                index -= 3;
+            }
+            else{
+                input[index] = input[i];
+                index--;
+            }
+            i--;
+        }
+    }
+
+    /**
+     *
+     * @param input
+     * @param actualLength
+     * @return
+     */
+    public static int countSpaces(char[] input, int actualLength){
+        int spaceCount = 0;
+        for(int i = 0 ; i < actualLength ; i++){
+            if(input[i] == ' '){
+                spaceCount++;
+            }
+        }
+        return spaceCount;
+    }
+
     /**
      *
      * @param input
@@ -64,6 +106,13 @@ public class UrlEncodeSpaces {
         output = encode(converted,21);
         System.out.println(String.valueOf(output));
         System.out.println(String.valueOf(output).length());
+        str = "Mr Someone  Somewhere      ";
+        converted = str.toCharArray();
+        System.out.println(converted.length);
+        encodeAlt(converted,21);
+        System.out.println(String.valueOf(converted));
+        System.out.println(String.valueOf(converted).length());
+
     }
 
 }
