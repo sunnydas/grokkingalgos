@@ -29,6 +29,23 @@ public class UniqueCharactersInString {
         return unique;
     }
 
+
+    public static boolean areCharactersUniqueWithoutUsingExtraSpace(String input){
+        boolean unique = true;
+        for(int i = 0 ; i < input.length() ; i++){
+            char cur = input.charAt(i);
+            for(int j = i+1 ; j < input.length() ; j++){
+                if(cur == input.charAt(j)){
+                    unique = false;
+                    break;
+                }
+            }
+            if(!unique){
+                break;
+            }
+        }
+        return unique;
+    }
     /**
      *
      * @param args
@@ -38,5 +55,7 @@ public class UniqueCharactersInString {
         String input2 = "zxcvbjhglzlo";
         System.out.println(areCharactersUnique(input1));
         System.out.println(areCharactersUnique(input2));
+        System.out.println(areCharactersUniqueWithoutUsingExtraSpace(input1));
+        System.out.println(areCharactersUniqueWithoutUsingExtraSpace(input2));
     }
 }
