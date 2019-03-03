@@ -1,5 +1,8 @@
 package com.sunny.grokkingalgorithms.refresh.ctci.arraysandstrings;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class PermutationPalindromeChecker {
 
     /**
@@ -59,6 +62,62 @@ public class PermutationPalindromeChecker {
         return isAnyPermutationPalindrome;
     }
 
+
+    public static boolean isAnyPermutationAPalindromeUsingSet(String s){
+        boolean isAnyPermutationPalindrome = false;
+        Set<Character> set = new HashSet<>();
+        for(int i = 0 ; i < s.length() ; i++){
+            char current = Character.toLowerCase(s.charAt(i));
+            if(current == ' '){
+                continue;
+            }
+            if(set.contains(current)){
+                set.remove(current);
+            }
+            else{
+                set.add(current);
+            }
+        }
+        int count = set.size();
+        if(effectiveCount(s)%2 == 0 && count == 0){
+            isAnyPermutationPalindrome = true;
+        }
+        else if((effectiveCount(s)%2 != 0) && count == 1){
+            isAnyPermutationPalindrome = true;
+        }
+        return isAnyPermutationPalindrome;
+    }
+
+    public static boolean isAnyPermutationAPalindromeAssumingAscii(String s){
+        boolean isAnyPermutationPalindrome = false;
+        char[] lookup = new char[256];
+        for(int i = 0 ; i < s.length() ; i++){
+            char cur = Character.toLowerCase(s.charAt(i));
+            if(cur != ' ') {
+                if(lookup[cur] > 0){
+                    lookup[cur]--;
+                }
+                else{
+                    lookup[cur]++;
+                }
+            }
+        }
+        int count = 0;
+        for(int i = 0 ; i < s.length() ; i++){
+            char cur = Character.toLowerCase(s.charAt(i));
+            if(cur != ' ') {
+                count += lookup[cur];
+            }
+        }
+        if(effectiveCount(s)%2 == 0 && count == 0){
+            isAnyPermutationPalindrome = true;
+        }
+        else if((effectiveCount(s)%2 != 0) && count == 1){
+            isAnyPermutationPalindrome = true;
+        }
+        return isAnyPermutationPalindrome;
+    }
+
     /**
      *
      * @param args
@@ -66,5 +125,22 @@ public class PermutationPalindromeChecker {
     public static void main(String[] args) {
         String s = "Tact Coa";
         System.out.println(isAnyPermutationAPalindrome(s));
+        System.out.println(isAnyPermutationAPalindromeUsingSet(s));
+        System.out.println(isAnyPermutationAPalindromeAssumingAscii(s));
+        System.out.println();
+        s = "ab                ba";
+        System.out.println(isAnyPermutationAPalindrome(s));
+        System.out.println(isAnyPermutationAPalindromeUsingSet(s));
+        System.out.println(isAnyPermutationAPalindromeAssumingAscii(s));
+        System.out.println();
+        s = "malayalam";
+        System.out.println(isAnyPermutationAPalindrome(s));
+        System.out.println(isAnyPermutationAPalindromeUsingSet(s));
+        System.out.println(isAnyPermutationAPalindromeAssumingAscii(s));
+        System.out.println();
+        s = "malayaalam";
+        System.out.println(isAnyPermutationAPalindrome(s));
+        System.out.println(isAnyPermutationAPalindromeUsingSet(s));
+        System.out.println(isAnyPermutationAPalindromeAssumingAscii(s));
     }
 }
