@@ -13,9 +13,9 @@ if n = 3, then the following strings will sum up to n:
      */
 
 
-    public static int findSumMemoization(int n, String s, int[] computed){
+    public static int findSumMemoization(int n, int[] computed){
         if(n == 0){
-            System.out.println(s);
+            //System.out.println(s);
             return 1;
         }
         if(n < 1){
@@ -25,8 +25,8 @@ if n = 3, then the following strings will sum up to n:
             return computed[n];
         }
         int sum = 0;
-        sum += findSumMemoization(n - 1,s,computed) + findSumMemoization(n - 2,s,computed)
-          + findSumMemoization(n - 3,s,computed);
+        sum += findSumMemoization(n - 1,computed) + findSumMemoization(n - 2,computed)
+          + findSumMemoization(n - 3,computed);
         computed[n] = sum;
         return computed[n];
     }
@@ -53,7 +53,7 @@ if n = 3, then the following strings will sum up to n:
         for(int i = 0 ; i < computed.length ; i++){
             computed[i] = -1;
         }
-        System.out.println(findSumMemoization(50,"",computed));
+        System.out.println(findSumMemoization(50,computed));
         System.out.println();
         System.out.println();
         printStringSum(2,"");
