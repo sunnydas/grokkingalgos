@@ -13,6 +13,19 @@ if n = 3, then the following strings will sum up to n:
      */
 
 
+
+    public static int findSumDP(int n){
+        int[] dp = new int[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 4;
+        for(int i = 4 ; i < n + 1 ; i++){
+            dp[i] += dp[i - 1] + dp[i - 2] + dp[i - 3];
+        }
+        return dp[n];
+    }
+
     public static int findSumMemoization(int n, int[] computed){
         if(n == 0){
             //System.out.println(s);
@@ -59,6 +72,19 @@ if n = 3, then the following strings will sum up to n:
         printStringSum(2,"");
         System.out.println();
         printStringSum(7,"");
+        System.out.println("with memoization:");
+        computed = new int[4];
+        for(int i = 0 ; i < computed.length ; i++){
+            computed[i] = -1;
+        }
+        System.out.println(findSumMemoization(3,computed));
+        System.out.println("with memoization:");
+        computed = new int[5];
+        for(int i = 0 ; i < computed.length ; i++){
+            computed[i] = -1;
+        }
+        System.out.println(findSumMemoization(4,computed));
+        System.out.println("DP sum for n = 50 is " + findSumDP(50));
     }
 
 }
