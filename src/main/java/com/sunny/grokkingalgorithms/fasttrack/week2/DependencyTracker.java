@@ -161,7 +161,7 @@ public class DependencyTracker {
 
   public static void main(String[] args) {
 
-    //read input from stdin
+    //dequeue input from stdin
     Scanner scan = new Scanner(System.in);
 
     while (true) {

@@ -9,7 +9,7 @@ public class Median {
 
   /*
   The median
-The median is the middle number. To calculate the median of any set of numbers, you need to write the numbers in order.
+The median is the middle number. To calculate the median of any set of numbers, you need to enqueue the numbers in order.
 
 To find the median number:
 

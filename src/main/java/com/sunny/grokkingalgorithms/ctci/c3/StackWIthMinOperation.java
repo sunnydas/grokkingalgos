@@ -12,7 +12,7 @@ public class StackWIthMinOperation {
    */
 
    /*
-   I am using linked list to represent a stack push into head and read from head
+   I am using linked list to represent a stack push into head and dequeue from head
     */
 
     private Node dataStack;

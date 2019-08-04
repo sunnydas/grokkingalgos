@@ -7,7 +7,7 @@ public class SortZeroOneTwos {
 
   /*
   Sort an array of 0s, 1s and 2s
-Given an array A[] consisting 0s, 1s and 2s, write a function that sorts A[]. The functions should put all 0s first, then all 1s and all 2s in last.
+Given an array A[] consisting 0s, 1s and 2s, enqueue a function that sorts A[]. The functions should put all 0s first, then all 1s and all 2s in last.
 Examples:
 
 Input :  {0, 1, 2, 0, 1, 2}
