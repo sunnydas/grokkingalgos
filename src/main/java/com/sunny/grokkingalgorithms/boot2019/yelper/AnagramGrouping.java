@@ -1,8 +1,6 @@
 package com.sunny.grokkingalgorithms.boot2019.yelper;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class AnagramGrouping {
 
@@ -12,6 +10,36 @@ Given an array of words, print all anagrams together. For example, if the given 
 “god”,
  “act”}, then output may be “cat tac act dog god”.
      */
+
+    public static void groupAnagramsTogetherUsingHash(String[] input){
+        Map<Long, List<String>> hashedStrings = new HashMap<>();
+        for(String s : input){
+            long hash = calculateHash(s);
+            if(hashedStrings.containsKey(hash)){
+                hashedStrings.get(hash).add(s);
+            }
+            else{
+                List<String> anagrams = new ArrayList<>();
+                anagrams.add(s);
+                hashedStrings.put(hash,anagrams);
+            }
+        }
+        System.out.println(hashedStrings);
+        Iterator<Map.Entry<Long,List<String>>> entryIterator = hashedStrings.entrySet().iterator();
+        while(entryIterator.hasNext()){
+            Map.Entry<Long,List<String>> entry = entryIterator.next();
+            System.out.print(entry.getValue());
+        }
+        System.out.println();
+    }
+
+    public static long calculateHash(String s){
+        long hash = 0L;
+        for(int i = 0 ; i < s.length() ; i++){
+            hash += s.charAt(i)%s.length();
+        }
+        return hash;
+    }
 
     public static String[] groupAnagramsTogetherWithoutSort(String[] input){
         for(int i = 0 ; i < input.length; i++){
@@ -77,6 +105,8 @@ Given an array of words, print all anagrams together. For example, if the given 
         System.out.println(Arrays.asList(groupAnagramsUsingSort(animals)));
         animals = new String[]{"cat", "dog", "tac", "god", "act","doggo","ooggd","santorio","ogd"};
         System.out.println(Arrays.asList(groupAnagramsTogetherWithoutSort(animals)));
+        animals = new String[]{"cat", "dog", "tac", "god", "act","doggo","ooggd","santorio","ogd"};
+        groupAnagramsTogetherUsingHash(animals);
     }
 
 }
