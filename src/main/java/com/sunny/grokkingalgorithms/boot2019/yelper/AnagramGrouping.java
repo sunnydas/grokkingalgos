@@ -57,7 +57,7 @@ class AnagramString implements Comparable{
 }
 public class AnagramGrouping {
 
-   
+
 
     public static void groupAnagramsTogether(String[] input){
         AnagramString[] anagramStrings = new AnagramString[input.length];
