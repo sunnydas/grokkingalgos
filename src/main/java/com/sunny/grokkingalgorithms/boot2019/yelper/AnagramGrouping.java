@@ -2,6 +2,59 @@ package com.sunny.grokkingalgorithms.boot2019.yelper;
 
 import java.util.*;
 
+class AnagramString implements Comparable{
+
+    private String anagram;
+
+    public String getAnagram() {
+        return anagram;
+    }
+
+    @Override
+    public String toString() {
+        return "AnagramString{" +
+                "anagram='" + anagram + '\'' +
+                ", index=" + index +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AnagramString that = (AnagramString) o;
+        return index == that.index &&
+                Objects.equals(anagram, that.anagram);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(anagram, index);
+    }
+
+    public void setAnagram(String anagram) {
+        this.anagram = anagram;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    private int index;
+
+    @Override
+    public int compareTo(Object o) {
+        if(o instanceof AnagramString){
+            return this.anagram.compareTo(((AnagramString) o).anagram);
+        }else{
+            throw new IllegalArgumentException("invalid input = " + o);
+        }
+    }
+}
 public class AnagramGrouping {
 
     /*
@@ -10,6 +63,23 @@ Given an array of words, print all anagrams together. For example, if the given 
 “god”,
  “act”}, then output may be “cat tac act dog god”.
      */
+
+    public static void groupAnagramsTogether(String[] input){
+        AnagramString[] anagramStrings = new AnagramString[input.length];
+        for(int i = 0 ; i < input.length ; i++){
+            char[] cVer = input[i].toCharArray();
+            Arrays.sort(cVer);
+            anagramStrings[i] = new AnagramString();
+            anagramStrings[i].setAnagram(String.valueOf(cVer));
+            anagramStrings[i].setIndex(i);
+        }
+        Arrays.sort(anagramStrings);
+        System.out.println(Arrays.asList(anagramStrings));
+        for(int i = 0 ; i < anagramStrings.length ; i++){
+            System.out.print(input[anagramStrings[i].getIndex()] + " ");
+        }
+        System.out.println();
+    }
 
     public static void groupAnagramsTogetherUsingHash(String[] input){
         Map<Long, List<String>> hashedStrings = new HashMap<>();
@@ -107,6 +177,8 @@ Given an array of words, print all anagrams together. For example, if the given 
         System.out.println(Arrays.asList(groupAnagramsTogetherWithoutSort(animals)));
         animals = new String[]{"cat", "dog", "tac", "god", "act","doggo","ooggd","santorio","ogd"};
         groupAnagramsTogetherUsingHash(animals);
+        animals = new String[]{"cat", "dog", "tac", "god", "act","doggo","ooggd","santorio","ogd"};
+        groupAnagramsTogether(animals);
     }
 
 }
