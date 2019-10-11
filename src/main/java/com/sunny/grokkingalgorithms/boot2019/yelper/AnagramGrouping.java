@@ -57,12 +57,7 @@ class AnagramString implements Comparable{
 }
 public class AnagramGrouping {
 
-    /*
-    Given a sequence of words, print all anagrams together | Set 1
-Given an array of words, print all anagrams together. For example, if the given array is {“cat”, “dog”, “tac”,
-“god”,
- “act”}, then output may be “cat tac act dog god”.
-     */
+   
 
     public static void groupAnagramsTogether(String[] input){
         AnagramString[] anagramStrings = new AnagramString[input.length];
