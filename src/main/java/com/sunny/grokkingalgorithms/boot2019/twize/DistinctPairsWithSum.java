@@ -1,9 +1,7 @@
 package com.sunny.grokkingalgorithms.boot2019.twize;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+
 class Pair{
 
     private int i;
@@ -83,6 +81,28 @@ Output :  9
         System.out.println(pairs.size());
     }
 
+    public static void countPairs(int[] input,int k){
+        Map<Integer,Integer> numFreqMap = new HashMap<>();
+        for(int i = 0 ; i < input.length ; i++){
+            if(numFreqMap.containsKey(input[i])){
+                numFreqMap.put(input[i],numFreqMap.get(input[i]) + 1);
+            } else{
+                numFreqMap.put(input[i],1);
+            }
+        }
+        int count = 0;
+        System.out.println(numFreqMap);
+        for(int i = 0 ; i < input.length ; i++){
+            if(numFreqMap.containsKey(k - input[i])){
+                count += numFreqMap.get(k - input[i]);
+                if(input[i] == (k - input[i])){
+                    count--;
+                }
+            }
+        }
+        System.out.println(count/2);
+    }
+
     public static void main(String[] args) {
         int[] input = new int[]{1, 5, 7, -1};
         countDistinctPairsWithSum(input,6);
@@ -93,6 +113,18 @@ Output :  9
         input = new int[]{10, 12, 10, 15, -1, 7, 6,
                 5, 4, 2, 1, 1, 1};
         countDistinctPairsWithSum(input,11);
+        System.out.println();
+        System.out.println();
+        input = new int[]{1, 5, 7, -1};
+        countPairs(input,6);
+        input = new int[]{1, 5, 7, -1, 5};
+        countPairs(input,6);
+        input = new int[]{1, 1, 1, 1};
+        countPairs(input,2);
+        input = new int[]{10, 12, 10, 15, -1, 7, 6,
+                5, 4, 2, 1, 1, 1};
+        countPairs(input,11);
+        System.out.println();
     }
 
 }
