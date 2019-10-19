@@ -1,0 +1,7 @@
+this is a log file
+there will some lines logged
+we need to find the k frequent wordsin the log file
+the log files can go on and on
+what else can be said here
+some more lines follow
+log is more important
