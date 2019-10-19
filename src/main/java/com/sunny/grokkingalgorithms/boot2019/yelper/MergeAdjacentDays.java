@@ -110,6 +110,20 @@ For example, let the given set of intervals be {{1,3}, {2,4}, {5,7}, {6,8} }.
         return merged;
     }
 
+    public static List<TInterval> mergeAdjacentTimesUsingStack(List<TInterval> intervals){
+        Stack<TInterval> stack = new Stack<>();
+        Collections.sort(intervals);
+        for(TInterval tInterval : intervals){
+            if(!stack.isEmpty() && tInterval.startTime >= stack.peek().startTime &&
+            tInterval.startTime <= stack.peek().endTime){
+                stack.peek().setEndTime(tInterval.endTime);
+            } else{
+                stack.push(tInterval);
+            }
+        }
+        return stack;
+    }
+
     public static void main(String[] args) {
         List<TInterval> tIntervals = new ArrayList<>();
         TInterval ti1 = new TInterval(1,3);
@@ -128,6 +142,15 @@ For example, let the given set of intervals be {{1,3}, {2,4}, {5,7}, {6,8} }.
         tIntervals.add(ti7);
         System.out.println(tIntervals);
         System.out.println(mergeIntervals(tIntervals));
+        tIntervals = new ArrayList<>();
+        tIntervals.add(ti1);
+        tIntervals.add(ti2);
+        tIntervals.add(ti3);
+        tIntervals.add(ti4);
+        tIntervals.add(ti5);
+        tIntervals.add(ti6);
+        tIntervals.add(ti7);
+        System.out.println(mergeAdjacentTimesUsingStack(tIntervals));
     }
 
 
