@@ -40,6 +40,8 @@ public class PascalTriangle {
 
     public static void main(String[] args) {
         printPascalsTriangle(6);
+        System.out.println();
+        printPascalsTriangle(7);
     }
 
 }
