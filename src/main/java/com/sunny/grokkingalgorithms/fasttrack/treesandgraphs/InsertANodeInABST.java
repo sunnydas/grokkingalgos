@@ -138,7 +138,7 @@ public class InsertANodeInABST {
     TreeUtils.performBfsLevelMarker(root);
     System.out.println("#####################");
     TreeUtils.inorder(root);
-    //root = TreeUtils.createBST();
+    //root = TreeUtils.insertIntoBST();
     System.out.println("Insert 2");
     root = insertIntoBSTIterative(root, 2);
     TreeUtils.performBfsLevelMarker(root);
