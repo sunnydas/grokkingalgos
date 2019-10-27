@@ -18,6 +18,20 @@ Input: str1 = "gksrek", str2 = "geeksforgeeks"
 Output: True (str1 is a subsequence of str2)
      */
 
+    public static boolean isSubsequenceAlt(String str,String subsequence){
+        boolean isSubsequence = false;
+        int i = 0;
+        int j = 0;
+        for(;i < str.length() && j < subsequence.length(); i++){
+            if(str.charAt(i) == subsequence.charAt(j)){
+                j++;
+            }
+        }
+        isSubsequence = (j==subsequence.length());
+        return isSubsequence;
+    }
+
+
     public static boolean isSubsequence(String subsequence,String str){
         boolean isSubsequence = false;
         for(int i = 0 ; i < str.length() ; i++){
@@ -55,12 +69,18 @@ Output: True (str1 is a subsequence of str2)
         String subsequence = "AXY";
         String str = "ADXCPY";
         System.out.println(isSubsequence(subsequence,str));
+        System.out.println(isSubsequenceAlt(str,subsequence));
+        System.out.println();
         subsequence = "AXY";
         str = "YADXCP";
         System.out.println(isSubsequence(subsequence,str));
+        System.out.println(isSubsequenceAlt(str,subsequence));
+        System.out.println();
         subsequence = "gksrek";
         str = "geeksforgeeks";
         System.out.println(isSubsequence(subsequence,str));
+        System.out.println(isSubsequenceAlt(str,subsequence));
+        System.out.println();
     }
 
 }
