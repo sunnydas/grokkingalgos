@@ -18,6 +18,23 @@ Input: str1 = "gksrek", str2 = "geeksforgeeks"
 Output: True (str1 is a subsequence of str2)
      */
 
+    public static boolean isSubsequenceRecursive(String str,String subsequence,int i,int j,int count){
+        if(count == subsequence.length()){
+            return true;
+        }
+        if(i >= str.length()){
+            return false;
+        }
+        if(j >= subsequence.length()){
+            return false;
+        }
+        if(str.charAt(i) == subsequence.charAt(j)){
+            j++;
+            count++;
+        }
+        return isSubsequenceRecursive(str,subsequence,i+1,j,count);
+    }
+
     public static boolean isSubsequenceAlt(String str,String subsequence){
         boolean isSubsequence = false;
         int i = 0;
@@ -70,16 +87,19 @@ Output: True (str1 is a subsequence of str2)
         String str = "ADXCPY";
         System.out.println(isSubsequence(subsequence,str));
         System.out.println(isSubsequenceAlt(str,subsequence));
+        System.out.println(isSubsequenceRecursive(str,subsequence,0,0,0));
         System.out.println();
         subsequence = "AXY";
         str = "YADXCP";
         System.out.println(isSubsequence(subsequence,str));
         System.out.println(isSubsequenceAlt(str,subsequence));
+        System.out.println(isSubsequenceRecursive(str,subsequence,0,0,0));
         System.out.println();
         subsequence = "gksrek";
         str = "geeksforgeeks";
         System.out.println(isSubsequence(subsequence,str));
         System.out.println(isSubsequenceAlt(str,subsequence));
+        System.out.println(isSubsequenceRecursive(str,subsequence,0,0,0));
         System.out.println();
     }
 
