@@ -34,6 +34,8 @@ O/P   1
         System.out.println(positionOfRightMostSetBit(n));
         n = 12;
         System.out.println(positionOfRightMostSetBit(n));
+        n = 16;
+        System.out.println(positionOfRightMostSetBit(n));
     }
 
 }
