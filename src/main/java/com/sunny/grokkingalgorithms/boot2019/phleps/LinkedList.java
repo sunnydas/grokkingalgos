@@ -97,6 +97,40 @@ public class LinkedList {
     }
 
 
+    public static boolean detectLoop(Node root){
+        boolean hasLoop = false;
+        Node slowPtr = root;
+        Node fastPtr = root.next.next;
+        while(fastPtr != null){
+            if(slowPtr == fastPtr){
+                hasLoop = true;
+                break;
+            }
+            fastPtr = fastPtr.next;
+            if(fastPtr != null){
+                fastPtr = fastPtr.next;
+            }
+            slowPtr = slowPtr.next;
+        }
+        return hasLoop;
+    }
+
+    public static Node createLoopedLinkedList(){
+        Node root = new Node();
+        root.data = 1;
+        Node two = new Node();
+        two.data = 2;
+        root.next = two;
+        Node three = new Node();
+        three.data = 3;
+        two.next = three;
+        Node four =  new Node();
+        four.data = 4;
+        three.next = four;
+        four.next = two;
+        return root;
+    }
+
     public static void main(String[] args) {
         int[] input = new int[]{1,2,3,4,5};
         Node root = createLinkedList(input);
@@ -111,6 +145,9 @@ public class LinkedList {
         printLinkedList(root);
         root =  reverseLinkedList(root);
         printLinkedList(root);
+        System.out.println(detectLoop(root));
+        root = createLoopedLinkedList();
+        System.out.println(detectLoop(root));
     }
 
 }
