@@ -35,11 +35,61 @@ public class ReverseASentenceKeepingPunctiationsIntact {
         return sentenceBuilder.toString();
     }
 
+    public static String reverseArray(String input){
+        char[] inputArr = input.toCharArray();
+        for(int i = 0 ; i < inputArr.length ;){
+            if(inputArr[i] != ' ') {
+                int end = findEndOfWord(inputArr, i);
+                reverseWord(inputArr,i,end);
+                i = i + (end - i) + 1;
+            } else{
+                i++;
+            }
+        }
+        //System.out.println("###" + String.valueOf(inputArr));
+        System.out.println();
+        return new StringBuilder(String.valueOf(inputArr)).reverse().toString();
+    }
+
+    public static void reverseWord(char[] input,int start,int end){
+        int i = start;
+        int j = end;
+        while(i < j){
+            if(input[i] == ' '){
+                i++;
+            }
+            else if(input[j] == ' '){
+                j--;
+            } else{
+                char temp = input[i];
+                input[i] = input[j];
+                input[j] = temp;
+            }
+            i++;
+            j--;
+        }
+    }
+
+    public static int findEndOfWord(char[] input,int startIndex){
+        int index = startIndex;
+        for(int i = startIndex+1; i < input.length ; i++){
+            if(input[i] == ' '){
+                index = i - 1;
+                break;
+            } else if(i == (input.length - 1)){
+                index = i;
+            }
+        }
+        return index;
+    }
+
     public static void main(String[] args) {
         String str = "this new world ";
         System.out.println(reverse(str));
         str = "!Hello,                 world!                          ";
         System.out.println(reverseKeepingPuncIntact(str));
+        str = "Hello world this     is sunny";
+        System.out.println(reverseArray(str));
     }
 
 }
