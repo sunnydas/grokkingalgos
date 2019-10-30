@@ -48,23 +48,17 @@ public class ReverseASentenceKeepingPunctiationsIntact {
         }
         //System.out.println("###" + String.valueOf(inputArr));
         System.out.println();
-        return new StringBuilder(String.valueOf(inputArr)).reverse().toString();
+        reverseWord(inputArr,0,inputArr.length - 1);
+        return String.valueOf(inputArr);
     }
 
     public static void reverseWord(char[] input,int start,int end){
         int i = start;
         int j = end;
         while(i < j){
-            if(input[i] == ' '){
-                i++;
-            }
-            else if(input[j] == ' '){
-                j--;
-            } else{
-                char temp = input[i];
-                input[i] = input[j];
-                input[j] = temp;
-            }
+            char temp = input[i];
+            input[i] = input[j];
+            input[j] = temp;
             i++;
             j--;
         }
