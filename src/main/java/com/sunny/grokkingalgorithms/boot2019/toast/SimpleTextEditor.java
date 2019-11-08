@@ -46,6 +46,35 @@ Print the  character on a new line. Currently, the  character is a.
 
      */
 
+    public static void simpleTextEditor(String operation,
+                                        Stack<String> undoStack,
+                                        StringBuilder myText){
+        String[] parsed = parseOperation(operation);
+        switch (parsed[0]) {
+            case "1":
+                myText.append(parsed[1]);
+                undoStack.push(operation);
+                break;
+            case "2":
+                StringBuilder orig = new StringBuilder(myText);
+                deleteChars(myText, Integer.parseInt(parsed[1]));
+                //System.out.println(orig);
+                undoStack.push(operation + " "
+                        + orig.substring(orig.length() -
+                        Integer.parseInt(parsed[1])));
+                break;
+            case "3":
+                //System.out.println(myText);
+                System.out.println(myText.charAt(Integer.parseInt(parsed[1]) - 1));
+                break;
+            case "4":
+                undoLastOperation(myText, undoStack);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid operation");
+        }
+    }
+
     public static void simpleTextEditor(String[] operations){
         StringBuilder myText = new StringBuilder();
         Stack<String> undoStack = new Stack<>();
@@ -99,11 +128,8 @@ Print the  character on a new line. Currently, the  character is a.
     }
 
     private static void deleteChars(StringBuilder myText,int k){
-        int index = myText.length() - 1;
-        for(int i = 0 ; i < k ; i++){
-            myText.deleteCharAt(index);
-            index--;
-        }
+        int index = myText.length();
+        myText.delete(index - k,myText.length());
     }
 
     private static String[] parseOperation(String operation){
@@ -130,7 +156,10 @@ Print the  character on a new line. Currently, the  character is a.
             operations[i] = scanner.nextLine();
         }
         simpleTextEditor(operations);
+        /*Stack<String> undoStack = new Stack<>();
+        StringBuilder myText = new StringBuilder();
+        for(int i = 0 ; i < numOperations ; i++){
+            simpleTextEditor(scanner.nextLine(),undoStack,myText);
+        }*/
     }
-
-
 }
