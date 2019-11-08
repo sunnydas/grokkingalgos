@@ -20,6 +20,22 @@ Pick the lower of the two types seen twice: type .
 
      */
 
+    public static int migratoryBirdsAlt(List<Integer> arr){
+        int birdIndex = -1;
+        int[] tracker = new int[6];
+        for(int i : arr){
+            tracker[i]++;
+        }
+        int max = Integer.MIN_VALUE;
+        for(int i = 0 ; i < tracker.length ; i++){
+            if(tracker[i] > max){
+                max = tracker[i];
+                birdIndex = i;
+            }
+        }
+        return birdIndex;
+    }
+
     // Complete the migratoryBirds function below.
     public static int migratoryBirds(List<Integer> arr) {
         Map<Integer,Integer> tracker = new TreeMap<>();
@@ -68,6 +84,7 @@ Pick the lower of the two types seen twice: type .
         birds.add(3);
         birds.add(4);
         System.out.println(migratoryBirds(birds));
+        System.out.println(migratoryBirdsAlt(birds));
     }
 
 }
