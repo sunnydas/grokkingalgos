@@ -22,5 +22,6 @@ public class Palindrome {
         System.out.println(isPalindrome(s.toCharArray()));
         s = "abccdef";
         System.out.println(isPalindrome(s.toCharArray()));
+        System.out.println(Math.abs('a' - 'a') + 1);
     }
 }
