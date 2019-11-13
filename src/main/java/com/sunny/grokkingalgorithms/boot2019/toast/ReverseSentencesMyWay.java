@@ -6,7 +6,7 @@ public class ReverseSentencesMyWay {
 
     public static String reverseSentence(String line){
         StringBuilder reversed = new StringBuilder();
-        String[] splitted = line.split("\\s+");
+        String[] splitted = line.split("[\\p{Punct}\\s]+");
         int i = splitted.length - 1;
         int j = 0;
         int k  = 0;
