@@ -1,8 +1,6 @@
-package com.sunny.grokkingalgorithms.boot2019.enefit;
+package com.sunny.grokkingalgorithms.boot2019.eft;
 
 import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 import java.util.ArrayList;
 
 class Main {
