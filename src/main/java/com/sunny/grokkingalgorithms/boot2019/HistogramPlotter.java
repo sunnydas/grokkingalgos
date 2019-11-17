@@ -38,6 +38,7 @@ public class HistogramPlotter {
     public static void main(String[] args) throws IOException {
         List<String> lines = SortOnAsciiSum.parseLines("notes_for_use");
         plotHistogram(lines);
+        System.out.println("done");
     }
 
 }
