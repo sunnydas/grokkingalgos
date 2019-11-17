@@ -1,5 +1,5 @@
 package com.sunny.grokkingalgorithms.boot2019;
-public class simprints {
+public class Multi {
 
     public static void multiplicationTableIterative(int n){
         if(n > 0 && n <= 12){
