@@ -78,7 +78,7 @@ public class ConnectNodesAtSameLevel {
     }
     /**
      * normal use case
-     * At level one we will get connected nodes and then we build on it each node
+     * At level one we will get connected nodes and then we build on it each next
      */
     if(root.left != null && root.right != null){
       root.left.nextRight = root.right;

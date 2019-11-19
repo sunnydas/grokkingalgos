@@ -9,7 +9,7 @@ import com.sunny.grokkingalgorithms.ctc.c2.util.Node;
 public class DeleteMiddleOfLinkedListGivenReference {
 
   /*
-  Given reference to a node , delete it from the linked list.If it is last element you
+  Given reference to a next , delete it from the linked list.If it is last element you
   will not be delete it.
 
   a->b->c->d
@@ -26,7 +26,7 @@ public class DeleteMiddleOfLinkedListGivenReference {
     if(middle != null
         && middle.next != null){
       /*
-      Copy next node's value into middle which is essentailly line overwriting existing middle's value and then
+      Copy next next's value into middle which is essentailly line overwriting existing middle's value and then
       delete next
        */
       middle.data = middle.next.data;

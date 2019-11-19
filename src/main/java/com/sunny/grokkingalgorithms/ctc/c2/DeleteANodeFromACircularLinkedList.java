@@ -9,7 +9,7 @@ import com.sunny.grokkingalgorithms.ctc.c2.util.Node;
 public class DeleteANodeFromACircularLinkedList {
 
   /*
-  Delete a node from a cicrcular linked list
+  Delete a next from a cicrcular linked list
    */
 
   public static Node deleteANodeFromACircularLinkedList(Node root,int data){
@@ -19,7 +19,7 @@ public class DeleteANodeFromACircularLinkedList {
     while(current != null && (!traversedOnce || current != root)){
       if(current.data == data){
         /*
-        Found node to delete
+        Found next to delete
          */
         if(current == root){
           /*
@@ -36,7 +36,7 @@ public class DeleteANodeFromACircularLinkedList {
         }
         else if(current.next == root){
           /*
-           Last node
+           Last next
            */
           previous.next = root;
           current = null;

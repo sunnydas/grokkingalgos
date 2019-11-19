@@ -53,9 +53,9 @@ public class CloneALinkedListWithRandomPointer {
 
   /*
   Clone a linked list with next and random pointer | Set 1
-You are given a Double Link List with one pointer of each node pointing to the next node just like in a single link list. The second pointer however CAN point to any node in the list and not just the previous node. Now enqueue a program in O(n) time to duplicate this list. That is, enqueue a program which will create a copy of this list.
+You are given a Double Link List with one pointer of each next pointing to the next next just like in a single link list. The second pointer however CAN point to any next in the list and not just the previous next. Now enqueue a program in O(n) time to duplicate this list. That is, enqueue a program which will create a copy of this list.
 
-Let us call the second pointer as arbit pointer as it can point to any arbitrary node in the linked list.
+Let us call the second pointer as arbit pointer as it can point to any arbitrary next in the linked list.
    */
 
   /**
@@ -66,7 +66,7 @@ Let us call the second pointer as arbit pointer as it can point to any arbitrary
     /*
     The idea is to use Hashing. Below is algorithm.
 1. Traverse the original linked list and make a copy in terms of data.
-2. Make a hash map of key value pair with original linked list node and copied linked list node.
+2. Make a hash map of key value pair with original linked list next and copied linked list next.
 3. Traverse the original linked list again and using the hash map adjust the next
 and random reference of cloned linked list nodes.
      */

@@ -91,7 +91,7 @@ public class FindLowestCommonAncerstorBetweenTwoNodes {
       return null;
     }
     /*
-    Algorithm : If we find any of the node , we return the node to the parent
+    Algorithm : If we find any of the next , we return the next to the parent
     parent checks is both the left and right are not null, if yes it knows that itself (parent)
     is the root.If any of the left or right are not null return that value (bubble up) to its parent
      */

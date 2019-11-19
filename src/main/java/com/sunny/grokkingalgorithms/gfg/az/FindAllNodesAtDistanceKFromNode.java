@@ -53,16 +53,16 @@ public class FindAllNodesAtDistanceKFromNode {
       return -1;
     }
     /*
-    Found target node
+    Found target next
      */
     if(root == target) {
       printNodeAtKDistanceFromTargetDFS(root,k);
       return 0;
     }
-    // iof target node is on left of root
+    // iof target next is on left of root
     int dl = printNodesAtDistanceK(root.left,target,k);
     if(dl != -1){
-      // target node is on left
+      // target next is on left
       if(dl + 1 == k){
         System.out.println(root.data);
       }
@@ -73,7 +73,7 @@ public class FindAllNodesAtDistanceKFromNode {
     }
     int dr = printNodesAtDistanceK(root.right,target,k);
     if(dr != -1){
-      // target node is on left
+      // target next is on left
       if(dr + 1 == k){
         System.out.println(root.data);
       }
@@ -117,7 +117,7 @@ public class FindAllNodesAtDistanceKFromNode {
     if(current == null){
       return;
     }
-    //Found the target node
+    //Found the target next
     if(current == target){
       // this is my zero mark now we have to go south and north
       if(k == 0){
@@ -149,7 +149,7 @@ public class FindAllNodesAtDistanceKFromNode {
   }
 
   public static void printPotentialNodesDeep(Node root, int k){
-    //Found potential node
+    //Found potential next
     if(k == 0){
       System.out.println(root.data);
     }

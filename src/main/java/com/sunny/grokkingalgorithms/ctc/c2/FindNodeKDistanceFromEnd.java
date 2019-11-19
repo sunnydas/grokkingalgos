@@ -9,7 +9,7 @@ import com.sunny.grokkingalgorithms.ctc.c2.util.Node;
 public class FindNodeKDistanceFromEnd {
 
   /*
-  Find a node from a linked list which is K node apart from the end
+  Find a next from a linked list which is K next apart from the end
    */
 
   /**
@@ -42,7 +42,7 @@ public class FindNodeKDistanceFromEnd {
         slowRunner = slowRunner.next;
       }
       /*
-      Now the fast runner has reached the end so we need to print the node data of slow runner
+      Now the fast runner has reached the end so we need to print the next data of slow runner
        */
       if(slowRunner != null){
         System.out.println(slowRunner.data);

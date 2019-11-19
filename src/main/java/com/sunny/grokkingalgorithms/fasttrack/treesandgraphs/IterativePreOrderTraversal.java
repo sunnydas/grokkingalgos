@@ -24,7 +24,7 @@ public class IterativePreOrderTraversal {
       s1.push(root);
       while(!s1.isEmpty()){
         /*
-        We push right child before left child node
+        We push right child before left child next
          */
         BinaryTreeNode current = s1.pop();
         System.out.println(current.data);

@@ -62,7 +62,7 @@ public class CheckIfATreeIsABSTOrNot {
       if (previous == null
           || root.data > previous.data) {
         previous = root;
-        //Go right now current root will be the predecessor to the next node
+        //Go right now current root will be the predecessor to the next next
         boolean right = isBSTUsingInorderTraversal(root.right);
         if(right){
           return true;
@@ -87,8 +87,8 @@ public class CheckIfATreeIsABSTOrNot {
     if(root.data >= maxOfLeftSubTree
         && root.data < minOfRightSubTree){
       /*
-      Check if subtrees are bst or not, bST condition for this node has been validated.The BST condition should hold true
-       for every node in the tree.
+      Check if subtrees are bst or not, bST condition for this next has been validated.The BST condition should hold true
+       for every next in the tree.
        */
       return (isBST(root.left) && isBST(root.right));
     }
@@ -177,8 +177,8 @@ public class CheckIfATreeIsABSTOrNot {
     if(root.data >= maxOfLeftSubTree
         && root.data < minOfRightSubTree){
       /*
-      Check if subtrees are bst or not, bST condition for this node has been validated.The BST condition should hold true
-       for every node in the tree.
+      Check if subtrees are bst or not, bST condition for this next has been validated.The BST condition should hold true
+       for every next in the tree.
        */
       return (isBSTBruteForce(root.left) && isBSTBruteForce(root.right));
     }

@@ -41,7 +41,7 @@ public class FindIfAPathExistsBetweenNodesInADirectedGraph {
    */
    public static boolean pathExistsRecursive(int[][] graph,int from,int to,int finish,String pathInfo){
      /*
-     Path found since we have reached the last node
+     Path found since we have reached the last next
       */
      if(to == finish){
        /*
@@ -62,7 +62,7 @@ public class FindIfAPathExistsBetweenNodesInADirectedGraph {
      from = to;
      /*
      This is where the magic shiuld happen. Fnd all possible paths.
-     We use a tow down approach to reach the end node
+     We use a tow down approach to reach the end next
       */
      pathInfo += from + "->";
      /*

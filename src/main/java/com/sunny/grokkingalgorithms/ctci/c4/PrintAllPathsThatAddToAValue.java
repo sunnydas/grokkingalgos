@@ -32,7 +32,7 @@ public class PrintAllPathsThatAddToAValue {
      }
      paths[level] = root.data;
      /*
-     Does this node add up to the sum
+     Does this next add up to the sum
       */
      int runningSum = 0;
      for(int i = level ; i >= 0 ; i--){

@@ -36,7 +36,7 @@ public class CheckIfATreeIsBalanced {
       return balancedTreeCheck;
     }
     /*
-    Check place holder for current node
+    Check place holder for current next
      */
     BalancedTreeCheck currentCheck = new BalancedTreeCheck();
     /*

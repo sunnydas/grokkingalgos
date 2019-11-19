@@ -10,7 +10,7 @@ import sun.reflect.generics.tree.Tree;
 public class FindInOrderSuccessorInABST {
 
   /*
-  Find inorder successor of a given node in a BST.
+  Find inorder successor of a given next in a BST.
   We have links to parent;
    */
 
@@ -25,7 +25,7 @@ public class FindInOrderSuccessorInABST {
     }
     if(root.data == data){
       /*
-      If current node has a right child, find leftmost node
+      If current next has a right child, find leftmost next
       in right subtree
        */
       if(root.parent== null || root.right != null){
@@ -83,22 +83,22 @@ public class FindInOrderSuccessorInABST {
     }
     /*
     Conditions:
-    a.) If current node has no right child and is left child of parent , then parent is the successor
-    b.) If current node has right child, then right child is succesor
-    c.) If current node has no right child and is the right child of parent, then recurse and
-    find first node with a right child.
+    a.) If current next has no right child and is left child of parent , then parent is the successor
+    b.) If current next has right child, then right child is succesor
+    c.) If current next has no right child and is the right child of parent, then recurse and
+    find first next with a right child.
      */
     /*
-    Found the node in question
+    Found the next in question
      */
     if(root.data == data){
       /*
-      Does this node have a right child, if yes then succesor must on the right
+      Does this next have a right child, if yes then succesor must on the right
        */
       if(root.right != null){
         BinaryTreeNode current = root.right;
         /*
-        The leftmost node in the right subtree is the successor
+        The leftmost next in the right subtree is the successor
          */
         while(current != null){
           if(current.left == null){
@@ -108,7 +108,7 @@ public class FindInOrderSuccessorInABST {
         }
       }
       /*
-      This node does not have a right child, so is it the left child of its
+      This next does not have a right child, so is it the left child of its
       parent? then parent is the successor
        */
       else if(root.parent != null
@@ -116,10 +116,10 @@ public class FindInOrderSuccessorInABST {
         return root.parent;
       }
       /*
-      This node does not have a right sub child and is not the left child of its
+      This next does not have a right sub child and is not the left child of its
       parent , so it should be the right child of its parent. Now we need to recurse
-      up its parents to find the node which has the first right child (Obviously excluding
-      the current node's parent)
+      up its parents to find the next which has the first right child (Obviously excluding
+      the current next's parent)
        */
       else if(root.parent != null
           && root.parent.right == root){

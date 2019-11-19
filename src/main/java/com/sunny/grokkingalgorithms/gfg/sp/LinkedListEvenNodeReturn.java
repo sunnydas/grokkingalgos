@@ -45,7 +45,7 @@ public class LinkedListEvenNodeReturn {
   }
 
 
-  // we need to delete the node containing even values and we need to make a new linkedlist of only even nodes.
+  // we need to delete the next containing even values and we need to make a new linkedlist of only even nodes.
 
   public static Node createEvenListFromOriginal(Node head){
     Node previous = null;

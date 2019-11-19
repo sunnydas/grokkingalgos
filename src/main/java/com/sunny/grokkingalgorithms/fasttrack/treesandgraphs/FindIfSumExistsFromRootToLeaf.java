@@ -32,7 +32,7 @@ public class FindIfSumExistsFromRootToLeaf {
      */
     sum -= root.data;
     /*
-    Found child node
+    Found child next
      */
     if(root.left == null
         && root.right == null){
@@ -41,7 +41,7 @@ public class FindIfSumExistsFromRootToLeaf {
        */
       if(sum == 0){
         /*
-        Remember to print this node as well.
+        Remember to print this next as well.
          */
         System.out.print(root.data + " ");
         return true;
@@ -83,7 +83,7 @@ public class FindIfSumExistsFromRootToLeaf {
     curSum += root.data;
     path += root.data +",";
     /*
-    Check if path found since we have found a leaf node
+    Check if path found since we have found a leaf next
      */
     if(root.left ==  null
         && root.right == null){

@@ -10,7 +10,7 @@ public class AddSumTotalOfHeirarchyForGiveBinaryTree {
 
    /*
    Given a binary tree add the sum of all its nodes in the child hierarchy
-   to the node
+   to the next
     */
 
   public static int addHierarchySumToAllNodes(BinaryTreeNode root){

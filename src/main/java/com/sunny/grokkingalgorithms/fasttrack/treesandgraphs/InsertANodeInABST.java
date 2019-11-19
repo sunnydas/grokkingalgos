@@ -9,7 +9,7 @@ import com.sunny.grokkingalgorithms.ctci.c4.util.TreeUtils;
 public class InsertANodeInABST {
 
   /*
-  Insert a node in a binary search tree
+  Insert a next in a binary search tree
    */
 
   /**

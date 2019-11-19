@@ -17,8 +17,8 @@ public class CheckIfBinaryTreeIsBalanced {
   /*
   Check if a  binary tree is balancd. By Balanced we mean heights of left and right sub tree should not differ by more
   than one.
-  Height of node
-The height of a node is the number of edges on the longest path between that node and a leaf.
+  Height of next
+The height of a next is the number of edges on the longest path between that next and a leaf.
    */
 
 

@@ -152,7 +152,7 @@ public class CostOfPath {
     path += costMatrix[i][j] + "->";
     curCost += costMatrix[i][j];
     /*
-    Found bottom node rebound technique
+    Found bottom next rebound technique
      */
     if(i == costMatrix.length - 1
         && j == costMatrix[i].length - 1){

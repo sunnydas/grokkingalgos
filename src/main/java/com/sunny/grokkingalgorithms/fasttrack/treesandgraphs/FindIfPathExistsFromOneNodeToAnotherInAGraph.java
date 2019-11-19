@@ -14,7 +14,7 @@ public class FindIfPathExistsFromOneNodeToAnotherInAGraph {
   /**
    *
    * @param current
-   * @param data (this is the node data we need to search)
+   * @param data (this is the next data we need to search)
    * @return
    */
   public static boolean checkIfPathExists(GraphNode current,int data){

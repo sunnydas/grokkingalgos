@@ -21,7 +21,7 @@ public class CheckTreeIsSubTreeOfAnotherTree {
    */
   public static boolean isT2SubsetOfT1(BinaryTreeNode t1,BinaryTreeNode t2){
     /*
-    The idea is that we search T1 for a node mantching t2 and then
+    The idea is that we search T1 for a next mantching t2 and then
     we perform a preorder traversal together. Assumes all keys are unique.
      */
     boolean isSubTree = false;

@@ -21,7 +21,7 @@ class BSTOutputHolder{
 public class FindNextInOrderSuccessorInBST {
 
   /*
-  Given a node find the next inorder successor in a BST.
+  Given a next find the next inorder successor in a BST.
    */
 
 
@@ -33,20 +33,20 @@ public class FindNextInOrderSuccessorInBST {
    */
   public static BinaryTreeNode findNextInorderSuccesor(int nodeData,BinaryTreeNode root){
     /*
-    The idea is that we find the node in question using pre order, the parent is passed along.
-    Once we find the node. We need to check:
-    a.) if node has right child , then right child is inorder successor.
-    b.) else if node has no right child but is a left child of the parent, then the parent is the
+    The idea is that we find the next in question using pre order, the parent is passed along.
+    Once we find the next. We need to check:
+    a.) if next has right child , then right child is inorder successor.
+    b.) else if next has no right child but is a left child of the parent, then the parent is the
      in order successor/
-    c.) else if node has no right child but is the right child of the , then we have to up the stack and find a parent
-       with a right child, that right child will be the inorder successor for this node.
+    c.) else if next has no right child but is the right child of the , then we have to up the stack and find a parent
+       with a right child, that right child will be the inorder successor for this next.
      */
     BinaryTreeNode node = null;
     Queue<BinaryTreeNode> parents = new LinkedList<>();
     BinaryTreeNode successor = null;
     node =  findNode(nodeData,root,parents);
     /*
-    Found node
+    Found next
      */
     if(node != null){
       successor = findInorderSuccessor(node,parents);
@@ -90,7 +90,7 @@ public class FindNextInOrderSuccessorInBST {
       while(!parents.isEmpty()){
         BinaryTreeNode parent = parents.poll();
         /*
-        The right child should not be the current node.
+        The right child should not be the current next.
          */
         if(parent != null
             && parent.left == root){
@@ -98,7 +98,7 @@ public class FindNextInOrderSuccessorInBST {
           break;
         }
         /*
-        We need to do this because we have to ensure that the right child of a parent is not some node on the already
+        We need to do this because we have to ensure that the right child of a parent is not some next on the already
          traversed path.
          */
         root = parent;
@@ -120,7 +120,7 @@ public class FindNextInOrderSuccessorInBST {
     }
     else{
       /*
-      The thing to note here is atht we need to traverse only the parents of this node.Other paths are irrelevant.
+      The thing to note here is atht we need to traverse only the parents of this next.Other paths are irrelevant.
       We use a queue here while going back (backtracking).
        */
       found = findNode(nodeData,root.left,parents);
