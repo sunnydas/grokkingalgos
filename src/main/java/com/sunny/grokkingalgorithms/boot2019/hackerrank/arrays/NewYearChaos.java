@@ -55,7 +55,33 @@ https://www.hackerrank.com/challenges/new-year-chaos/problem?h_l=interview&playl
      */
 
 
-   private static int minBribe = 0;
+
+    public static void minimumBribesAlt(int[] q){
+        int i  = q.length - 1;
+        int minCount = 0;
+        while(i >= 0) {
+            if (q[i] != i + 1){
+                if ((i - 1 >= 0) && (q[i - 1] == i + 1)) {
+                    minCount++;
+                    int temp = q[i - 1];
+                    q[i - 1] = q[i];
+                    q[i] = temp;
+                } else if ((i - 2 >= 0) && (q[i - 2] == i + 1)) {
+                    minCount += 2;
+                    q[i - 2] = q[i - 1];
+                    q[i - 1] = q[i];
+                    q[i] = i + 1;
+                } else {
+                    System.out.println("Too chaotic");
+                    return;
+                }
+            }
+            i--;
+        }
+        System.out.println(minCount);
+    }
+
+
 
 
 
