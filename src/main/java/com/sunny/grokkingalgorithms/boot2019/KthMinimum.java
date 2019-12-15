@@ -21,6 +21,11 @@ public class KthMinimum {
         System.out.println(kthMinimum(input,3));
         System.out.println(kthMinimum(input,4));
         System.out.println(kthMinimum(input,1));
+        System.out.println();
+        input = new int[]{5,2,3,1,4};
+        System.out.println(kthMinimum(input,3));
+        System.out.println(kthMinimum(input,4));
+        System.out.println(kthMinimum(input,1));
     }
 
 }
