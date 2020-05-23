@@ -15,9 +15,10 @@ public class PeakFinder {
 
     public static int findPeak(int[] input){
         int index = -1;
-        for(int i = 1 ; i < input.length - 1 ; i++){
+        for(int i = 1 ; i < input.length; i++){
             if((input[i] >= input[i - 1])
-                && (input[i] >=  input[i + 1])){
+                && ((i == input.length - 1)
+                    || (input[i] >=  input[i + 1]))){
                 index = i;
                 break;
             }
@@ -29,6 +30,8 @@ public class PeakFinder {
         int[] input = new int[]{1,2,1,4,5};
         System.out.println(input[findPeak(input)]);
         input = new int[]{1,2,3,4,2};
+        System.out.println(input[findPeak(input)]);
+        input = new int[]{1,2,3,4,6};
         System.out.println(input[findPeak(input)]);
     }
 
