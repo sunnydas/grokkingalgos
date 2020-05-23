@@ -12,6 +12,17 @@ public class PeakFinder {
     a<= b >= c
      */
 
+   public static int findRecursive(int[] input,int start,int end){
+       int mid =  start + (end - start)/2;
+       if(mid > 0 && input[mid] < input[mid -1]){
+           return findRecursive(input,start,mid -1);
+       }else if(mid < input.length - 1 && input[mid] < input[mid + 1]){
+           return findRecursive(input,mid + 1,end);
+       }else{
+           return mid;
+       }
+   }
+
 
     public static int findPeak(int[] input){
         int index = -1;
@@ -29,10 +40,13 @@ public class PeakFinder {
     public static void main(String[] args) {
         int[] input = new int[]{1,2,1,4,5};
         System.out.println(input[findPeak(input)]);
+        System.out.println(input[findRecursive(input,0,input.length - 1)]);
         input = new int[]{1,2,3,4,2};
         System.out.println(input[findPeak(input)]);
+        System.out.println(input[findRecursive(input,0,input.length - 1)]);
         input = new int[]{1,2,3,4,6};
         System.out.println(input[findPeak(input)]);
+        System.out.println(input[findRecursive(input,0,input.length - 1)]);
     }
 
 
