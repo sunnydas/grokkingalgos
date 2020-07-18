@@ -49,6 +49,4 @@ public class PeakFinder {
         System.out.println(input[findRecursive(input,0,input.length - 1)]);
     }
 
-
-
 }
