@@ -76,6 +76,22 @@ public class BinomialCoefficients {
         }
     }
 
+    public static void pascalTriangle(int n){
+        int[][] pascalTriangle = new int[n][n];
+        pascalTriangle[0][0] = 1;
+        for(int i = 1 ; i < n ; i++){
+            for(int j = 0 ; j < n ; j ++){
+                if(j == 0){
+                    pascalTriangle[i][j] = pascalTriangle[i - 1][j];
+                }
+                else{
+                    pascalTriangle[i][j] = pascalTriangle[i - 1][j] + pascalTriangle[i - 1][j - 1];
+                }
+            }
+        }
+        printMatrix(pascalTriangle);
+    }
+
     public static void main(String[] args) {
         System.out.println(calculateBinomialCoefficients(4,2));
         System.out.println(calculateBinomialCoefficients(5,2));
@@ -94,5 +110,7 @@ public class BinomialCoefficients {
         System.out.println(calculateBinomialCoefficientIterative(4,2));
         System.out.println(calculateBinomialCoefficientIterative(5,2));
         System.out.println(calculateBinomialCoefficientIterative(10,2));
+        System.out.println();
+        pascalTriangle(5);
     }
 }
