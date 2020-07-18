@@ -28,6 +28,39 @@ public class BinomialCoefficients {
         return cache[n][k];
     }
 
+    /*
+        C(4,2) = C(1,0) -> C(2,k) ... C(n,k)
+        0  ,  ,   ,
+        1  ,  ,   ,
+        2  ,  ,   ,
+        3  ,  ,   ,
+        4  ,  ,   ,
+     */
+    public static int calculateBinomialCoefficientIterative(int n,int k){
+        int[][] dp = new int[n + 1][k + 1];
+        //Arrays.fill(dp[0],1);
+        for(int i = 0 ; i <= n; i++){
+            for(int j = 0 ; j <= Math.min(i,k) ; j++){
+                if(i == j || j == 0){
+                    dp[i][j] = 1;
+                }else{
+                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+                }
+            }
+        }
+        //printMatrix(dp);
+        return dp[n][k];
+    }
+
+    public static void printMatrix(int[][] matrix){
+        for(int i = 0 ; i < matrix.length ; i++){
+            for(int j = 0 ; j < matrix[i].length ; j++){
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public static int calculateBinomialCoefficients(int n,int k){
         if(k <= 0 || n == k){
             return 1;
@@ -57,7 +90,9 @@ public class BinomialCoefficients {
         cache = new int[11][3];
         fill(cache,0);
         System.out.println(calculateBinomialCoefficientsCached(10,2));
+        System.out.println();
+        System.out.println(calculateBinomialCoefficientIterative(4,2));
+        System.out.println(calculateBinomialCoefficientIterative(5,2));
+        System.out.println(calculateBinomialCoefficientIterative(10,2));
     }
-
-
 }
