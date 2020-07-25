@@ -61,6 +61,36 @@ After the third update list will be 100 200 200 200 100.
 The required answer will be .
 	 */
 	
+
+	/*
+	 * 0 0 0       2 3 1 => 1 2 2
+	 * 0 1 1
+	 * 2 3 1
+	 * 
+	 * 
+	 * 0 1 0 -1
+	 * 2 1 -2 -1
+	 * 2 3 1 .... 
+	 */
+	
+	static long arrayManipulationAlt(int n, int[][] queries) {
+		long[] input = new long[n + 2];
+		for(int i = 0; i < queries.length ;i++) {
+			int begin = queries[i][0] - 1;
+			int end = queries[i][1] - 1;
+			int k = queries[i][2];
+			input[begin] += k;
+			input[end + 1] -= k;
+		}
+		long max = 0;
+		long cur = 0;
+		for(int i = 0; i < n ; i++) {
+			cur += input[i];
+			max = Math.max(cur, max);
+		}
+		return max;
+    }
+	
 	static long arrayManipulation(int n, int[][] queries) {
 		long[] input = new long[n];
 		for(int i = 0; i < queries.length ;i++) {
