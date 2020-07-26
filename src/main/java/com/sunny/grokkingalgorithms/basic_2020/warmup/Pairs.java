@@ -45,7 +45,7 @@ There are 3 pairs of integers in the set with a difference of 2: [5,3], [4,2] an
 	// Complete the pairs function below.
     static int pairs(int k, int[] arr) {
     	/*
-    	 * O(n)
+    	 * O(n) - uses hash map as well
     	 */
     	int pairCount = 0;
     	Map<Integer,Integer> trackerMap = new HashMap<Integer, Integer>();
