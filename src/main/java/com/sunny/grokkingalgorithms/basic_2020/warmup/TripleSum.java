@@ -1,5 +1,6 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -71,8 +72,51 @@ Explanation 2
 The special triplets are 
 	 */
 
-	
 	static long triplets(int[] a, int[] b, int[] c) {
+    	long tripletCount = 0;
+    	Set<Integer> bset = new LinkedHashSet<Integer>();
+    	Arrays.sort(a);
+    	Arrays.sort(c);
+    	for(int i = 0 ; i < b.length ; i++) {  
+    		if(!bset.contains(b[i])) {
+	    		long aCount = numElementsLessThanOrEqualBinarySearch(a, b[i]);
+	    		//System.out.println(aCount);
+	    		long cCount = numElementsLessThanOrEqualBinarySearch(c, b[i]);
+	    		//System.out.println(cCount);
+	    		tripletCount += (aCount*cCount);
+	    		//System.out.println();
+	    		bset.add(b[i]);
+    		}
+    	}
+    	return tripletCount;
+    }
+	
+	static long numElementsLessThanOrEqualBinarySearch(int[] input,int k) {
+		/*
+		 * 3 3 3
+1 4 5
+2 3 3
+1 2 3
+		 */
+		long count = 0;
+		int left = 0;
+		int right = input.length - 1;
+		while(left <= right) {
+			int mid = left + (right - left)/2;
+			if(input[mid] <= k) {
+				//System.out.println(Arrays.asList(input));
+				//System.out.println(mid);
+				count = Math.max((mid + 1), count);
+				//break
+				left = mid + 1;
+			}else {
+				right = mid - 1;
+			}
+		}
+		return count;
+	}
+	
+	static long tripletsQuadratic(int[] a, int[] b, int[] c) {
     	long tripletCount = 0;
     	Set<Integer> bset = new LinkedHashSet<Integer>();
     	for(int i = 0 ; i < b.length ; i++) {  
