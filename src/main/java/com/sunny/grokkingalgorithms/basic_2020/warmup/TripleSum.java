@@ -71,8 +71,41 @@ Explanation 2
 The special triplets are 
 	 */
 
+	
+	static long triplets(int[] a, int[] b, int[] c) {
+    	long tripletCount = 0;
+    	Set<Integer> bset = new LinkedHashSet<Integer>();
+    	for(int i = 0 ; i < b.length ; i++) {  
+    		if(!bset.contains(b[i])) {
+	    		long aCount = 0;
+	        	long cCount = 0;
+	        	Set<Integer> aSet = new LinkedHashSet<Integer>();
+	    		for(int j = 0; j < a.length ; j++) {
+	    			if(a[j] <= b[i] && !aSet.contains(a[j])) {
+	    				aCount++;
+	    				aSet.add(a[j]);
+	    			}
+	    		}
+	    		Set<Integer> cSet = new LinkedHashSet<Integer>();
+	    		for(int j = 0; j < c.length ; j++) {
+	    			if(c[j] <= b[i] && !cSet.contains(c[j])) {
+	    				cCount++;
+	    				cSet.add(c[j]);
+	    			}    			
+	    		}
+	    		//System.out.println(aSet);
+	    		//System.out.println("TripleSum.triplets()" + cSet);
+	    		//System.out.println("TripleSum.triplets()" + b[i]);
+	    		tripletCount += (aCount*cCount);
+	    		bset.add(b[i]);
+    		}
+    	}
+    	return tripletCount;
+    }
+	
+	
 	 // Complete the triplets function below.
-    static long triplets(int[] a, int[] b, int[] c) {
+    static long tripletsBF(int[] a, int[] b, int[] c) {
     	long tripletCount = 0;
     	Set<String> tracker = new LinkedHashSet<String>();
     	for(int i = 0 ; i < a.length ; i++) {
