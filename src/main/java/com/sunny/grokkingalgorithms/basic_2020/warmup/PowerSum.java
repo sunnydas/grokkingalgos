@@ -71,24 +71,26 @@ Explanation 2
 	// Complete the powerSum function below.
     static int powerSum(int X, int N) {
     	Set<Integer> considered = new LinkedHashSet<Integer>();
-    	return powerSumRecursive(X, N, 0,considered);
+    	return powerSumRecursive(X, N, 0,considered,X);
     }
 	
-    static int powerSumRecursive(int x,int n,int curSum,Set<Integer> considered) {
+    static int powerSumRecursive(int x,int n,int curSum,
+    		Set<Integer> considered,
+    		int rest) {
     	if(curSum == x) {
-    		System.out.println(considered);
+    		//System.out.println(considered);
     		//System.out.println(curSum);
     		return 1;    		
     	}else if(curSum > x) {
     		return 0;    		
     	}
     	int totalCount = 0;
-    	for(int i = 1; i <= x; i++) {
+    	for(int i = 1; i <= rest; i++) {
     		if(!considered.contains(i)) {
     			int curValue = (int) Math.pow(i,n);
     			considered.add(i);
 	    		totalCount += powerSumRecursive(x, n, 
-	    				curSum + curValue,clone(considered));
+	    				curSum + curValue,clone(considered),x - curValue);
     		}
     	}
     	return totalCount;
