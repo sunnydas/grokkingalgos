@@ -88,20 +88,36 @@ super_digit(P) = super_digit(123123123)
 	
 	// Complete the superDigit function below.
     static int superDigit(String n, int k) {
-    	String number = new String(new char[n.length()]).replace("\0", n);
+    	//String number = new String(new char[k]).replace("\0", n);
+    	StringBuilder number = new StringBuilder(n);
+    	for(int i = 0; i < k; i++) {
+    		number.append(n);    		
+    	}
     	//System.out.println(number);
-    	return superDigitrecursive(number);
+    	return superDigitrecursive(number.toString());
     }
     
     static int superDigitrecursive(String n) {
+    	/*
+    	 * 593593593593593593593593593593
+    	 * 
+    	 * (5 + 9 + 3)*10
+    	 * 
+    	 * 170 
+    	 * 
+    	 * 8
+    	 */
     	if(n.length() == 1) {
+    		System.out.println(n);
     		return Integer.parseInt(n);    		
     	}
     	int sum = 0;
+    	//System.out.println(n);
     	for(int i = 0 ; i < n.length() ; i++) {
     		sum += Integer.parseInt(String.valueOf(
     				n.charAt(i)));    		
     	}
+    	//System.out.println(sum);
     	return superDigitrecursive(String.valueOf(sum));
     }
     
