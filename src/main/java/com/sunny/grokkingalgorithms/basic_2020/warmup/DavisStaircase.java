@@ -67,16 +67,24 @@ The second staircase has  steps and he can climb it in any of the four following
 Thus, we print  on a new line.
 	 */
 	
+	static int[] cache;
+	
 	static int stepPerms(int n) {
 		if(n == 0) {
-			return 1;			
+			cache[0] = 1;
+			return cache[0];			
 		}
 		if(n < 0) {
 			return 0;			
 		}
-		return stepPerms(n-1) 
+		if(cache[n] > 0) {
+			return cache[n];			
+		}
+		
+		cache[n] =  stepPerms(n-1) 
 				+ stepPerms(n-2) 
 				+ stepPerms(n-3);
+		return cache[n];
     }
 	
 	 private static final Scanner scanner = 
@@ -90,7 +98,11 @@ Thus, we print  on a new line.
         for (int sItr = 0; sItr < s; sItr++) {
             int n = scanner.nextInt();
             scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+            cache = new int[n+1];
             int res = stepPerms(n);
+			/*
+			 * for(int i: cache) { System.out.print(i + " "); } System.out.println();
+			 */
             System.out.println(res);           
         }
         scanner.close();
