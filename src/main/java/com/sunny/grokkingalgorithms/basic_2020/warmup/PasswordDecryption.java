@@ -8,31 +8,38 @@ public class PasswordDecryption {
 	 public static String decryptPassword(String s) {
 		    // Write your code here
 		 int i = 0;
-		 char[] decrypted = new char[calculatedLength(s)];
-		 int j  = 0;
-		 while(i < s.length()) {
-			char current = s.charAt(i);
-			if(Character.isDigit(current)) {
-				int index = findZero(decrypted);
-				decrypted[index] = current;
-			}
-			else if(Character.isUpperCase(current) && 
-					(i+1 < s.length() && 
-							Character.isLowerCase(s.charAt(i+1)))) {
-				decrypted[j] = s.charAt(i+1);
-				decrypted[j+1] = current;
-			}else {
-			    decrypted[j] = current;	
-			}			
-			j++;
-			i++;
+		 StringBuilder decrypted = new StringBuilder();
+		 char[] original = s.toCharArray();
+		 while(i < original.length) {
+			 char current = original[i];
+			 if(Character.isDigit(current)) {
+				 int index = findZero(original,i);
+				 if(index > 0) {
+					 original[index] = current;
+					 original[i] = '-';
+				 }
+			 }else if(Character.isUpperCase(current)
+					 && (i+1 < original.length &&
+							 Character.
+							 isLowerCase(original[i+1]))) {
+				 char temp = original[i+1];
+				 original[i+1] = original[i];
+				 original[i] = temp;
+			 }
+			 i++;			 
 		 }
-		 return String.valueOf(decrypted);
+		 for(int j = 0 ; j < original.length;j++) {
+			 char cur = original[j];
+			 if(cur != '-' && cur != '*') {
+				 decrypted.append(cur);				 
+			 }
+		 }
+		 return decrypted.toString();
 	 }
 	 
-	 public static int findZero(char[] dec) {
+	 public static int findZero(char[] dec, int start) {
 		 int index = -1;
-		 for(int i = 0 ; i < dec.length ; i++) {
+		 for(int i = start ; i < dec.length ; i++) {
 			 if(dec[i] == '0') {
 				 index = i;
 				 break;
