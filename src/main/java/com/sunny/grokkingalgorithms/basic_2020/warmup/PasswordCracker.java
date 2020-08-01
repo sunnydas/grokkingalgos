@@ -3,7 +3,13 @@ package com.sunny.grokkingalgorithms.basic_2020.warmup;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -92,7 +98,33 @@ WRONG PASSWORD
 	public static String passwordCracker(List<String> passwords, String loginAttempt) {
 	    // Write your code here
 	 	String tracker = "";
-        return passwordCrackerRecursive(passwords, loginAttempt, tracker); 
+        String cracked =  passwordCrackerRecursive(passwords, loginAttempt, tracker);
+        //StringBuilder ordered = new StringBuilder();
+        if(!cracked.contains("WRONG PASSWORD")) {
+	        String[] splitted = cracked.split("\\s+");
+	        int len = cracked.replaceAll("\\s+", "").length();
+	        String[] modified = new String[len];
+	        Set<Integer> consideredIndex = new HashSet<Integer>();
+	        //System.out.println(modified.length);
+	        for(int i = 0 ; i < splitted.length ; i++) {
+	        	String current = splitted[i];
+	        	int index = loginAttempt.indexOf(current);
+	        	while(consideredIndex.contains(index)) {
+	        		index = loginAttempt.indexOf(current, ++index);        		        		
+	        	}
+	        	modified[index] = current;
+	        	consideredIndex.add(index);
+	        }
+	        StringBuilder builder = new StringBuilder();
+	        for(String s : modified) {
+	        	if(s != null) {
+		        	builder.append(s);
+		        	builder.append(" ");
+	        	}
+	        }
+	        cracked = builder.toString();
+        }
+        return cracked.trim();
 	}
 	
 	public static String passwordCrackerRecursive(List<String> passwords,
@@ -100,7 +132,10 @@ WRONG PASSWORD
 			String tracker) {
 		if(loginAttempt.isEmpty()) {
 			//System.out.println(tracker);
-			return tracker;			
+			return tracker.trim();			
+		}
+		if(!isValid(passwords, loginAttempt)) {
+			return "WRONG PASSWORD";			
 		}
 		for(String password : passwords) {
 			int index = loginAttempt.indexOf(password);
@@ -117,6 +152,18 @@ WRONG PASSWORD
 		return passwordCrackerRecursive(passwords, 
 				loginAttempt, 
 				tracker);
+	}
+	
+	public static boolean isValid(List<String> passwords,
+			String loginAttempt) {
+		boolean valid = true;
+		for(String password : passwords) {
+			loginAttempt = loginAttempt.replace(password, "");			
+		}
+		if(!loginAttempt.isEmpty()) {
+			valid = false;			
+		}
+		return valid;
 	}
 
 	public static void main(String[] args) throws IOException {
