@@ -3,6 +3,27 @@ package com.sunny.grokkingalgorithms.basic_2020.warmup;
 public class BinarySearch {
 
 	
+	public static int binarySearchIterative(int[] input,
+			int key) {
+		int i = 0;
+		int j = input.length - 1;
+		int found = -1;
+		while(i <= j) {
+			int mid = i + (j - i)/2;
+			if(input[mid] == key) {
+				found = mid;
+				break;
+			}
+			else if(input[mid] < key) {
+				i = mid+1;				
+			}else {
+				j = mid - i;
+			}
+		}
+		return found;
+	}
+	
+	
 	public static int binarySearchRecursive(int[] input,
 			int start,
 			int end,
@@ -30,18 +51,22 @@ public class BinarySearch {
 				0, 
 				input.length - 1, 
 				3));
+		System.out.println(binarySearchIterative(input, 3));
 		System.out.println(binarySearchRecursive(input,
 				0, 
 				input.length - 1, 
 				5));
+		System.out.println(binarySearchIterative(input, 5));
 		System.out.println(binarySearchRecursive(input,
 				0, 
 				input.length - 1, 
 				1));
+		System.out.println(binarySearchIterative(input, 1));
 		System.out.println(binarySearchRecursive(input,
 				0, 
 				input.length - 1, 
 				10));
+		System.out.println(binarySearchIterative(input, 10));
 	}
 
 }
