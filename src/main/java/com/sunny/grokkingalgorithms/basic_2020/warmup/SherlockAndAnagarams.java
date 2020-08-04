@@ -2,6 +2,7 @@ package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -119,7 +120,7 @@ There are three anagrammatic pairs of length :  at positions  respectively.
 	 */
 	
 	static void findAnagramicSubstrings(String s,
-			Set<String> anagrams){
+			List<String> anagrams){
 		if(s.length() <= 0) {
 			return;
 		}
@@ -142,27 +143,34 @@ There are three anagrammatic pairs of length :  at positions  respectively.
 	 // Complete the sherlockAndAnagrams function below.
     static int sherlockAndAnagrams(String s) {
     	int count = 0;
-    	Set<String> anagrams = new LinkedHashSet<String>();
+    	List<String> anagrams = new ArrayList<String>();
     	findAnagramicSubstrings(s,anagrams);
-    	Set<String> tracker = new LinkedHashSet<String>();
+    	Map<String,Integer> tracker = new HashMap<String,Integer>();
     	Iterator<String> iterator = anagrams.iterator();
     	while(iterator.hasNext()) {
     		String current = iterator.next();
     		if(current != "" 
     				&& current.length() 
-    				< s.length()) {
-    			if(current.length() == 1) {
-    				count++;
-    			}else {
+    				< s.length()) {    			
 	    			char[] cs = current.toCharArray();
 	    			Arrays.sort(cs);
 	    			String valueOf = String.valueOf(cs);
-					if(tracker.contains(valueOf)) {
-	    				count++;    			
+					if(tracker.containsKey(valueOf)) {
+	    				int val = tracker.get(valueOf);
+	    				tracker.put(valueOf, val+1);
 	    			}else {
-	    				tracker.add(valueOf);
+	    				tracker.put(valueOf,1);
 	    			}
     			}
+    		}
+    	Iterator<Map.Entry<String,Integer>> iterator2 = tracker.
+    			entrySet().
+    			iterator();
+    	System.out.println(tracker);
+    	while(iterator2.hasNext()) {
+    		Map.Entry<String, Integer> entry = iterator2.next();
+    		if(entry.getValue() >= 2) {
+    			count++;    			
     		}
     	}
     	return count;
@@ -182,9 +190,9 @@ There are three anagrammatic pairs of length :  at positions  respectively.
             int result = sherlockAndAnagrams(s);
 
             System.out.println(result);
-            Set<String> anagrams = new LinkedHashSet<String>();
-            findAnagramicSubstrings(s, anagrams);
-            System.out.println(anagrams);
+            //Set<String> anagrams = new LinkedHashSet<String>();
+            //findAnagramicSubstrings(s, anagrams);
+            //System.out.println(anagrams);
         }
 
         scanner.close();
