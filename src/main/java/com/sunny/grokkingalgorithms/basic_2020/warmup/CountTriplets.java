@@ -72,13 +72,69 @@ Explanation 2
 The triplets satisfying are index , , , .
 
 
+
+
+
+	 */
+	
+	
+	static long countTriplets(List<Long> arr,
+			long r) {
+		long count = 0;
+		Map<Long,Long> leftMap = new HashMap<Long, Long>();
+		Map<Long,Long> rightMap = new HashMap<Long, Long>();
+		for(long i: arr) {
+			if(rightMap.containsKey(i)) {
+				rightMap.put(i, rightMap.get(i)+1);				
+			}else {
+				rightMap.put(i, 1L);
+			}
+		}
+		//System.out.println(rightMap);
+		//System.out.println(leftMap);
+		for(int i = 0 ; i < arr.size() ; i++) {
+			long current = arr.get(i);
+			long rCount = rightMap.get(current);
+			rightMap.put(current, rCount - 1);
+			if((current%r) == 0) {
+				if(rightMap.containsKey(current*r)
+						&& leftMap.containsKey(current/r)) {
+					count += rightMap.get(current*r)*leftMap.get(current/r);					
+				}
+			}
+			if(leftMap.containsKey(current)) {
+				leftMap.put(current, leftMap.get(current) + 1);				
+			}else {
+				leftMap.put(current, 1L);
+			}
+		}
+		return count;
+	}
+	
+	/*
+	 * 4 2
+1 2 2 4
 	 */
 
 	// Complete the countTriplets function below.
-    static long countTriplets(List<Long> arr, long r) {
+    static long countTripletsAlt(List<Long> arr, long r) {
     	int count = 0;
     	/*
+    	 *  1 3 9 9 27 81
+    	 *  
+    	 *  1 1 3 3 9 27
+    	 *  
+    	 *  1 1 1 1 3 9
+    	 *  
+    	 *  5 5
+1 5 5 25 125
+
+              1 1 1 5 25
+              
+              1 1 1 1 5
+    	 *  
     	 * 
+    	 *  
     	 */
     	Map<Long,List<Integer>> tracker = new HashMap();
     	for(int i = 0 ; i < arr.size() ; i++) {
