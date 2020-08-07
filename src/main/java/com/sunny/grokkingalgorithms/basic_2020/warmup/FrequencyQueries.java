@@ -124,6 +124,10 @@ When the first output query is run, the array is empty.
     	for(int i = 0 ; i < queries.size() ; i++) {
     		int queryId = queries.get(i).get(0);
             int value = queries.get(i).get(1);
+			/*
+			 * if(i == 23157) { System.out.println(freqMap);
+			 * System.out.println(countTracker); System.out.println(value); }
+			 */
             if(queryId == 1) {
             	if(freqMap.containsKey(value)) {
             		Integer count = freqMap.get(value);
@@ -152,12 +156,20 @@ When the first output query is run, the array is empty.
             		Integer count = freqMap.get(value);
 					freqMap.put(value, count - 1);
 					if(countTracker.containsKey(count)) {
-						countTracker.put(count, countTracker.get(count) - 1);
+						int v = countTracker.get(count);
+						if(v > 0) {
+							countTracker.put(count, v - 1);
+						}
 					}
 					if(countTracker.containsKey(count - 1)) {
-						countTracker.put(count - 1, countTracker.get(count - 1) + 1);						
+						 int v = countTracker.get(count - 1);
+						 if(v >= 0) {
+							 countTracker.put(count - 1, v + 1);			
+						 }
 					}else {
-						countTracker.put(count-1,1);
+						if((count - 1) > 0) {
+							countTracker.put(count-1,1);
+						}
 					}
             	}
             }else if(queryId == 3
@@ -180,7 +192,7 @@ When the first output query is run, the array is empty.
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         //BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
-
+        
         int q = Integer.parseInt(bufferedReader.readLine().trim());
 
         List<List<Integer>> queries = new ArrayList<>();
@@ -200,9 +212,23 @@ When the first output query is run, the array is empty.
         List<Integer> ans = freqQuery(queries);
 
        System.out.println(ans);
-        
+       
+       List<Integer> parsed = FileLoader.parse("dump");
+       
+       //print(ans, parsed);
+       
+       //System.out.println(parsed.size() + " " + ans.size()); 
     }
 
+    public static void print(List<Integer> current,List<Integer> expected) {
+    	int i = 0;
+    	while(i < current.size()) {
+    		System.out.print(current.get(i) + " " + expected.get(i));
+    		System.out.print(" "+(current.get(i) != expected.get(i)?"diff" + " " + i:" "));
+    		System.out.println();
+    		i++;    		
+    	}
+    }
 
-
+    
 }
