@@ -119,7 +119,7 @@ When the first output query is run, the array is empty.
 	// Complete the freqQuery function below.
     static List<Integer> freqQuery(List<List<Integer>> queries) {
     	Map<Integer,Integer> freqMap = new HashMap<Integer, Integer>();
-    	Set<Integer> countTracker = new LinkedHashSet<Integer>();
+    	Map<Integer,Integer> countTracker = new HashMap();
     	List<Integer> result = new ArrayList<Integer>();
     	for(int i = 0 ; i < queries.size() ; i++) {
     		int queryId = queries.get(i).get(0);
@@ -128,37 +128,52 @@ When the first output query is run, the array is empty.
             	if(freqMap.containsKey(value)) {
             		Integer count = freqMap.get(value);
 					freqMap.put(value, count + 1);
-            		if(countTracker.contains(count - 1)) {
-            			countTracker.remove(count - 1);            			
-            		}
-            		countTracker.add(count+1);
+					if(countTracker.containsKey(count)) {
+						countTracker.put(count, countTracker.get(count) - 1);
+					}
+					if(countTracker.containsKey(count + 1)) {
+						countTracker.put(count + 1, countTracker.get(count + 1) + 1);						
+					}else {
+						countTracker.put(count+1,1);
+					}
             	}else {
             		freqMap.put(value, 1);
-            		countTracker.add(1);
+            		Integer count = 1;
+					if(countTracker.containsKey(count)) {
+						countTracker.put(count, countTracker.get(count) + 1);						
+					}else {
+						countTracker.put(count,1);
+					}
             	}
+            	
             }
             else if(queryId == 2) {
             	if(freqMap.containsKey(value)) {
             		Integer count = freqMap.get(value);
 					freqMap.put(value, count - 1);
-            		if(countTracker.contains(count)) {
-            			countTracker.remove(count);            			
-            		}
-            		countTracker.add(count - 1);
-            	}else {
-            		freqMap.put(value, 1);
-            		countTracker.add(1);
+					if(countTracker.containsKey(count)) {
+						countTracker.put(count, countTracker.get(count) - 1);
+					}
+					if(countTracker.containsKey(count - 1)) {
+						countTracker.put(count - 1, countTracker.get(count - 1) + 1);						
+					}else {
+						countTracker.put(count-1,1);
+					}
             	}
-            }else if(queryId == 3 
-            		&& countTracker.contains(value)){
-            	result.add(1);            	
-            }else if(queryId == 3 
-            		&& !countTracker.contains(value)) {
-            	result.add(0);            	
+            }else if(queryId == 3
+            		&& countTracker.containsKey(value)){
+            	if(countTracker.get(value) > 0) {
+            		result.add(1);	
+            	}else {
+            		result.add(0);
+            	}            	            	
+            }else if(queryId == 3
+            		&& !countTracker.containsKey(value)) {
+            	result.add(0);
             }
     	}
-    	System.out.println(freqMap);
-    	System.out.println(countTracker);
+    	//System.out.println(freqMap);
+    	//System.out.println(countTracker);
     	return result;
     }
 
