@@ -26,6 +26,22 @@ public class PancakeSort {
 		}
 	}
 	
+	public static void panCakeSort(int[] input) {
+		for(int i = 0 ; i < input.length ; i++) {
+			for(int j = 0 ; j < (input.length - i - 1) ; j++) {
+				if(input[j] > input[j + 1]) {
+					int[] stage = new int[] {input[j],input[j + 1]};
+					flip(stage,2);	
+					//print(stage);
+					//print(input);
+					input[j] = stage[0];
+					input[j + 1] = stage[1];
+				}
+			}
+		}
+		//print(input);
+	}
+	
 	public static void print(int[] input) {
 		for(int i = 0; i < input.length ; i++) {
 			System.out.print(input[i] + " ");			
@@ -37,8 +53,11 @@ public class PancakeSort {
 		// TODO Auto-generated method stub
         int[] input = new int[] {5,4,3,2,1};
         flip(input,5);	
-        print(input);
+        //print(input);
         flip(input,3);
+        //print(input);
+        input = new int[] {5,4,3,2,1};
+        panCakeSort(input);
         print(input);
 	}
 
