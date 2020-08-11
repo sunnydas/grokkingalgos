@@ -1,6 +1,9 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class OddOccurences {
 	
@@ -37,6 +40,28 @@ all but one of the values in A occur an even number of times.
 	 */
 	
 	public static int solution(int[] A) {
+		Map<Integer,Integer> map = new HashMap<Integer, Integer>();
+		int element = -1;
+		for(int i = 0 ; i < A.length ; i++) {
+			int current = A[i];
+			if(map.containsKey(current)) {
+				map.put(current, map.get(current) + 1);				
+			}else {
+				map.put(current, 1);
+			}
+		}
+		Iterator<Map.Entry<Integer, Integer>> iterator = map.entrySet().iterator();
+		while(iterator.hasNext()) {
+			Map.Entry<Integer, Integer> entry = iterator.next();
+			if(entry.getValue() %2 != 0) {
+				element = entry.getKey();
+				break;
+			}
+		}
+		return element;
+	}
+	
+	public static int solutionAlt(int[] A) {
         // write your code in Java SE 8
 		int element = -1;
 		if(A.length == 1) {
@@ -63,6 +88,7 @@ all but one of the values in A occur an even number of times.
         System.out.println(solution(input));
         input = new int[] {5,9,3,9,3,9,9};
         System.out.println(solution(input));
+        
 	}
 
 }
