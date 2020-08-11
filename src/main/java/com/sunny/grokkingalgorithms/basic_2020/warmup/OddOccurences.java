@@ -39,7 +39,7 @@ each element of array A is an integer within the range [1..1,000,000,000];
 all but one of the values in A occur an even number of times.
 	 */
 	
-	public static int solution(int[] A) {
+	public static int solutionAlt1(int[] A) {
 		Map<Integer,Integer> map = new HashMap<Integer, Integer>();
 		int element = -1;
 		for(int i = 0 ; i < A.length ; i++) {
@@ -59,6 +59,32 @@ all but one of the values in A occur an even number of times.
 			}
 		}
 		return element;
+	}
+	
+	public static int solution(int[] A) {
+		/*
+		 * 1,3,5,7
+		 * 
+		 *  001
+		 *  011  = 0 1 1 3
+		 *  011
+		 *  101  = 1 1 0 
+		 *  110 
+		 *  111 = 0 0 1
+		 */
+		int result = 0;
+		/*
+		 * As you can see a second number from a pair unset
+		 *  bits which were set by a first number from a pair. 
+		 *  Even if they going not directly one after another. 
+		 *  Finally all bits which were set to 1 will be unset 
+		 *  for each paired numbers 
+		 * and we will have in the variable a value of the only unpaired number.
+		 */
+		for(int i = 0; i < A.length ; i++) {
+			result ^= A[i];
+		}
+		return result;
 	}
 	
 	public static int solutionAlt(int[] A) {
