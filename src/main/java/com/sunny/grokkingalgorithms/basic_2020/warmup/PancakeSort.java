@@ -48,6 +48,28 @@ public class PancakeSort {
 		}
 		System.out.println();
 	}
+	
+	public static void pancakeSort(int[] input) {
+		for(int i = input.length - 1; i >= 0 ; i--) {
+			int maxIndex = findMax(input, 0,i);
+			if(maxIndex != i) {
+				flip(input,maxIndex + 1);
+				flip(input,i + 1);
+			}
+		}
+	}
+	
+	public static int findMax(int[] input,int start,int end) {
+		int max = input[start];
+		int maxIndex = -1;
+		for(int i = start + 1 ; i <= end ; i++ ) {
+			if(input[i] > max) {
+				max = input[i];
+				maxIndex = i;
+			}
+		}
+		return maxIndex;		
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
