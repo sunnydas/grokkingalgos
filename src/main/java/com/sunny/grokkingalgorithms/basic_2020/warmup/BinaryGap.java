@@ -26,7 +26,7 @@ Write an efficient algorithm for the following assumptions:
 N is an integer within the range [1..2,147,483,647].
 	 */
 	
-	public static int solution(int N) {
+	public static int solutionAlt(int N) {
         // write your code in Java SE 8
 		/*
 		 * 1001
@@ -53,6 +53,38 @@ N is an integer within the range [1..2,147,483,647].
 		return count;
     }
 
+	
+	public static int solution(int N) {
+        // write your code in Java SE 8
+		/*
+		 * 1001
+		 * 
+		 * 1000
+		 */
+		int count = 0;
+		int localCount = 0;
+		//int limit = 32;
+		boolean scopeStarted = false;
+		int i  = 0;
+		while(i < 32) {
+			int num = (N&1);
+		    //System.out.println(num);
+		    if(num == 1 && !scopeStarted) {
+		    	scopeStarted = true;		    	
+		    }else if(num == 1 && scopeStarted) {
+		    	//System.out.println(localCount + " " + count);
+		    	count = Math.max(localCount, count);
+		    	//scopeStarted = false;
+		    	localCount = 0;
+		    } else if(num == 0 && scopeStarted) {
+		    	++localCount;		    	
+		    }
+		    N = N>>1;
+		    i++;
+		}
+		return count;
+    }
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int n = 5;
@@ -73,7 +105,8 @@ N is an integer within the range [1..2,147,483,647].
 		//System.out.println(9>>1&1);
 		System.out.println(solution(9));
 		System.out.println(solution(20));
-		
+		System.out.println(solution(32));
+		System.out.println(solution(529));		
 	}
 
 }
