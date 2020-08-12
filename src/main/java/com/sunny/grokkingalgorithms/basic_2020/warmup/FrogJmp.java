@@ -18,6 +18,11 @@ For example, given:
   X = 10
   Y = 85
   D = 30
+  
+  85-10 ->  30)75(2
+               60
+               ---
+                1   
 the function should return 3, because the frog will be positioned as follows:
 
 after the first jump, at position 10 + 30 = 40
@@ -30,16 +35,14 @@ X ≤ Y.
 	 */
 	
 	public int solution(int X, int Y, int D) {
-		int minJumps = 0;
-		int i = X;
-		if(X == Y) {
-			return 0;			
+		int minJump = 0;
+		int diff = Y - X;
+		if(diff > 0) {
+			int div = diff/D;
+			int rem = diff%D;
+			minJump = div + rem;
 		}
-		while(i < Y) {
-			i += D;
-			minJumps++;
-		}
-		return minJumps;
+		return minJump;
 	}
 
 	public static void main(String[] args) {
