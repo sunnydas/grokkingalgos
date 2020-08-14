@@ -1,5 +1,10 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 public class FrogRiverOne {
 	
 	/*
@@ -57,6 +62,9 @@ each element of array A is an integer within the range [1..X].
   A[6] = 5
   A[7] = 4
   
+  
+  
+  
   1 - [0,2]
   2 - [4]
   3 - [1,5]
@@ -68,13 +76,50 @@ each element of array A is an integer within the range [1..X].
   [6]   
 	 */
 	
-	public int solution(int X, int[] A) {
-		return 0;
+	public static int solution(int X, int[] A) {
+		int earliestTime = -1;
+		List<Integer> xsInSchedule = findXsInSchedule(X, A);
+		if(!xsInSchedule.isEmpty()) {
+			int i = 0;
+			for(int index :xsInSchedule) {
+				Set<Integer> leafPositionTracker = new LinkedHashSet<Integer>();
+				while(i < index) {
+					leafPositionTracker.add(A[i]);
+					i++;
+				}
+				if(leafPositionTracker.size() == (X - 1)) {
+					earliestTime = index;
+					break;
+				}
+			}
+		}
+		return earliestTime;
 	}
+	
+    private static List<Integer> findXsInSchedule(int X,int[] A){
+    	List<Integer> xsInschedule = new ArrayList<Integer>();
+    	for(int i = 0 ; i < A.length ; i++) {
+    		if(A[i] == X) {
+    			xsInschedule.add(i);    			
+    		}
+    	}
+    	return xsInschedule;
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		/*
+		 * A[0] = 1
+  A[1] = 3
+  A[2] = 1
+  A[3] = 4
+  A[4] = 2
+  A[5] = 3
+  A[6] = 5
+  A[7] = 4
+		 */
+		int[] input = new int[] {1,3,1,4,2,3,5,4};
+		System.out.println(solution(5, input));
 	}
 
 }
