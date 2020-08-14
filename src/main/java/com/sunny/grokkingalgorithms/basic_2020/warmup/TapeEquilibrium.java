@@ -72,6 +72,19 @@ each element of array A is an integer within the range [−1,000..1,000].
 		}
 		int elem = sums[sums.length - 1];
 		for(int i = 0; i < A.length - 1; i++) {
+			/*
+			 * Logic for the formula
+			 * 
+			 * 3,4,6,10,13
+ 
+ 13 - 3 -3 = 7
+ 13 - 4 - 4 = 5
+ 13 - 6 - 6 = 1
+ 13 - 10 - 10 = 3
+ 
+                13 -3 you get the sum of second partition 
+                which is 10 this has to be subracted from sum of first partition 3
+			 */
 			int cur = Math.abs(elem - 2*sums[i]);
 			//System.out.println(cur);
 			if(cur < minDiff) {
