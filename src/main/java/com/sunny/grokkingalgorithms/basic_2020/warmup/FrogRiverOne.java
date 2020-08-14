@@ -79,17 +79,41 @@ each element of array A is an integer within the range [1..X].
   [6]   
 	 */
 	
+	
 	public static int solution(int X,int[] A) {
 		int earliestTime = -1;
-		Map<Integer,LinkedList<Integer>> trackerMap = new HashMap<Integer,
-				LinkedList<Integer>>();
+		int[] tracker = new int[X+1];
+		for(int i = 1; i <= X ; i++) {
+			tracker[i] = -1;			
+		}
+		for(int i = 0; i < A.length ; i++) {
+			int current = A[i];
+			if(tracker[current] <= 0) {
+				tracker[current] = i;				
+			}
+		}
+		for(int i = 1; i <= X ; i++) {
+			if(tracker[i] >= 0) {
+				earliestTime = Math.max(earliestTime, tracker[i]);			
+			}else {
+				earliestTime = -1;
+				break;
+			}
+		}
+		return earliestTime;
+	}
+	
+	public static int solutionAlt1(int X,int[] A) {
+		int earliestTime = -1;
+		Map<Integer,ArrayList<Integer>> trackerMap = new HashMap<Integer,
+				ArrayList<Integer>>();
 		for(int i = 0; i < A.length ; i++) {
 			int currentPosition = A[i];
 			int currentTime = i;
 			if(trackerMap.containsKey(currentPosition)) {
 				trackerMap.get(currentPosition).add(i);				
 			}else {
-				LinkedList<Integer> list = new LinkedList<Integer>();
+				ArrayList<Integer> list = new ArrayList<Integer>();
 				list.add(i);
 				trackerMap.put(currentPosition, list);
 			}
@@ -97,7 +121,7 @@ each element of array A is an integer within the range [1..X].
 		//System.out.println(trackerMap);
 		for(int i = 1; i <= X ; i++) {
 			if(trackerMap.containsKey(i)) {
-				earliestTime = Math.max(earliestTime, trackerMap.get(i).poll());
+				earliestTime = Math.max(earliestTime, trackerMap.get(i).get(0));
 			}else {
 				earliestTime = -1;
 				break;
@@ -183,6 +207,8 @@ each element of array A is an integer within the range [1..X].
 		 */
 		input = new int[] {1,3,1,3,2,1,3};
 		System.out.println(solution(3,input));
+		input = new int[] {1};
+		System.out.println(solution(1,input));
 	}
 
 }
