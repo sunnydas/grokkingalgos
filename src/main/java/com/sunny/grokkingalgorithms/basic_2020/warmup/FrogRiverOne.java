@@ -83,17 +83,32 @@ each element of array A is an integer within the range [1..X].
 			int i = 0;
 			for(int index :xsInSchedule) {
 				Set<Integer> leafPositionTracker = new LinkedHashSet<Integer>();
-				while(i < index) {
+				while(i <= index) {
 					leafPositionTracker.add(A[i]);
 					i++;
 				}
-				if(leafPositionTracker.size() == (X - 1)) {
+				if(validate(X, leafPositionTracker)) {
 					earliestTime = index;
 					break;
 				}
 			}
 		}
 		return earliestTime;
+	}
+	
+	private static boolean validate(int X,Set<Integer> tracker) {
+		boolean validated = true;
+		if(!tracker.isEmpty()) {
+			for(int i = 1; i <= X; i++) {
+				if(!tracker.contains(i)) {
+					validated = false;
+					break;
+				}
+			}
+		}else {
+			validated = false;
+		}
+	    return validated;		
 	}
 	
     private static List<Integer> findXsInSchedule(int X,int[] A){
@@ -120,6 +135,8 @@ each element of array A is an integer within the range [1..X].
 		 */
 		int[] input = new int[] {1,3,1,4,2,3,5,4};
 		System.out.println(solution(5, input));
+		input = new int[] {2,2,2,2,2};
+		System.out.println(solution(2, input));	
 	}
 
 }
