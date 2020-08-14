@@ -56,10 +56,16 @@ each element of array A is an integer within the range [1..(N + 1)].
 				return 1;
 			}			
 		}
+		if(A[0] != 1) {
+			return 1;			
+		}
 		int missing = 0;
 		for(int i = 1; i < A.length ; i++) {
 			if(A[i] - A[i - 1] > 1) {
 				missing = A[i - 1] + 1;
+				break;
+			}else if(i == A.length - 1) {
+				missing = A[i] + 1;
 				break;
 			}
 		}
@@ -75,6 +81,10 @@ each element of array A is an integer within the range [1..(N + 1)].
 		input = new int[] {1};
 		System.out.println(solution(input));
 		input = new int[] {2};
+		System.out.println(solution(input));
+		input = new int[] {1,2};
+		System.out.println(solution(input));
+		input = new int[] {3,2};
 		System.out.println(solution(input));
 	}
 
