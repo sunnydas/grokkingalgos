@@ -1,8 +1,11 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class FrogRiverOne {
@@ -76,7 +79,34 @@ each element of array A is an integer within the range [1..X].
   [6]   
 	 */
 	
-	public static int solution(int X, int[] A) {
+	public static int solution(int X,int[] A) {
+		int earliestTime = -1;
+		Map<Integer,LinkedList<Integer>> trackerMap = new HashMap<Integer,
+				LinkedList<Integer>>();
+		for(int i = 0; i < A.length ; i++) {
+			int currentPosition = A[i];
+			int currentTime = i;
+			if(trackerMap.containsKey(currentPosition)) {
+				trackerMap.get(currentPosition).add(i);				
+			}else {
+				LinkedList<Integer> list = new LinkedList<Integer>();
+				list.add(i);
+				trackerMap.put(currentPosition, list);
+			}
+		}
+		//System.out.println(trackerMap);
+		for(int i = 1; i <= X ; i++) {
+			if(trackerMap.containsKey(i)) {
+				earliestTime = Math.max(earliestTime, trackerMap.get(i).poll());
+			}else {
+				earliestTime = -1;
+				break;
+			}
+		}
+		return earliestTime;
+	}
+	
+	public static int solutionAlt(int X, int[] A) {
 		int earliestTime = -1;
 		List<Integer> xsInSchedule = findXsInSchedule(X, A);
 		if(!xsInSchedule.isEmpty()) {
@@ -134,9 +164,25 @@ each element of array A is an integer within the range [1..X].
   A[7] = 4
 		 */
 		int[] input = new int[] {1,3,1,4,2,3,5,4};
+		// 1 - [0,2]
+		// 2 - [4]
+		// 3 - [1,5]
+		// 4 - [3,7]
+		// 5 - [6] - 0,4,1,3,6  
 		System.out.println(solution(5, input));
 		input = new int[] {2,2,2,2,2};
 		System.out.println(solution(2, input));	
+		/*
+		 * For example, for the input (3, [1, 3, 1, 3, 2, 1, 3]) 
+		 * the solution returned a wrong answer (got 6 expected 4).
+		 */
+		/*
+		 * 1 - [0,2,5]
+		 * 2 - [4]
+		 * 3 - [1,3,6]
+		 */
+		input = new int[] {1,3,1,3,2,1,3};
+		System.out.println(solution(3,input));
 	}
 
 }
