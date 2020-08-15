@@ -1,5 +1,8 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MaxCounter {
 	
 	/*
@@ -50,13 +53,67 @@ For example, given:
     A[6] = 4
 the function should return [3, 2, 2, 4, 2], as explained above.
 
+3 - 1
+4 - 1 + 1 + 1 + 1
+2
+1 - 1
+
+3, 2 , 3,4,2
+
+1 - 2 + 1
+2 - 2 
+3 - 2
+4 - 1 + 1 + 1 + 1
+5 - 2 
+
+max = 2
 Write an efficient algorithm for the following assumptions:
 
 N and M are integers within the range [1..100,000];
 each element of array A is an integer within the range [1..N + 1].
 	 */
 
+	
 	public static int[] solution(int N, int[] A) {
+		int[] output = new int[N];
+		int max = 0;
+		/*
+		 * Logic
+		 * keep track of positions:
+		 * 1 - 2 + 1
+2 - 2 
+3 - 2
+4 - 1 + 1 + 1 + 1
+5 - 2 
+		 */
+		int runningMax = 0;
+		for(int i = 0 ; i < A.length ; i++) {
+			int current = A[i];
+			if(current <= N) {
+				if(output[current - 1] < max) {
+					output[current - 1] = max + 1; 
+				}else {
+					output[current - 1]++;
+				}
+				if(output[current - 1] > runningMax) {
+				    runningMax = output[current - 1];						
+				}
+			}else {
+				max = runningMax;
+			}
+		}
+		//print(output);
+		if(max > 0) {
+			for(int i = 0; i < output.length ; i++) {
+				if(output[i] < max) {
+					output[i] = max;					
+				}
+			}
+		}
+		return output;
+	}
+	
+	public static int[] solutionAlt(int N, int[] A) {
 		int max = 0;
 		int[] arr = new int[N];
 		for(int i = 0 ; i < A.length ; i++) {
