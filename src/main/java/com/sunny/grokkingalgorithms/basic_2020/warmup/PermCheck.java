@@ -136,7 +136,7 @@ each element of array A is an integer within the range [1..1,000,000,000].
 				}
 			}
 			A = null;
-			System.gc();
+			//System.gc();
 			for(int i = 1 ; i < tracker.length ; i++) {
 				if(tracker[i] != 1) {
 					isPermutation = 0;
