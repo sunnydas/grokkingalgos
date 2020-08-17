@@ -74,6 +74,14 @@ string S consists only of upper-case English letters A, C, G, T.
 	 *  
 	 *  C A G C C T A
 	 *  
+	 *  0 - A-0 C-1 G 0 T 0
+	 *  1 - A-1 C-1 G 0 T 0
+	 *  2 - A-1 C-1 G-1
+	 *  3 - A-1 C-2 G-1 T-0
+	 *  4 - A-1 C-3 G-1 T-0
+	 *  5 - A-1 C-3 G-1 T-1
+	 *  6 - A-2 C-3 G-1 T-1  
+	 *  
 	 *  2 3  6  8  10  14  15
 	 *  
 	 * 15 13 12  9  7   5    1   
@@ -97,7 +105,124 @@ string S consists only of upper-case English letters A, C, G, T.
 	 *  
 	 */
 	
-	public static int[] solution(String S,int[] P,int[] Q) {
+	public static int[] solution(String S,int[] p,int[] q) {
+		int[] impact = new int[p.length];
+		/*
+		 * 0-A, 1-C, 2-G, 3-T
+		 */
+		int[][] tracker = new int[S.length()][4];
+		populatedFirstTrackerElement(S, tracker);
+		for(int i=1; i < S.length() ;i++) {
+			char current = S.charAt(i);
+			switch(current) {
+				case 'A':
+					tracker[i][0] = tracker[i - 1][0] + 1;
+					tracker[i][1] = tracker[i - 1][1];
+					tracker[i][2] = tracker[i - 1][2];
+					tracker[i][3] = tracker[i - 1][3];
+					break;
+				case 'C':
+					tracker[i][1] = tracker[i - 1][1] + 1;
+					tracker[i][0] = tracker[i - 1][0];
+					tracker[i][2] = tracker[i - 1][2];
+					tracker[i][3] = tracker[i - 1][3];
+					break;
+				case 'G':
+					tracker[i][2] = tracker[i - 1][2] + 1;
+					tracker[i][0] = tracker[i - 1][0];
+					tracker[i][1] = tracker[i - 1][1];
+					tracker[i][3] = tracker[i - 1][3];
+					break;
+				case 'T':
+					tracker[i][3] = tracker[i - 1][3] + 1;
+					tracker[i][0] = tracker[i - 1][0];
+					tracker[i][2] = tracker[i - 1][2];
+					tracker[i][3] = tracker[i - 1][3];
+					break;	
+			}
+		}
+		//print(tracker);
+		for(int i = 0; i < p.length ; i++) {
+			int start = p[i];
+			int end = q[i];
+			if(p[i] == q[i]) {
+				char cur = S.charAt(p[i]);
+				if(cur == 'A') {
+					impact[i] = 1;
+				}else if(cur == 'C') {
+					impact[i] = 2;
+				} else if(cur == 'G') {
+					impact[i] = 3;
+				} else if(cur == 'T') {
+					impact[i] = 4;
+				}
+				continue;
+			}
+			if(start == 0) {
+				if(tracker[end][0] > 0 || tracker[start][0] > 0) {
+					impact[i] = 1;
+					continue;
+				}
+				if(tracker[end][1] > 0 || tracker[start][1] > 0) {
+					impact[i] = 2;
+					continue;
+				}
+				if(tracker[end][2] > 0 || tracker[start][2] > 0) {
+					impact[i] = 3;
+					continue;
+				}
+				if(tracker[end][3] > 0 || tracker[start][3] > 0) {
+					impact[i] = 4;
+					continue;
+				}
+			}else {
+				if(tracker[end][0] > tracker[start][0]) {
+					impact[i] = 1;
+					continue;
+				}else if(tracker[end][1] > tracker[start][1]) {
+					impact[i] = 2;
+					continue;
+				}else if(tracker[end][2] > tracker[start][2]) {
+					impact[i] = 3;
+					continue;
+				}else if(tracker[end][3] > tracker[start][3]) {
+					impact[i] = 4;
+					continue;
+				}				
+			}
+		}
+		return impact;
+	}
+
+	private static void handleSameIndex(String S, int[] p, int[] q, int[] impact, int i) {
+		if(p[i] == q[i]) {
+			char cur = S.charAt(p[i]);
+			if(cur == 'A') {
+				impact[i] = 1;
+			}else if(cur == 'C') {
+				impact[i] = 2;
+			} else if(cur == 'G') {
+				impact[i] = 3;
+			} else if(cur == 'T') {
+				impact[i] = 4;
+			}
+		}
+	}
+
+	private static void populatedFirstTrackerElement(String S, int[][] tracker) {
+		char first = S.charAt(0);
+		if(first == 'A') {
+			tracker[0][0]++;			
+		}else if(first == 'C') {
+			tracker[0][1]++;			
+		} else if(first == 'G') {
+			tracker[0][2]++;			
+		} else if(first == 'T') {
+			tracker[0][3]++;
+		}
+	}
+	
+	public static int[] solutionAlt1(String S,int[] P,int[] Q) {
 		int[] impact = new int[P.length];
 		/*
 		 * 0 is global mean , 1 is local mean
@@ -186,7 +311,7 @@ string S consists only of upper-case English letters A, C, G, T.
 	
 	public static void print(int[][] arr) {
 		for(int i = 0; i < arr.length ; i++) {
-			System.out.print(arr[i][0] + "," + arr[1][1] + " ");			
+			System.out.print(arr[i][0] + "," + arr[i][1] + "," + arr[i][2] + "," + arr[i][3] +" ");			
 		}
 		System.out.println();
 	}
@@ -210,12 +335,30 @@ WRONG ANSWER (got [1, 1, 1] expected [2, 4, 1])
         p = new int[] {0,0,1};
         q = new int[] {0,1,1};
         arr = solution(s, p, q);
-        //print(arr);
+        print(arr);
         s ="GGAGG";
         p = new int[] {0,0,1,2,0};
         q = new int[] {0,1,2,3,4};
         arr = solution(s,p,q);
         print(arr);
+        
+        /*
+         * T G A C
+         * 2 3 1 2
+         * 
+         * A C G A
+         * 
+         * 1 0 0 0
+         * 1 1 0 0
+         * 1 1 1 0
+         * 2 1 1 0
+         * 
+         * A C G T
+         * 0 0 1 1 
+         * 1 0 1 1
+         * 1 1 1 1
+         * 
+         */
 	}
 
 }
