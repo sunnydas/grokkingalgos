@@ -46,7 +46,104 @@ P[K] ≤ Q[K], where 0 ≤ K < M;
 string S consists only of upper-case English letters A, C, G, T.
 	 */
 	
-	public int[] solution(String S, int[] P, int[] Q) {
+	/*
+	 *  2 1 3 2 2 4 1
+	 *  
+	 *  2(2) 1(1,2)  3(1,3) 2(1,2)  2(1,2) 4(1,2) 1(1)
+	 *  
+	 *  
+	 *  3 1 2 4
+	 *  
+	 *   3(1,3)   1(1,1)  2(2,2)  4(4,4) 
+	 *       
+	 *   2(1,2)   1(1,1)  3(1,2)   2(1,2)  2(1,2) 4(1,4) 1(1,1)
+	 *  
+	 * 2 -1 4 -2 0 4 -3
+	 *  
+	 *      2  1   1   1  1  1  1  
+	 *  
+	 *     15  13  12  9  7  5  1         
+	 *  
+	 *  2 1 2 2 2 1 1 
+	 *  
+	 *  2 3 6 8 10 14 15
+	 *  
+	 *  2 1 1 1 1 1 1
+	 *  
+	 *  2 0 2 1 1 3 0 
+	 *  
+	 *  C A G C C T A
+	 *  
+	 *  2 3  6  8  10  14  15
+	 *  
+	 * 15 13 12  9  7   5    1   
+	 * 
+	 *   
+	 *     0   1   2   3   4   5
+	 *  0  2   1   1   1   1   1 
+	 *  
+	 *  1  X   1   1   1   1   1  
+	 *  
+	 *  2  X   X   3   2   2   1 
+	 *   
+	 *  3  X   X   X   2   2   1
+	 *  
+	 *  4  X   X   X   X   2   1   
+	 *  
+	 *  5  X   X   X   X   X   4
+	 *   
+	 * 
+	 * 
+	 *  
+	 */
+	
+	public int[] solution(String S,int[] P,int[] Q) {
+		int[] impact = new int[P.length];
+		/*
+		 * 0 is global mean , 1 is local mean
+		 */
+		int[][] tracker = new int[S.length()][2];
+		int[] input = new int[S.length()];
+		for(int i = 0; i < S.length() ; i++) {
+			char current = S.charAt(i);
+			if(current == 'A') {
+				input[i] = 1;
+			}else if(current == 'C'){
+				input[i] = 2;				
+			}else if(current == 'G'){
+				input[i] = 3;				
+			}else if(current == 'T'){
+				input[i] = 4;				
+			} 
+		}
+		int globalMin = input[input.length - 1];
+		int localMin = input[input.length - 1];
+		tracker[input.length - 1][0] = globalMin;
+		tracker[input.length - 1][1] = localMin;
+		for(int i = input.length - 2; i >= 0; i--) {
+			int current = input[i];
+			if(current < globalMin) {
+				globalMin = current;				
+			}
+			if(localMin == globalMin && current < localMin) {
+				localMin = current;				
+			}
+			tracker[i][0] = globalMin;
+			tracker[i][1] = localMin;
+		}
+		for(int i = 0; i < P.length ; i++) {
+			int start = P[i];
+			int end = Q[i];
+			if(end == input.length - 1) {
+				impact[i] = tracker[i][0]; 				
+			}else {
+				impact[i] = Math.min(tracker[P[i]][1], tracker[Q[i]][1]);
+			}
+		}
+		return impact;
+	}
+	
+	public int[] solutionAlt(String S, int[] P, int[] Q) {
 		int[] impact = new int[P.length];
 		int[] input = new int[S.length()];
 		for(int i = 0; i < S.length() ; i++) {
@@ -67,6 +164,7 @@ string S consists only of upper-case English letters A, C, G, T.
 		return impact;
 	}
 
+	
 	private static int findMin(int[] input,int start,int end) {
 		int min = input[start];
 		for(int i = start+1; i <= end ; i++) {
