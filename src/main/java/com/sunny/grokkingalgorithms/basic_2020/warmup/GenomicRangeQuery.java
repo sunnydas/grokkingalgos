@@ -97,7 +97,7 @@ string S consists only of upper-case English letters A, C, G, T.
 	 *  
 	 */
 	
-	public int[] solution(String S,int[] P,int[] Q) {
+	public static int[] solution(String S,int[] P,int[] Q) {
 		int[] impact = new int[P.length];
 		/*
 		 * 0 is global mean , 1 is local mean
@@ -125,12 +125,10 @@ string S consists only of upper-case English letters A, C, G, T.
 			if(current < globalMin) {
 				globalMin = current;				
 			}
-			if(localMin == globalMin && current < localMin) {
-				localMin = current;				
-			}
 			tracker[i][0] = globalMin;
-			tracker[i][1] = localMin;
+			tracker[i][1] = current;
 		}
+		//print(tracker);
 		for(int i = 0; i < P.length ; i++) {
 			int start = P[i];
 			int end = Q[i];
@@ -175,9 +173,32 @@ string S consists only of upper-case English letters A, C, G, T.
 		return min;
 	}
 	
+	public static void print(int[] arr) {
+		for(int i = 0; i < arr.length ; i++) {
+			System.out.print(arr[i] + " ");			
+		}
+		System.out.println();
+	}
+	
+	public static void print(int[][] arr) {
+		for(int i = 0; i < arr.length ; i++) {
+			System.out.print(arr[i][0] + "," + arr[1][1] + " ");			
+		}
+		System.out.println();
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		/*
+		 * Example test:   ('CAGCCTA', [2, 5, 0], [4, 5, 6])
+WRONG ANSWER (got [1, 1, 1] expected [2, 4, 1])
+		 */
+		
+		String s = "CAGCCTA";
+		int[] p = new int[] {2,5,0};
+		int[] q = new int[] {4,5,6};
+		int[] arr = solution(s, p, q);	
+        print(arr);
 	}
 
 }
