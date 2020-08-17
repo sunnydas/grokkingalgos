@@ -137,15 +137,16 @@ string S consists only of upper-case English letters A, C, G, T.
 					tracker[i][3] = tracker[i - 1][3] + 1;
 					tracker[i][0] = tracker[i - 1][0];
 					tracker[i][2] = tracker[i - 1][2];
-					tracker[i][3] = tracker[i - 1][3];
+					tracker[i][1] = tracker[i - 1][1];
 					break;	
 			}
 		}
+		//System.out.println(S);
 		//print(tracker);
 		for(int i = 0; i < p.length ; i++) {
 			int start = p[i];
 			int end = q[i];
-			if(p[i] == q[i]) {
+			if(start == end) {
 				char cur = S.charAt(p[i]);
 				if(cur == 'A') {
 					impact[i] = 1;
@@ -176,16 +177,21 @@ string S consists only of upper-case English letters A, C, G, T.
 					continue;
 				}
 			}else {
-				if(tracker[end][0] > tracker[start][0]) {
+				int[] curLevel = new int[4];
+				curLevel[0] = tracker[start][0] - tracker[0][0];
+				curLevel[1] = tracker[start][1] - tracker[0][1];
+				curLevel[2] = tracker[start][2] - tracker[0][2];
+				curLevel[3] = tracker[start][3] - tracker[0][3];
+				if(tracker[end][0] > curLevel[0]) {
 					impact[i] = 1;
 					continue;
-				}else if(tracker[end][1] > tracker[start][1]) {
+				}else if(tracker[end][1] > curLevel[1]) {
 					impact[i] = 2;
 					continue;
-				}else if(tracker[end][2] > tracker[start][2]) {
+				}else if(tracker[end][2] > curLevel[2]) {
 					impact[i] = 3;
 					continue;
-				}else if(tracker[end][3] > tracker[start][3]) {
+				}else if(tracker[end][3] > curLevel[3]) {
 					impact[i] = 4;
 					continue;
 				}				
@@ -311,7 +317,7 @@ string S consists only of upper-case English letters A, C, G, T.
 	
 	public static void print(int[][] arr) {
 		for(int i = 0; i < arr.length ; i++) {
-			System.out.print(arr[i][0] + "," + arr[i][1] + "," + arr[i][2] + "," + arr[i][3] +" ");			
+			System.out.print("[" + arr[i][0] + "," + arr[i][1] + "," + arr[i][2] + "," + arr[i][3] +" ]");			
 		}
 		System.out.println();
 	}
@@ -341,7 +347,11 @@ WRONG ANSWER (got [1, 1, 1] expected [2, 4, 1])
         q = new int[] {0,1,2,3,4};
         arr = solution(s,p,q);
         print(arr);
-        
+        s = "ACTGA";
+        p = new int[] {0,0,1,2,0};
+        q = new int[] {0,1,2,3,4};
+        arr = solution(s,p,q);
+        print(arr);
         /*
          * T G A C
          * 2 3 1 2
