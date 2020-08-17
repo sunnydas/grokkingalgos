@@ -132,8 +132,12 @@ string S consists only of upper-case English letters A, C, G, T.
 		for(int i = 0; i < P.length ; i++) {
 			int start = P[i];
 			int end = Q[i];
+			//System.out.println("##");
+			//System.out.println(start);
+			//System.out.println(end);
+			//System.out.println(input.length);
 			if(end == input.length - 1) {
-				impact[i] = tracker[start][0]; 				
+				impact[i] = Math.min(tracker[start][0],tracker[end][0]); 				
 			}else {
 				impact[i] = Math.min(tracker[P[i]][1], tracker[Q[i]][1]);
 			}
@@ -207,6 +211,11 @@ WRONG ANSWER (got [1, 1, 1] expected [2, 4, 1])
         q = new int[] {0,1,1};
         arr = solution(s, p, q);
         //print(arr);
+        s ="GGAGG";
+        p = new int[] {0,0,1,2,0};
+        q = new int[] {0,1,2,3,4};
+        arr = solution(s,p,q);
+        print(arr);
 	}
 
 }
