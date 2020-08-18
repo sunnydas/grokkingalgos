@@ -48,8 +48,32 @@ Write an efficient algorithm for the following assumptions:
 N is an integer within the range [2..100,000];
 each element of array A is an integer within the range [−10,000..10,000].
 	 */
-	
+
 	public static int solution(int[] A) {
+		int minAvgPosition = 0;
+		double[] prefixSums = new double[A.length];
+		prefixSums[0] = A[0];
+		for(int i = 1; i < A.length ; i++) {
+			prefixSums[i] = prefixSums[i - 1] + A[i];			
+		}
+		//print(prefixSums);
+		int P = 0;
+		double min_avg = Double.MAX_VALUE;
+		double avg = 0f;
+	    for (int i = 1; i < A.length; i++) {
+	        avg = (prefixSums[i] - prefixSums[P] + A[P]) / (i - P + 1);
+	        if (avg < min_avg) {
+	            min_avg = avg;
+	            minAvgPosition = P;
+	        }
+	        if (A[i] < min_avg) {
+	            P = i;
+	        }
+	    }    
+		return minAvgPosition;		
+	}
+	
+	public static int solutionAlt(int[] A) {
 		/*
 		 * For example, array A such that:
 
@@ -67,6 +91,8 @@ slice (3, 4), whose average is (5 + 1) / 2 = 3;
 slice (1, 4), whose average is (2 + 2 + 5 + 1) / 4 = 2.5.
 
 1 2 3 
+
+
 
 1 3 6
 
