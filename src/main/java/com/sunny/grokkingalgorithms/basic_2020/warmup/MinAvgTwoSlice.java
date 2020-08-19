@@ -66,6 +66,33 @@ each element of array A is an integer within the range [−10,000..10,000].
 	            min_avg = avg;
 	            minAvgPosition = P;
 	        }
+	        /*
+	         * This is key logic
+	         */
+	        /*
+			 * 1 2 3 4 5
+			 * 
+			 * prefix sums = 1 3 6 10 15
+			 * 
+			 * 10 - 1 + 1 = 9/4 = 2.2
+			 * 
+			 *  How can we ignore a value when currnet value is less than mim average?
+			 *  
+			 *  average means average of all values 
+			 *  
+			 *  if a value falls behind an average value then we reset
+			 *  
+			 *  
+			 * 
+			 * 5 4 3 2 1
+			 * 
+			 * 
+			 * 1 1 1 1 1
+			 * 
+			 *  
+			 *1 3 2 4 1 5
+			 *  
+			 */
 	        if (A[i] < min_avg) {
 	            P = i;
 	        }
