@@ -47,7 +47,25 @@ N is an integer within the range [1..100,000];
 each element of array A is an integer that can have one of the following values: 0, 1.
 	 */
 	
+	
 	public static int solution(int[] A) {
+		int count = 0;
+		int factor = 0;
+		for(int i = 0; i < A.length ; i++) {
+			if(count >= 1000000000) {
+				return -1;				
+			}
+			int current = A[i];
+			if(current == 0) {
+				factor++;				
+			}else {
+				count += factor*current;
+			}
+		}
+		return count;
+	}
+	
+	public static int solutionAlt(int[] A) {
 		int count = 0;
 		for(int  i = 0 ; i < A.length ; i++) {
 			int current = A[i];
