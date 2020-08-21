@@ -28,8 +28,7 @@ class UnorderedPair{
 		if (getClass() != obj.getClass())
 			return false;
 		UnorderedPair other = (UnorderedPair) obj;
-		if ((i == other.i || i == other.j)
-				&& (j == other.j || j  == other.i))
+		if ((i == other.i || i == other.j))
 			return true;
 		return false;
 	}
@@ -74,39 +73,19 @@ each element of array A is an integer within the range [0..2,147,483,647].
 	
 	 public static int solution(int[] A) {
 		 int count = 0;
-		 Set<UnorderedPair> tracker = new LinkedHashSet<UnorderedPair>();
-		 for(int i = 0 ; i < A.length ; i++) {
-			 int current = A[i];
-			 int sum = i + current;
-			 int diff = i - current;
-			 if(diff < 0) {
-				 diff = 0;				 
-			 }
-			 if(sum >= A.length) {
-				 sum = A.length - 1;
-			 }
-			 for(int j = 0; j < A.length ; j++) {
-				 UnorderedPair unorderedPair = new UnorderedPair();
-				 unorderedPair.i = i;
-				 unorderedPair.j = j;
-				 //System.out.println("sum " + sum);
-				 //System.out.println("diff " + diff);
-				 if(i != j && !tracker.contains(unorderedPair)) {
-					 if(j < i 
-							 && j >= diff) {
-						 count++;		
-						 //System.out.println(i + " " + j);
-						 tracker.add(unorderedPair);
-					 }else if(j > i  
-							 && j <= sum) {
-						 count++;	
-						 //System.out.println(i + " " + j);
-						 tracker.add(unorderedPair);
-					 }
+		 /*
+		  * 1 1 1 
+		  * 1 1 1
+		  * 
+		  * j−i≤A[i]+A[j]
+		  */
+		 for(int i = 0; i < A.length ; i++) {
+			 for(int j = i+1 ; j < A.length ; j++) {
+				 if((j - i) <= A[i] + A[j]) {
+					 count++;					 
 				 }
 			 }
 		 }
-		 //System.out.println(tracker);
 		 return count;		 
 	 }
 	 
@@ -120,6 +99,8 @@ each element of array A is an integer within the range [0..2,147,483,647].
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] input = new int[] {1,5,2,1,4,0};
+		System.out.println(solution(input));
+		input = new int[] {1,1,1};
 		System.out.println(solution(input));
 	}
 
