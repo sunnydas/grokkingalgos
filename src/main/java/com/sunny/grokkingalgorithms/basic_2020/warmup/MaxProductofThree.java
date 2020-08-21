@@ -62,7 +62,6 @@ N is an integer within the range [3..100,000];
 each element of array A is an integer within the range [−1,000..1,000].
 	 */
 	
-	
 	public static int solution(int[] A) {
 		int max = Integer.MIN_VALUE;
 		Arrays.parallelSort(A);
