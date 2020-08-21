@@ -40,6 +40,8 @@ string S consists only of the following characters: "(", "{", "[", "]", "}" and/
 					|| (current == '}' && stack.peek() == '{'
 					|| (current == ']' && stack.peek() == '[')))) {
 				stack.pop();				
+			}else {
+				return 0;
 			}
 			i++;			
 		}
@@ -54,6 +56,12 @@ string S consists only of the following characters: "(", "{", "[", "]", "}" and/
         String s = "{[()()]}";
         System.out.println(solution(s));    
         s = "([)()]";
+        System.out.println(solution(s));
+        s="{[()()]}{[()()]}";
+        System.out.println(solution(s));
+        s="{{{{()}}}";
+        System.out.println(solution(s));
+        s="}(())";
         System.out.println(solution(s));
 	}
 
