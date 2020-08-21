@@ -66,7 +66,12 @@ the function should return 0.
 				 for(int k = j+1 ; k < A.length ; k++) {
 					 if((A[i] + A[j] > A[k]) && (A[j] + A[k] > A[i])
 							 && (A[i] + A[k] > A[j])) {
-						 count++;						 
+						 //System.out.println(i + " " + j + " " + k);
+						 //System.out.println(" ai " + A[i]);
+						 //System.out.println(" aj " + A[j]);
+						 //System.out.println(" ak " + A[k]);
+						 count=1;
+						 break;
 					 }
 				 }
 			 }
