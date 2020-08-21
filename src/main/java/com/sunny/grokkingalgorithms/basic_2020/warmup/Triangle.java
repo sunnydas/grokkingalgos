@@ -1,5 +1,7 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
+import java.util.Arrays;
+
 public class Triangle {
 	
 	/*
@@ -36,7 +38,34 @@ N is an integer within the range [0..100,000];
 each element of array A is an integer within the range [−2,147,483,648..2,147,483,647].
 	 */
 	
-	 public static int solution(int[] A) {
+	private static void print(int[] input) {
+		 for(int i : input) {
+			 System.out.print(i + " ");
+		 }
+		 System.out.println();
+	 }
+	
+	public static int solution(int[] input) {
+		Arrays.parallelSort(input);
+		//print(input);
+		if(input.length >= 3) {
+			int i = input.length - 1;
+			while(i >= 2) {
+				long a = ((long)input[i - 2] + (long)input[i - 1]);
+				long b = ((long)input[i - 1] + (long)input[i]);
+				long c = ((long)input[i - 2] + (long)input[i]);
+				if(a > input[i]
+						&& b > input[i - 2]
+								&& c > input[i - 1]) {
+					return 1;				
+				}
+				i--;
+			}
+		}
+		return 0;		
+	}
+	
+	 public static int solutionAlt(int[] A) {
 		 /*
 		  * For example, consider array A such that:
 
@@ -45,6 +74,7 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 Triplet (0, 2, 4) is triangular.
 
 10,2,5,1,8,20
+0,1,2,3,4, 5
 
 1,2,5,8,10
 
@@ -86,8 +116,17 @@ the function should return 0.
 		// TODO Auto-generated method stub
 		/*
 		 * 10,2,5,1,8,20
+		 *  0,1,2,3,4,5
+		 * 
+		 * 0,2,4
+		 * 
+		 * 1 2 5 8,10,20
+		 * 
 
 			1,2,5,8,10
+			Q+R > P 
+			P+R > Q
+			 
 		 */
 		int[] input = new int[] {10,2,5,1,8,20};
 		System.out.println(solution(input));
