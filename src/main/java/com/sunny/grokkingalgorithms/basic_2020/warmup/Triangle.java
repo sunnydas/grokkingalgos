@@ -64,8 +64,11 @@ the function should return 0.
 		 for(int i = 0 ; i < A.length ; i++) {
 			 for(int j = i+1; j < A.length ; j++) {
 				 for(int k = j+1 ; k < A.length ; k++) {
-					 if((A[i] + A[j] > A[k]) && (A[j] + A[k] > A[i])
-							 && (A[i] + A[k] > A[j])) {
+					 long a = ((long)A[i] + (long)A[j]);
+					 long b = ((long)A[j] + (long)A[k]);
+					 long c = ((long)A[i] + (long)A[k]);
+					 if((a > A[k]) && (b > A[i])
+							 && (c > A[j])) {
 						 //System.out.println(i + " " + j + " " + k);
 						 //System.out.println(" ai " + A[i]);
 						 //System.out.println(" aj " + A[j]);
