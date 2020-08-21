@@ -36,9 +36,9 @@ string S consists only of the following characters: "(", "{", "[", "]", "}" and/
 			char current = S.charAt(i);
 			if(current == '(' || current == '{' || current == '[') {
 				stack.add(current);				
-			}else if(!(stack.isEmpty()) && (current == ')' && stack.peek() == '(')
+			}else if(!(stack.isEmpty()) && ((current == ')' && stack.peek() == '(')
 					|| (current == '}' && stack.peek() == '{'
-					|| (current == ']' && stack.peek() == '['))) {
+					|| (current == ']' && stack.peek() == '[')))) {
 				stack.pop();				
 			}
 			i++;			
