@@ -72,6 +72,59 @@ each element of array A is an integer within the range [0..2,147,483,647].
 	 */
 	
 	 public static int solution(int[] A) {
+		 long count = 0;
+		 /*
+		  *  j - i <= A[i] + A[j]
+		  *  -A[j] + j <= A[i] + i
+		  *  -(A[j] - j) <= A[i] + i
+		  */
+		 long[] arr1 = new long[A.length];
+		 long[] arr2 = new long[A.length];
+		 for(int i = 0; i < A.length ;i++) {
+			 arr1[i] = A[i] + i;
+			 arr2[i] = -(A[i] - i);
+		 }
+		 Arrays.parallelSort(arr1);
+		 Arrays.parallelSort(arr2);
+		 //print(arr1);
+		 //print(arr2);
+		 for(int i = arr1.length - 1 ; i >= 0 ; i--) {
+			 long current = arr1[i];
+			 //Important
+			 int pos = Arrays.binarySearch(arr2, current);
+			 //System.out.println(pos);
+			 // exact match
+			 if(pos >= 0) {
+				 //System.out.println(current);
+				 //System.out.println(pos);
+				 /*
+				  * Required because there can be repeats
+				  */
+				 while(pos < arr2.length && arr2[pos] == current) {
+					 pos++;					 
+				 }
+				 count += pos;
+			 }else {
+				 //No match find all values which have values less than A[i] + i
+				 count += -(pos + 1);
+			 }
+		 }
+		 int n = A.length;
+		 //Why is this required?
+		 /*
+		  * but we only care about those where j > i, as otherwise my predicate trivially holds. That means we have to eliminate all pairs where (j <= i). Say you have the list [x_1,x_2,x_3,...,x_k], you want to eliminate the tuples {(x_1,x_1),(x_1,x_2),(x_1,x_3),...(x_1,x_n)} for x_1. There is N of those. For x_2, you have (N-1). For x_k, you only have to ignore x_k, so 1 pair. You get N + (N-1) + (N-2) + ... + 1 tuples you have to eliminate – this is known to be N(N+1)/2.
+
+2 
+•
+Reply
+		  */
+		 long sub = (long)n*((long)n+1)/2;
+		 count -= sub;
+		 if(count > 1e7) return -1;
+		 return (int)count;
+	 }
+	
+	 public static int solutionAlt(int[] A) {
 		 int count = 0;
 		 /*
 		  * 1 1 1 
@@ -81,7 +134,9 @@ each element of array A is an integer within the range [0..2,147,483,647].
 		  */
 		 for(int i = 0; i < A.length ; i++) {
 			 for(int j = i+1 ; j < A.length ; j++) {
-				 if((j - i) <= A[i] + A[j]) {
+				 long val = A[i] + A[j];
+				 System.out.println(val);
+				 if((j - i) <= val) {
 					 count++;					 
 				 }
 			 }
@@ -96,12 +151,24 @@ each element of array A is an integer within the range [0..2,147,483,647].
 		 System.out.println();
 	 }
 
+	 private static void print(long[] input) {
+		 for(long i : input) {
+			 System.out.print(i + " ");
+		 }
+		 System.out.println();
+	 }
+	 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] input = new int[] {1,5,2,1,4,0};
+		//Arrays.sort(input);
+		//print(input);
+		//System.out.println(Arrays.binarySearch(input, 3));
 		System.out.println(solution(input));
 		input = new int[] {1,1,1};
 		System.out.println(solution(input));
+		input = new int[] {1, 2147483647, 0};
+		System.out.println(solution(input));	
 	}
 
 }
