@@ -81,8 +81,8 @@ each element of array A is an integer within the range [0..2,147,483,647].
 		 long[] arr1 = new long[A.length];
 		 long[] arr2 = new long[A.length];
 		 for(int i = 0; i < A.length ;i++) {
-			 arr1[i] = A[i] + i;
-			 arr2[i] = -(A[i] - i);
+			 arr1[i] = ((long)A[i] + i);
+			 arr2[i] = -((long)A[i] - i);
 		 }
 		 Arrays.parallelSort(arr1);
 		 Arrays.parallelSort(arr2);
@@ -120,7 +120,7 @@ Reply
 		  */
 		 long sub = (long)n*((long)n+1)/2;
 		 count -= sub;
-		 if(count > 1e7) return -1;
+		 if(count > 10000000) return -1;
 		 return (int)count;
 	 }
 	
