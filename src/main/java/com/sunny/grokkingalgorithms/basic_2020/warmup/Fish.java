@@ -66,33 +66,34 @@ the elements of A are all distinct.
 		 * 
 		 * 
 		 */
-		Stack<Integer> upStreamStack = new Stack<Integer>();
-		int dir = B[B.length - 1];
-		int size = A[A.length - 1];
-		upStreamStack.add(B.length - 1);
-		for(int i = A.length - 2; i >= 0 ; i--) {
-			int curSize = A[i];
-			int curDir = B[i];
-			if(curDir == dir) {
+		Stack<Integer> stack = new Stack<Integer>();
+		//int previousDirection = B[B.length - 1];
+		//stack.push(A.length - 1);
+		int i = B.length - 1;
+		while(i >= 0) {
+			int currentDirection = B[i];
+			//System.out.println(stack);
+			if(!stack.isEmpty() && B[stack.peek()] == currentDirection) {
+				stack.add(i);				
+			}else if(stack.isEmpty()) {
 				//System.out.println(i);
-				upStreamStack.add(i);
-				//System.out.println(upStreamStack);
-			}else{
-				if(!upStreamStack.isEmpty() && B[upStreamStack.peek()] == B[i]) {
-					upStreamStack.add(i);					
+				stack.add(i);
+			}else if(!stack.isEmpty() 
+					&& B[stack.peek()] != currentDirection){
+				int currentSize = A[i];
+				//System.out.println(stack);
+				while(!stack.isEmpty() 
+						&& A[stack.peek()] < currentSize) {
+					stack.pop();					
 				}
-				else {
-				//System.out.println(upStreamStack);
-					while(!upStreamStack.isEmpty() && 
-							(A[upStreamStack.peek()] < curSize) ) {
-						upStreamStack.pop();					
-					}
+				if(stack.isEmpty()) {
+					stack.add(i);					
 				}
 			}
-			dir = curDir;
+			i--;			
 		}
-		//System.out.println(upStreamStack);
-		return upStreamStack.size();
+		//System.out.println(stack);
+		return stack.size();
 	}
 
 	public static void main(String[] args) {
@@ -106,6 +107,9 @@ the elements of A are all distinct.
         */
        a = new int[] {0,1};
        b = new int[] {1,1};
+       System.out.println(solution(a,b));
+       a = new int[] {0};
+       b = new int[] {0};
        System.out.println(solution(a,b));
 	}
 
