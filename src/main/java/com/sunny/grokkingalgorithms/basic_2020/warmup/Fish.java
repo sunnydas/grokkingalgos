@@ -72,23 +72,21 @@ the elements of A are all distinct.
 		int i = B.length - 1;
 		while(i >= 0) {
 			int currentDirection = B[i];
-			//System.out.println(stack);
-			if(!stack.isEmpty() && B[stack.peek()] == currentDirection) {
+			if(stack.isEmpty()) {
 				stack.add(i);				
-			}else if(stack.isEmpty()) {
-				//System.out.println(i);
+			}else if(currentDirection == 1 
+					&& B[stack.peek()] == 0){
+					while(!stack.isEmpty() &&
+							currentDirection == 1 && B[stack.peek()] == 0
+							&& A[i] > A[stack.peek()]) {
+						stack.pop();						
+					}
+					if(stack.isEmpty() 
+							|| (currentDirection == B[stack.peek()])) {
+						stack.add(i);						
+					}
+			}else{
 				stack.add(i);
-			}else if(!stack.isEmpty() 
-					&& B[stack.peek()] != currentDirection){
-				int currentSize = A[i];
-				//System.out.println(stack);
-				while(!stack.isEmpty() 
-						&& A[stack.peek()] < currentSize) {
-					stack.pop();					
-				}
-				if(stack.isEmpty()) {
-					stack.add(i);					
-				}
 			}
 			i--;			
 		}
@@ -104,12 +102,32 @@ the elements of A are all distinct.
        /*
         * 
         * ([0, 1], [1, 1])
+        * 
+        * 1  1 
+        * 2  0 
+        * 3  1 
+        * 4  1
+        * 
         */
        a = new int[] {0,1};
        b = new int[] {1,1};
        System.out.println(solution(a,b));
-       a = new int[] {0};
-       b = new int[] {0};
+		/*
+		 * a = new int[] {0}; b = new int[] {0}; System.out.println(solution(a,b)); a =
+		 * new int[] {1,1}; b = new int[] {1,1}; System.out.println(solution(a,b)); a =
+		 * new int[] {1,1}; b = new int[] {0,0}; System.out.println(solution(a,b)); a =
+		 * new int[] {1,2}; b = new int[] {0,1}; System.out.println(solution(a,b)); a =
+		 * new int[] {1,2,3,4}; b = new int[] {1,0,1,1};
+		 * System.out.println(solution(a,b)); a = new int[] {1,2,3,4}; b = new int[]
+		 * {1,1,1,1}; System.out.println(solution(a,b)); a = new int[] {1,2,3,4}; b =
+		 * new int[] {0,1,1,1}; System.out.println(solution(a,b)); a = new int[]
+		 * {4,3,2,1}; b = new int[] {0,1,1,1}; System.out.println(solution(a,b)); a =
+		 * new int[] {4,3,2,1}; b = new int[] {1,1,1,0};
+		 * System.out.println(solution(a,b)); a = new int[] {4,3,2,1}; b = new int[]
+		 * {0,0,0,1}; System.out.println(solution(a,b));
+		 */
+       a = new int[] {4,3,2,1};
+       b = new int[] {0,1,0,1};
        System.out.println(solution(a,b));
 	}
 
