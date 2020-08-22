@@ -64,10 +64,11 @@ each element of array A is an integer within the range [−1,000,000,000..1,000,
 						//candidate = current;
 					}else if(stack.peek() != current) {
 						stack.pop();
-						stack.add(current);
+						//stack.add(current);
 					}
 				}
 				//System.out.println(stack);
+				//System.out.println(stack.peek());
 				if(!stack.isEmpty()) {
 					if(stack.size() == 1) {
 						candidate = stack.pop();					
@@ -79,6 +80,8 @@ each element of array A is an integer within the range [−1,000,000,000..1,000,
 						candidate = prev;
 					}
 				}
+				//System.out.println(candidate);
+				//System.out.println();
 				if(candidate != Integer.MIN_VALUE) {
 					//System.out.println(candidate);
 					int count = 0;
@@ -94,6 +97,7 @@ each element of array A is an integer within the range [−1,000,000,000..1,000,
 						dominator = -1;
 					}
 				}
+				//System.out.println(dominator);
 				if(dominator >= 0) {
 					int[] tracker = new int[A.length];
 					int tCount = 0;
@@ -162,6 +166,8 @@ each element of array A is an integer within the range [−1,000,000,000..1,000,
 		int[] input = new int[] {4,3,4,4,4,2};
 		System.out.println(solution(input));
 		input = new int[] {4, 4, 2, 5, 3, 4, 4, 4};
+		System.out.println(solution(input));
+		input = new int[] {4,4,4,4,2,2,2};
 		System.out.println(solution(input));
 	}
 
