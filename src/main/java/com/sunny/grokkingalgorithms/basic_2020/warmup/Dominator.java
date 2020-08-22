@@ -35,31 +35,36 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 	
 	public static int solution(int[] A) {
 		int dominator = -1;
-		Stack<Integer> stack = new Stack<Integer>();
-		stack.push(A[0]);
-		for(int i = 1; i < A.length ; i++) {
-			int current = A[i];
-			if(stack.isEmpty()) {
-				stack.push(A[i]);
-			}else if(stack.peek() != current) {
-				stack.pop();
-				stack.add(current);
+		if(A.length > 0) {
+			if(A.length == 1) {
+				return 0;				
 			}
-		}
-		int candidate = Integer.MIN_VALUE;
-		if(!stack.isEmpty()) {
-			candidate = stack.pop();
-		}
-		if(candidate != Integer.MIN_VALUE) {
-			int count = 0;
-			for(int i = 0; i < A.length ; i++) {
-				if(candidate == A[i]) {
-					dominator = i;
-					count++;
+			Stack<Integer> stack = new Stack<Integer>();
+			stack.push(A[0]);
+			for(int i = 1; i < A.length ; i++) {
+				int current = A[i];
+				if(stack.isEmpty()) {
+					stack.push(A[i]);
+				}else if(stack.peek() != current) {
+					stack.pop();
+					stack.add(current);
 				}
 			}
-			if(count < A.length/2) {
-				dominator = -1;
+			int candidate = Integer.MIN_VALUE;
+			if(!stack.isEmpty()) {
+				candidate = stack.pop();
+			}
+			if(candidate != Integer.MIN_VALUE) {
+				int count = 0;
+				for(int i = 0; i < A.length ; i++) {
+					if(candidate == A[i]) {
+						dominator = i;
+						count++;
+					}
+				}
+				if(count < (A.length/2)) {
+					dominator = -1;
+				}
 			}
 		}
 		return dominator;
