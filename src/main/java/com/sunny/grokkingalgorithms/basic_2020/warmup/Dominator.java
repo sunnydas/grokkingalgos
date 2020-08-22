@@ -58,7 +58,7 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 					candidate = stack.pop();					
 				}else {
 					int prev = stack.pop();
-					while(stack.peek() != prev) {
+					while(!stack.isEmpty() && stack.peek() != prev) {
 						prev = stack.pop();						
 					}
 					candidate = prev;
