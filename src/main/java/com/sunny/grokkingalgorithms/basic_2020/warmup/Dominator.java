@@ -41,20 +41,31 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 			}
 			Stack<Integer> stack = new Stack<Integer>();
 			stack.push(A[0]);
+			int candidate = Integer.MIN_VALUE;
 			for(int i = 1; i < A.length ; i++) {
 				int current = A[i];
-				if(stack.isEmpty()) {
+				if(stack.isEmpty() || stack.peek() == current) {
 					stack.push(A[i]);
+					//candidate = current;
 				}else if(stack.peek() != current) {
 					stack.pop();
 					stack.add(current);
 				}
 			}
-			int candidate = Integer.MIN_VALUE;
+			//System.out.println(stack);
 			if(!stack.isEmpty()) {
-				candidate = stack.pop();
+				if(stack.size() == 1) {
+					candidate = stack.pop();					
+				}else {
+					int prev = stack.pop();
+					while(stack.peek() != prev) {
+						prev = stack.pop();						
+					}
+					candidate = prev;
+				}
 			}
 			if(candidate != Integer.MIN_VALUE) {
+				//System.out.println(candidate);
 				int count = 0;
 				for(int i = 0; i < A.length ; i++) {
 					if(candidate == A[i]) {
@@ -62,6 +73,8 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 						count++;
 					}
 				}
+				//System.out.println(count);
+				//System.out.println(A.length/2);
 				if(count < (A.length/2)) {
 					dominator = -1;
 				}
@@ -79,6 +92,10 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 		 */
 		int[] input = new int[] {3,4,3,2,3,-1,3,3};
 		System.out.println(solution(input));
+		input = new int[] {2, 1, 1, 1, 3};
+		System.out.println(solution(input));
+		input = new int[] {1,2,1};
+		System.out.println(solution(input));	
 	}
 
 }
