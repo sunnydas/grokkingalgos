@@ -1,5 +1,6 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class Dominator {
@@ -34,6 +35,43 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 	 */
 	
 	public static int solution(int[] A) {
+		int dominator = -1;
+		if(A.length > 1) {
+			/*
+						 * 7
+			3
+			2
+			-1
+			
+			{3,4,3,2,3,-1,3,3}
+			
+			-1,2,3,3,3,3,3,4
+			 */
+			Arrays.parallelSort(A);
+			int count = 1;
+			int maxCount = -1;
+			int maxCandidate = -1;
+			for(int i = 1; i < A.length ; i++) {
+				if(A[i] == A[i-1]) {
+					count++;					
+				}else {
+					if(count > maxCount) {
+						maxCount = count;
+						maxCandidate = i;
+					}
+					count = 1;
+				}
+			}
+			if(maxCount > A.length/2) {
+				dominator = maxCandidate;				
+			}
+		}else if(A.length == 1) {
+			dominator = 0;
+		}
+		return dominator;
+	}
+	
+	public static int solutionAlt(int[] A) {
 		int dominator = -1;
 		if(A.length > 0) {
 			if(A.length == 1) {
