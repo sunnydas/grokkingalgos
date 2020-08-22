@@ -100,25 +100,51 @@ each element of array A is an integer within the range [−1,000,000,000..1,000,
 					for(int i = 0; i < A.length ; i++) {
 						if(A[i] == candidate) {
 							tCount++;
-							tracker[i] = tCount;
 						}
+						tracker[i] = tCount;
 					}
+					//print(tracker);
 					for(int i = 0; i < tracker.length ; i++) {
+						//System.out.println(i);
 						int curCount = tracker[i];
 						int leftLength = (i+1);
 						/*
 						 * 1 2 3
 						 * 0 1 2
 						 */
-						int rightLength = A.length - i;
-						if(curCount > leftLength/2 
-								&& curCount > rightLength/2) {
+						int rightLength = A.length - i - 1;
+						//System.out.println(curCount);
+						//System.out.println(leftLength);
+						//System.out.println(rightLength);
+						//System.out.println();
+						int rightCount = tracker[A.length - 1] - curCount;
+						/*
+						 * if(i == A.length - 1) { rightCount = A[A.length - 1]; }
+						 */
+						//System.out.println(rightCount);
+						//System.out.println();
+						//System.out.println();
+						if(curCount > leftLength/2 && 
+								rightCount > rightLength/2) {
+							
+							  //System.out.println(); System.out.println(" i " + i);
+							  //System.out.println(leftLength); System.out.println(rightLength);
+							  //System.out.println(curCount); System.out.println(eCount);
+							  //System.out.println();
+							 
 							eCount++;
 						}
 					}
 				}
 			}
 			return eCount;
+	 }
+	 
+	 public static void print(int[] input) {
+		 for(int i : input) {
+			 System.out.print(i + " ");			 
+		 }
+		 System.out.println();
 	 }
 	
 	public static void main(String[] args) {
@@ -134,6 +160,8 @@ each element of array A is an integer within the range [−1,000,000,000..1,000,
     0,1,2,3,4,5
 		 */
 		int[] input = new int[] {4,3,4,4,4,2};
+		System.out.println(solution(input));
+		input = new int[] {4, 4, 2, 5, 3, 4, 4, 4};
 		System.out.println(solution(input));
 	}
 
