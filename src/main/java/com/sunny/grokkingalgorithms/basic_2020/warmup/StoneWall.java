@@ -46,6 +46,7 @@ Afterward, if the stack size = 0 or higher, increase the block count by 1
 		int count = 1;
 		for(int i = 1; i < H.length ; i++) {
 			int currentHeight = H[i];
+			//System.out.println(stack);
 			if(!stack.isEmpty() && currentHeight == stack.peek()) {
 				continue;				
 			}
@@ -54,6 +55,10 @@ Afterward, if the stack size = 0 or higher, increase the block count by 1
 				count++;
 			}else if(!stack.isEmpty() 
 					&& currentHeight < stack.peek()) {
+				/*
+				 * Essentially find a block or at least find a place 
+				 * where the blokc might fit.
+				 */
 				while(!stack.isEmpty() 
 						&& stack.peek() > currentHeight ) {
 					stack.pop();
