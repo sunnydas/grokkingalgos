@@ -75,7 +75,7 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 				}
 				//System.out.println(count);
 				//System.out.println(A.length/2);
-				if(count < (A.length/2)) {
+				if(count <= (A.length/2)) {
 					dominator = -1;
 				}
 			}
@@ -96,6 +96,8 @@ each element of array A is an integer within the range [−2,147,483,648..2,147,
 		System.out.println(solution(input));
 		input = new int[] {1,2,1};
 		System.out.println(solution(input));	
+		input = new int[] {2, 1, 1, 3};
+		System.out.println(solution(input));
 	}
 
 }
