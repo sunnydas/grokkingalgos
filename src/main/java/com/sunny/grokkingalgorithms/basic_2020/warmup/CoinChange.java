@@ -1,6 +1,6 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
-public class GreedyCoinChange {
+public class CoinChange {
 	
 	/*
 	 * Given a value V, if we want to make a change for V Rs, and we have an infinite supply of each of the denominations in Indian currency, i.e., we have an infinite supply of { 1, 2, 5, 10, 20, 50, 100, 500, 1000} valued coins/notes, what is the minimum number of coins and/or notes needed to make the change?
@@ -14,6 +14,23 @@ Input: V = 121
 Output: 3
 We need a 100 Rs note, a 20 Rs note and a 1 Rs coin. 
 	 */
+	
+	public static int coinChange(int[] coins,int v) {
+		if(v <= 0) {
+			return 0;			
+		}
+		int minChange = Integer.MAX_VALUE;
+		for(int i = 0 ; i < coins.length ; i++) {
+			if(coins[i] <= v) {
+				int res = coinChange(v - coins[i]);
+				if(res != Integer.MAX_VALUE) {
+					System.out.println(res);
+					minChange = Math.min(res + 1, minChange);
+				}
+			}
+		}
+		return minChange;
+	}
 	
 	public static int coinChange(int v) {
 		int minChanges = 0;
@@ -47,6 +64,12 @@ We need a 100 Rs note, a 20 Rs note and a 1 Rs coin.
         System.out.println(coinChange(70));
         System.out.println(coinChange(121));
         System.out.println(coinChange(93));
+        int coins[] =  {9, 6, 5, 1};
+        int v = 11;
+        System.out.println(coinChange(coins, v));
+        coins = new int[]{25,10,5};
+        v = 30;
+        System.out.println(coinChange(coins,v));
 	}
 
 }
