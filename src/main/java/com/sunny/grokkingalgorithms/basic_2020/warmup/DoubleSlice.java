@@ -54,6 +54,38 @@ each element of array A is an integer within the range [−10,000..10,000].
 	 */
 	
 	public static int solution(int[] A) {
+		/*
+		 * The problem is essentially to find a 
+		 * subarray which does not include current element 
+		 * and then find max sum among .
+I think you are overthinking the problem, that's why you find it more difficult than it is:
+
+The understanding that if all elements in the array are positive, or negative it is a different case than when there are some positive and negative elements in the array.
+
+It doesn't have to be a different case. You might be able to come up with an algorithm that doesn't care about this distinction and works anyway.
+
+You don't need to start by understanding this distinction, so don't think about it until or even if you have to.
+
+Kadane's Algorithm
+
+Don't think of an algorithm, think of what the problem requires. Usually that 10+ paragraph problem statement can be expressed in much less.
+
+So let's see how we can simplify the problem statement.
+
+It first defines a slice as a triplet (x, y, z). It's defined at the sum of elements starting at x+1, ending at z-1 and not containing y.
+
+Then it asks for the maximum sum slice. If we need the maximum slice, do we need x and z in the definition? We might as well let it start and end anywhere as long as it gets us the maximum sum, no?
+
+So redefine a slice as a subset of the array that starts anywhere, goes up to some y-1, continues from y+1 and ends anywhere. Much simpler, isn't it?
+
+Now you need the maximum such slice.
+
+Now you might be thinking that you need, for each y, the maximum sum subarray that starts at y+1 and the maximum sum subarray that ends at y-1. If you can find these, you can update a global max for each y.
+
+So how do you do this? This should now point you towards Kadane's algorithm, which does half of what you want: it computes the maximum sum subarray ending at some x. So if you compute it from both sides, for each y, you just have to find:
+
+kadane(y - 1) + kadane_reverse(y + 1)
+		 */
 		int maxSum = 0;
 		int[] k1 = new int[A.length];
 		int[] k2 = new int[A.length];
