@@ -39,6 +39,25 @@ each element of array A is an integer within the range [0..200,000].
 	
 	public static int solution(int[] input) {
 		int maxProfit = 0;
+		int i = 0;
+		int j = i+1;
+		while(i < input.length 
+				&& j < input.length) {
+			int p = input[i];
+			int q = input[j];
+			int diff = q - p;
+			maxProfit = Math.max(diff, maxProfit);
+			if(diff >= 0) {
+				j++;
+			}else {
+				i++;
+			}
+		}
+		return maxProfit;
+	}
+	
+	public static int solutionAlt(int[] input) {
+		int maxProfit = 0;
 		for(int i = 0 ; i < input.length ; i++) {
 			for(int j = i+1; j < input.length ; j++) {
 				maxProfit = Math.max(input[j] - input[i], maxProfit);				
@@ -56,6 +75,12 @@ each element of array A is an integer within the range [0..200,000].
   A[3] = 21366
   A[4] = 21013
   A[5] = 21367
+  
+ 4 3 5 2
+   3 1   
+     1 2  
+  
+  
 		 */
 		int[] input = new int[] {23171,21011,21123,21366,21013,21367};
 		System.out.println(solution(input));
