@@ -16,6 +16,24 @@ We need a 100 Rs note, a 20 Rs note and a 1 Rs coin.
 	 */
 	
 	public static int coinChange(int[] coins,int v) {
+		int[] cache = new int[v+1];
+		for(int i = 1; i < cache.length ; i++) {
+			cache[i] = Integer.MAX_VALUE;			
+		}
+		for(int i = 1; i <= v ; i++) {
+			for(int j = 0 ; j < coins.length ; j++) {
+				if(coins[j] <= i) {
+					int result = cache[i - coins[j]];
+					if(result != Integer.MAX_VALUE) {
+						cache[i] = Math.min(cache[i], result  + 1);						
+					}
+				}
+			}
+		}
+		return cache[v];
+	}
+	
+	public static int coinChangeAlt(int[] coins,int v) {
 		if(v <= 0) {
 			return 0;			
 		}
