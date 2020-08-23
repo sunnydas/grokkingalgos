@@ -63,7 +63,36 @@ each element of array B is an integer within the range [1..30].
 		return cache[N];
 	}
 	
-	public static int[] solution(int[] A,int[] B) {
+	public static long fib(int n,long[] cache) {
+		if(cache[n] > 0) {
+			return cache[n];			
+		}
+		cache[0] = 1;
+		cache[1] = 1;
+		for(int i = 2; i <= n ; i++) {
+			cache[i] = cache[i - 1] + cache[i - 2];
+		}
+		return cache[n];
+	}
+	
+	public static int[] solution(int[] A, int[] B) {
+		int[] solution = new int[A.length];
+		int max = Integer.MIN_VALUE;
+		for(int i : A) {
+			if(i > max) {
+				max = i;
+			}
+		}
+		long[] cache = new long[max + 1];
+		for(int i = 0 ; i < A.length ; i++) {
+			long ways = fib(A[i],cache);
+			//print(cache);
+			solution[i] = (int) (ways%(Math.pow(2, B[i])));
+		}
+		return solution;
+	}
+	
+	public static int[] solutionAlt(int[] A,int[] B) {
 		int[] solution = new int[A.length];
 		long[] cache = new long[A.length + 1];
 		for(int i = 0 ; i < A.length ; i++) {
@@ -72,6 +101,13 @@ each element of array B is an integer within the range [1..30].
 			solution[i] = (int) (ways%(Math.pow(2, B[i])));
 		}
 		return solution;
+	}
+	
+	public static void print(long[] cache) {
+		for(long i : cache) {
+			System.out.print(i + " ");
+		}
+		System.out.println();
 	}
 	
 	public static void print(int[] cache) {
