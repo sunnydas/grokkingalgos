@@ -29,7 +29,7 @@ the result will be an integer within the range [−2,147,483,648..2,147,483,647]
 	 */
 	
 	public static int solution(int[] A) {
-		int maxSum = 0;
+		int maxSum = Integer.MIN_VALUE;
 		int maxSoFar = 0;
 		for(int i = 0; i < A.length ; i++) {
 			maxSoFar = Math.max(maxSoFar + A[i],A[i]);
@@ -45,6 +45,8 @@ the result will be an integer within the range [−2,147,483,648..2,147,483,647]
 A[3] = 4  A[4] = 0 
          */
 		int[]  input = new int[] {3,2,-6,4,0};
+        System.out.println(solution(input));
+        input = new int[] {-2,-2};
         System.out.println(solution(input));
 	}
 
