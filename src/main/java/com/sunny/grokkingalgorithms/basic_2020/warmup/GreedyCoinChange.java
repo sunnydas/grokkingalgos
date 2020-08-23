@@ -22,6 +22,7 @@ We need a 100 Rs note, a 20 Rs note and a 1 Rs coin.
 		while(v > 0) {
 			int index = findHighestValueThatFulFillsCriteria(v, denominations,start);
 			if(index >= 0) {
+				//System.out.println(denominations[index]);
 				v -= denominations[index];
 				minChanges++;
 				start = index;
@@ -45,6 +46,7 @@ We need a 100 Rs note, a 20 Rs note and a 1 Rs coin.
 		// TODO Auto-generated method stub
         System.out.println(coinChange(70));
         System.out.println(coinChange(121));
+        System.out.println(coinChange(93));
 	}
 
 }
