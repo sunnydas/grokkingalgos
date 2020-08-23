@@ -52,8 +52,27 @@ Write an efficient algorithm for the following assumptions:
 N is an integer within the range [3..100,000];
 each element of array A is an integer within the range [−10,000..10,000].
 	 */
-
+	
 	public static int solution(int[] A) {
+		int maxSum = 0;
+		int[] k1 = new int[A.length];
+		int[] k2 = new int[A.length];
+		for(int i = 1; i < A.length - 1 ; i++) {
+			k1[i] = Math.max(k1[i - 1] + A[i], 0);			
+		}
+		//print(k1);
+		for(int i = A.length - 2; i > 0; i--) {
+			k2[i] = Math.max(k2[i + 1] + A[i], 0);			
+		}
+		//print(k2);
+		for(int i = 1; i < A.length - 1 ; i++) {
+			maxSum = Math.max(k1[i - 1] + k2[i + 1], maxSum);		
+		}
+		return maxSum;
+	}
+	
+
+	public static int solutionAlt(int[] A) {
 		int maxSum = 0;
 		int[] prefixSum = new int[A.length];
 		prefixSum[0] = A[0];
