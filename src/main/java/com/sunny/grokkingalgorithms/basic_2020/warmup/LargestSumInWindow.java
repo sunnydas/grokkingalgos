@@ -5,6 +5,16 @@ public class LargestSumInWindow {
 	
 	public static int largestSum(int[] input) {
 		int largestSum  = 0;
+		int maxSoFar=0;
+		for(int i = 0 ; i  < input.length ; i++) {
+			maxSoFar = Math.max(0, input[i] + maxSoFar);
+			largestSum = Math.max(maxSoFar, largestSum);
+		}
+		return largestSum;
+	}
+	
+	public static int largestSumAlt(int[] input) {
+		int largestSum  = 0;
 	    int[] prefixSums = new int[input.length];
 	    prefixSums[0] = input[0];
 	    for(int i = 1; i < input.length ; i++) {
