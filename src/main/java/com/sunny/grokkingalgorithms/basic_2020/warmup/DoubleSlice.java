@@ -61,8 +61,8 @@ each element of array A is an integer within the range [−10,000..10,000].
 			prefixSum[i] = prefixSum[i - 1] + A[i];
 		}
 		for(int i = 0 ; i < A.length; i++) {
-			for(int j = i+2; j < A.length ; j++) {
-				for(int k = j+2; k < A.length ; k++) {
+			for(int j = i+1; j < A.length ; j++) {
+				for(int k = j+1; k < A.length ; k++) {
 					int sum = 0;
 					sum += prefixSum[j - 1] - prefixSum[i];
 					//System.out.println(sum);
@@ -95,6 +95,8 @@ each element of array A is an integer within the range [−10,000..10,000].
     A[7] = 2
 		 */
         int[] input = new int[] {3,2,6,-1,4,5,-1,2};
+        System.out.println(solution(input));
+        input = new int[] {5, 17, 0, 3};
         System.out.println(solution(input));
 	}
 
