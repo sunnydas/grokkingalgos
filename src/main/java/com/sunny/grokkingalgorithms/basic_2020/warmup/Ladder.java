@@ -51,17 +51,23 @@ each element of array A is an integer within the range [1..L];
 each element of array B is an integer within the range [1..30].
 	 */
 	
-	public static long calculateWays(int N) {
-		if(N <= 1) {
-			return 1;			
+	public static long calculateWays(int N,long[] cache) {
+		if(cache[N] > 0) {
+			return cache[N];
 		}
-		return calculateWays(N - 1) + calculateWays(N - 2);		
+		if(N <= 1) {
+			cache[N] = 1;
+			return cache[N];			
+		}
+		cache[N] = calculateWays(N - 1,cache) + calculateWays(N - 2,cache);
+		return cache[N];
 	}
 	
 	public static int[] solution(int[] A,int[] B) {
 		int[] solution = new int[A.length];
+		long[] cache = new long[A.length + 1];
 		for(int i = 0 ; i < A.length ; i++) {
-			long ways = calculateWays(A[i]);
+			long ways = calculateWays(A[i],cache);
 			//System.out.println(ways);
 			solution[i] = (int) (ways%(Math.pow(2, B[i])));
 		}
