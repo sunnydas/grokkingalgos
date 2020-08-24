@@ -9,11 +9,37 @@ public class Permutations {
 		if(s.length() == 0) {
 			System.out.print(ans + " ");			
 		}
+		/*
+		 * ab
+		 * a 
+		 *     ab
+		 *         
+		 */
 		for(int i = 0; i < s.length() ; i++) {
 			char cur = s.charAt(i);
 			String rest = s.substring(0, i) + s.substring(i+1);
+			//System.out.println("#####" + rest);
 			permute(rest,ans+cur);
 		}
+	}
+	
+	public static List<String> generateCombinations(String s){
+		if(s.length() <= 0) {
+			List<String> empty = new ArrayList<String>();
+			empty.add(" ");
+			return empty;
+		}
+	    char current = s.charAt(0);
+	    String remaining = s.substring(1);
+	    List<String> sub = generateCombinations(remaining);
+	    List<String> overall = new ArrayList<String>();
+	    for(String str : sub) {
+	    	//System.out.println(str);
+	    	String str1 = current + str;
+	    	overall.add(str1);
+	    }	    
+	    overall.addAll(sub);
+	    return overall;
 	}
 	
 	public static List<String> permute(String s) {
@@ -58,6 +84,8 @@ public class Permutations {
         System.out.println();
         permute(s,"");
         System.out.println();
+        System.out.println();
+        System.out.println(generateCombinations(s));
 	}
 
 }
