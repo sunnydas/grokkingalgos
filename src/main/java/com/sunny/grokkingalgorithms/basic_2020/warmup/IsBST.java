@@ -197,6 +197,43 @@ public class IsBST {
 		}
 	}
 	
+	public static void bottomView(BNode root) {
+		if(root == null) {
+			return;			
+		}
+		Map<Integer, LinkedList<Integer>> traversalMap = 
+				new TreeMap<Integer, LinkedList<Integer>>();
+		root.level = 0;
+		Queue<BNode> queue = new LinkedList<BNode>();
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			BNode current = queue.poll();
+			if(traversalMap.containsKey(current.level)) {
+				traversalMap.get(current.level).add(current.data);				
+			}else {
+				LinkedList<Integer> elements = new LinkedList<Integer>();
+				elements.add(current.data);
+				traversalMap.put(current.level,elements);
+			}
+			if(current.left != null) {
+				current.left.level = current.level - 1;
+				queue.add(current.left);				
+			}
+			if(current.right != null) {
+				current.right.level = current.level + 1;
+				queue.add(current.right);
+			}
+		}
+		System.out.println(traversalMap);
+		Iterator<Map.Entry<Integer, LinkedList<Integer>>> iterator = 
+				traversalMap.entrySet().iterator();
+		System.out.println();
+		while(iterator.hasNext()) {
+			Map.Entry<Integer, LinkedList<Integer>> entry = iterator.next();
+			System.out.println(entry.getValue().get(entry.getValue().size() - 1));
+		}
+	}
+	
 	public static void levelOrder(BNode root) {
 		Queue<BNode> queue = new LinkedList<BNode>();
 		if(root !=  null) {
@@ -272,6 +309,8 @@ public class IsBST {
 		verticalTraversal(root);
 		System.out.println();
 		topView(root);
+		System.out.println();
+		bottomView(root);
 		System.out.println();
 	}
 
