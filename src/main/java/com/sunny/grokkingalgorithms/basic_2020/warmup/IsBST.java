@@ -1,6 +1,8 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import com.sunny.grokkingalgorithms.ctci.c4.util.BinaryTreeNode;
 
@@ -75,6 +77,32 @@ public class IsBST {
 		return root;
 	}
 	
+	public static void levelOrder(BNode root) {
+		Queue<BNode> queue = new LinkedList<BNode>();
+		if(root !=  null) {
+			queue.add(root);
+			BNode marker = new BNode();
+			queue.add(marker);
+			while(!queue.isEmpty()) {
+				BNode current = queue.poll();
+				if(current == marker) {
+					System.out.println();
+					if(!queue.isEmpty()) {
+						queue.add(marker);
+					}
+				}else {
+					System.out.print(current.data + " ");	
+					if(current.left != null) {
+						queue.add(current.left);
+					}
+					if(current.right != null) {
+						queue.add(current.right);
+					}
+				}
+			}
+		}
+	}
+	
 	public static BNode createBSTFalse() {
 		BNode root = new BNode();
 		root.data = 10;
@@ -91,6 +119,9 @@ public class IsBST {
 		nine.data = 2;
 		left.left = six;
 		left.right = nine;
+		BNode eighty = new BNode();
+		eighty.data = 80;
+		nine.left = eighty;
 		return root;
 	}
 
@@ -109,8 +140,10 @@ public class IsBST {
 		System.out.println(findMax(root.left.right));
 		System.out.println(findMax(root.left));
 		System.out.println(isBST(root));
+		levelOrder(root);
 		root = createBSTFalse();
 		System.out.println(isBST(root));
+		levelOrder(root);
 	}
 
 }
