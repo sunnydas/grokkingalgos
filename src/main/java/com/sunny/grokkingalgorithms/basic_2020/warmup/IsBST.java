@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.TreeMap;
 
 import com.sunny.grokkingalgorithms.ctci.c4.util.BinaryTreeNode;
 
@@ -133,7 +134,7 @@ public class IsBST {
 			return;			
 		}
 		Map<Integer, LinkedList<Integer>> traversalMap = 
-				new HashMap<Integer, LinkedList<Integer>>();
+				new TreeMap<Integer, LinkedList<Integer>>();
 		root.level = 0;
 		Queue<BNode> queue = new LinkedList<BNode>();
 		queue.add(root);
