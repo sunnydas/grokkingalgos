@@ -260,6 +260,24 @@ public class IsBST {
 		}
 	}
 	
+	public static BNode findLCA(BNode root,
+			int node1,
+			int node2) {
+		if(root == null) {
+			return null;			
+		}
+		//System.out.println(root.data);
+		//System.out.println(node1);
+		//System.out.println(node2);
+		if(node1 <= root.data && root.data < node2) {
+			return root;
+		}else if(root.data < node1) {
+			return findLCA(root.right, node1, node2);
+		}else {
+			return findLCA(root.left, node1, node2);
+		}
+	}
+	
 	public static BNode createBSTFalse() {
 		BNode root = new BNode();
 		root.data = 10;
@@ -297,6 +315,12 @@ public class IsBST {
 		System.out.println(findMax(root.left.right));
 		System.out.println(findMax(root.left));
 		System.out.println(isBST(root));
+		System.out.println("---Begin of lca check -----");
+		System.out.println(findLCA(root, 8, 14).data);
+		System.out.println(findLCA(root, 6, 9).data);
+		System.out.println(findLCA(root, 8, 9).data);
+		System.out.println(findLCA(root, 6, 14).data);
+		System.out.println("---lca check done ---");
 		levelOrder(root);
 		root = createBSTFalse();
 		System.out.println(isBST(root));
