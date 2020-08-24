@@ -2,6 +2,7 @@ package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -159,6 +160,43 @@ public class IsBST {
 		System.out.println(traversalMap);		
 	}
 	
+	public static void topView(BNode root) {
+		if(root == null) {
+			return;			
+		}
+		Map<Integer, LinkedList<Integer>> traversalMap = 
+				new TreeMap<Integer, LinkedList<Integer>>();
+		root.level = 0;
+		Queue<BNode> queue = new LinkedList<BNode>();
+		queue.add(root);
+		while(!queue.isEmpty()) {
+			BNode current = queue.poll();
+			if(traversalMap.containsKey(current.level)) {
+				traversalMap.get(current.level).add(current.data);				
+			}else {
+				LinkedList<Integer> elements = new LinkedList<Integer>();
+				elements.add(current.data);
+				traversalMap.put(current.level,elements);
+			}
+			if(current.left != null) {
+				current.left.level = current.level - 1;
+				queue.add(current.left);				
+			}
+			if(current.right != null) {
+				current.right.level = current.level + 1;
+				queue.add(current.right);
+			}
+		}
+		System.out.println(traversalMap);
+		Iterator<Map.Entry<Integer, LinkedList<Integer>>> iterator = 
+				traversalMap.entrySet().iterator();
+		System.out.println();
+		while(iterator.hasNext()) {
+			Map.Entry<Integer, LinkedList<Integer>> entry = iterator.next();
+			System.out.println(entry.getValue().get(0));
+		}
+	}
+	
 	public static void levelOrder(BNode root) {
 		Queue<BNode> queue = new LinkedList<BNode>();
 		if(root !=  null) {
@@ -232,6 +270,9 @@ public class IsBST {
 		rightView(root);
 		System.out.println();
 		verticalTraversal(root);
+		System.out.println();
+		topView(root);
+		System.out.println();
 	}
 
 }
