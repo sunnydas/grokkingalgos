@@ -16,6 +16,7 @@ public class LongestSequence {
 			else if(input[i] == input[i - 1]) {
 				continue;
 			}else {
+				runningCount = 1;
 				if(runningCount > longestCount) {
 					longestCount = runningCount;					
 				}
