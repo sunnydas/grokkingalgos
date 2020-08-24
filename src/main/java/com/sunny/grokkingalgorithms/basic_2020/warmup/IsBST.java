@@ -63,6 +63,39 @@ public class IsBST {
 		leftView(root.right, level+1);
 	}
 	
+	public static void rightView(BNode root) {
+		if(root == null) {
+			return;
+		}
+		Queue<BNode> queue = new LinkedList<BNode>();
+		if(root !=  null) {
+			queue.add(root);
+			BNode marker = new BNode();
+			queue.add(marker);
+			while(!queue.isEmpty()) {
+				BNode current = queue.poll();
+				if(current == marker) {
+					System.out.println();
+					if(!queue.isEmpty()) {
+						queue.add(marker);
+					}
+				}else {
+					//System.out.print(current.data + " ");
+					if(!queue.isEmpty() && queue.peek() == marker) {
+						System.out.print(current.data);
+					}
+					//System.out.println();
+					if(current.left != null) {
+						queue.add(current.left);
+					}
+					if(current.right != null) {
+						queue.add(current.right);
+					}
+				}
+			}
+		}
+	}
+	
 	public static void inOrder(BNode root) {
 		if(root == null) {
 			return;
@@ -160,6 +193,8 @@ public class IsBST {
 		levelOrder(root);
 		System.out.println();
 		leftView(root,1);
+		System.out.println();
+		rightView(root);
 	}
 
 }
