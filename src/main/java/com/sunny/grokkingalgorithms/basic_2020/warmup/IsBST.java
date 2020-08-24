@@ -49,6 +49,20 @@ public class IsBST {
 		return Math.min(minSubTree, root.data);
 	}
 	
+	static int maxLevel=0;
+	
+	public static void leftView(BNode root,int level) {
+		if(root == null) {
+			return;			
+		}
+		if(level > maxLevel) {
+			System.out.println(root.data);
+			maxLevel = level;
+		}
+		leftView(root.left, level+1);
+		leftView(root.right, level+1);
+	}
+	
 	public static void inOrder(BNode root) {
 		if(root == null) {
 			return;
@@ -144,6 +158,8 @@ public class IsBST {
 		root = createBSTFalse();
 		System.out.println(isBST(root));
 		levelOrder(root);
+		System.out.println();
+		leftView(root,1);
 	}
 
 }
