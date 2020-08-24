@@ -280,6 +280,29 @@ public class IsBST {
 		}
 	}
 	
+	public static boolean isNodePresent(BNode root,int node) {
+		if(root == null) {
+			return false;			
+		}
+		if(root.data == node) {
+			return true;
+		}
+		boolean found = isNodePresent(root.left, node);
+		if(!found) {
+			found = isNodePresent(root.right, node);
+		}
+		return found;
+	}
+	
+	public static BNode findLCASafe(BNode root,
+			int node1,
+			int node2) {
+		if(!isNodePresent(root, node1) && !isNodePresent(root.right, node2)) {
+			return null;			
+		}
+		return findLCA(root, node1, node2);
+	}
+	
 	public static BNode createBSTFalse() {
 		BNode root = new BNode();
 		root.data = 10;
@@ -322,6 +345,11 @@ public class IsBST {
 		System.out.println(findLCA(root, 6, 9).data);
 		System.out.println(findLCA(root, 8, 9).data);
 		System.out.println(findLCA(root, 6, 14).data);
+		System.out.println(findLCA(root, 8, 14).data);
+		System.out.println(findLCA(root, 6, 9).data);
+		System.out.println(findLCA(root, 8, 9).data);
+		System.out.println(findLCA(root, 6, 14).data);
+		System.out.println(findLCASafe(root, 100, 9));
 		System.out.println("---lca check done ---");
 		levelOrder(root);
 		root = createBSTFalse();
