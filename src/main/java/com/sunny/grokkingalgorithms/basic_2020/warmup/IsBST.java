@@ -271,10 +271,12 @@ public class IsBST {
 		//System.out.println(node2);
 		if(node1 <= root.data && root.data < node2) {
 			return root;
-		}else if(root.data < node1) {
+		}else if(root.data < node1 && root.data < node2) {
 			return findLCA(root.right, node1, node2);
-		}else {
+		}else if(root.data > node1 && root.data > node2){
 			return findLCA(root.left, node1, node2);
+		}else {
+			return root;
 		}
 	}
 	
