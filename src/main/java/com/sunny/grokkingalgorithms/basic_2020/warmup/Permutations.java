@@ -5,6 +5,17 @@ import java.util.List;
 
 public class Permutations {
 	
+	public static void permute(String s,String ans) {
+		if(s.length() == 0) {
+			System.out.print(ans + " ");			
+		}
+		for(int i = 0; i < s.length() ; i++) {
+			char cur = s.charAt(i);
+			String rest = s.substring(0, i) + s.substring(i+1);
+			permute(rest,ans+cur);
+		}
+	}
+	
 	public static List<String> permute(String s) {
 		if(s.length() <= 0) {
 			List<String> empty = new ArrayList<String>();
@@ -44,6 +55,9 @@ public class Permutations {
          *             
          */
         System.out.println(permute(s));
+        System.out.println();
+        permute(s,"");
+        System.out.println();
 	}
 
 }
