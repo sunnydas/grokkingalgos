@@ -303,6 +303,39 @@ public class IsBST {
 		return findLCA(root, node1, node2);
 	}
 	
+	public static void swap(BNode root) {
+		BNode temp = root.right;
+		root.right = root.left;
+		root.left = temp;
+	}
+	
+	public static void invert(BNode root) {
+		if(root == null) {
+			return;
+		}
+		swap(root);
+		invert(root.left);
+		invert(root.right);
+	}
+	
+	public static void preOrder(BNode root) {
+		if(root == null) {
+			return;
+		}
+		System.out.println(root.data);
+		preOrder(root.left);
+		preOrder(root.right);
+	}
+	
+	public static int height(BNode root) {
+		if(root == null) {
+			return 0;
+		}
+		int leftHeight = height(root.left);
+		int rightHeight = height(root.right);
+		return Math.max(leftHeight,rightHeight) + 1;
+	}
+	
 	public static BNode createBSTFalse() {
 		BNode root = new BNode();
 		root.data = 10;
@@ -366,6 +399,16 @@ public class IsBST {
 		System.out.println();
 		bottomView(root);
 		System.out.println();
+		preOrder(root);
+		System.out.println();
+		levelOrder(root);
+		invert(root);
+		System.out.println();
+		preOrder(root);
+		System.out.println();
+		levelOrder(root);
+		System.out.println();
+		System.out.println(height(root));
 	}
 
 }
