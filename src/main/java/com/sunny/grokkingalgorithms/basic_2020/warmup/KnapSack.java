@@ -1,6 +1,8 @@
 package com.sunny.grokkingalgorithms.basic_2020.warmup;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class KnapSack {
 
@@ -45,7 +47,8 @@ Knapsack capacity: 5
 			}
 		}
 		//System.out.println(Arrays.toString(dp));
-		print(dp);
+		//print(dp);
+		printPathOfProfit(dp,k,profits,weights);
 		return dp[dp.length - 1][k];		
 	}
 	
@@ -56,6 +59,25 @@ Knapsack capacity: 5
 			}
 			System.out.println();
 		}
+	}
+	
+	
+	public static void printPathOfProfit(int[][] dp, int k,
+			int[] profits,
+			int[] weights) {
+		int profit = dp[dp.length - 1][k];
+		System.out.println("path start ---- ");
+		for(int i = dp.length - 1 ; i > 0 ; i--) {
+			if(dp[i-1][k] != profit) {
+				System.out.println(weights[i]);
+				profit -= profits[i];
+				k -= weights[i];
+			}
+		}
+		if(profit != 0) {
+			System.out.println(weights[0]);			
+		}
+		System.out.println("path end -----");
 	}
 	
 	
