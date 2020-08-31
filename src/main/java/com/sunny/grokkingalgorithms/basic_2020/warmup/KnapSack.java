@@ -6,9 +6,10 @@ public class KnapSack {
 			 int[] profits,
 			 int k,
 			 int profit,
-			 int i) {
+			 int i,
+			 String path) {
 		if(k == 0) {
-			//System.out.println(profit);
+			System.out.println(path);
 			return profit;			
 		}
 		if(k < 0 || i >= weights.length) {
@@ -16,13 +17,17 @@ public class KnapSack {
 		}
 		int currentWeight = weights[i];
 		int currentProfit = profits[i];
-		int maxWithCur = maxProfit(weights, profits,
-				k - currentWeight,
-				profit + currentProfit, 
-				(i + 1)); 
+		int maxWithCur = -1;
+		if(k - currentWeight >= 0) {
+			maxWithCur = maxProfit(weights, profits,
+					k - currentWeight,
+					profit + currentProfit, 
+					(i + 1),
+					path + " " + i);
+		}
 		int maxWithoutCur =  maxProfit(weights, profits, k,
 				profit, 
-				(i + 1)); 
+				(i + 1),path); 
 		return Math.max(maxWithCur, maxWithoutCur);
 	}
 	
@@ -37,7 +42,7 @@ Knapsack capacity: 5
 		int[] weights = new int[] {2,3,1,4};
 		int[] profits = new int[] {4,5,3,7};
         int k = 5;
-        System.out.println(maxProfit(weights, profits, k,0,0));
+        System.out.println(maxProfit(weights, profits, k,0,0,""));
 	}
 
 }
