@@ -1,0 +1,102 @@
+package com.sunny.grokkingalgorithms.basic_2020.warmup;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class EqualSubSetSUmPartition {
+	
+	/*
+	 * iven a set of positive numbers, find if we can partition it into two subsets such that the sum of elements in both the subsets is equal.
+
+Example 1: #
+Input: {1, 2, 3, 4}
+Output: True
+Explanation: The given set can be partitioned into two subsets with equal sum: {1, 4} & {2, 3}
+Example 2: #
+Input: {1, 1, 3, 4, 7}
+Output: True
+Explanation: The given set can be partitioned into two subsets with equal sum: {1, 3, 4} & {1, 7}
+	 */
+	
+	public static boolean canPartition(int[] input) {
+		boolean canPartition = false;
+		List<List<Integer>> all = getCombinations(input);
+		//System.out.println(all);
+		for(int i = 0; i < all.size() ; i++) {
+			for(int j = i+1; j < all.size() ; j++) {
+				if(areSumEqual(all.get(i), all.get(j))) {
+					System.out.println("##");
+					System.out.println(all.get(i));
+					System.out.println(all.get(j));
+					canPartition = true;
+					break;
+				}
+			}
+		}
+		return canPartition;
+	}
+	
+	public static boolean areSumEqual(List<Integer> a,List<Integer> b) {
+		int sum = 0;
+		for(Integer i : a) {
+			sum += i;
+		}
+		int sum1 = 0;
+		for(Integer i : b) {
+			sum1 += i;
+		}
+		return sum == sum1;
+	}
+	
+	public static List<List<Integer>> getCombinations(int[] input){
+			if(input.length <= 0) {
+				List<List<Integer>> list = new ArrayList<List<Integer>>();
+				List<Integer> empty = new ArrayList<Integer>();
+				list.add(empty);
+				return list;
+			}
+			if(input.length == 1) {
+				List<List<Integer>> list = new ArrayList<List<Integer>>();
+				List<Integer> one = new ArrayList<Integer>();
+				one.add(input[0]);
+				list.add(one);
+				List<Integer> empty = new ArrayList<Integer>();
+				list.add(empty);
+				return list;				
+			}
+			//System.out.println(Arrays.toString(input));
+			int current = input[0];
+			int[] rest = Arrays.copyOfRange(input, 1, input.length);
+			List<List<Integer>> sub = getCombinations(rest);
+			List<List<Integer>> all = new ArrayList<List<Integer>>();
+			if(sub.size() == 1 
+					&& sub.get(0).isEmpty()) {
+				List<Integer> one = new ArrayList<Integer>();
+				one.add(current);
+				all.add(one);
+				//System.out.println(all);
+			}else {
+				//System.out.println(sub);
+				for(List<Integer> now : sub) {
+					List<Integer> mod = new ArrayList<Integer>();
+					mod.add(current);
+					mod.addAll(now);
+					all.add(mod);
+				}
+			}
+			all.addAll(sub);
+			return all;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int[] input = {1, 2, 3, 4};
+		System.out.println(canPartition(input));
+		int[] input1 = {1, 1, 3, 4, 7};
+		System.out.println(canPartition(input1));
+		int[] input3 = {2, 3, 4, 6};
+		System.out.println(canPartition(input3));
+	}
+
+}
