@@ -23,13 +23,53 @@ Explanation: The given set can be partitioned into two subsets with equal sum: {
 	
 	public static boolean canPartitionImproved(int[] input) {
 		int sum = 0;
+		/*
+		 * 1 2 3 4=10
+		 * 1+4 2+3
+		 * 
+		 */
 		for(int i = 0; i < input.length ; i++) {
 			sum += input[i];			
 		}
 		if(sum %2 != 0) {
 			return false;			
 		}
-		return canPartitionRecursive(input, sum/2, 0);
+		Boolean[][] dp = new Boolean[input.length][sum+1];
+		//return canPartitionRecursive(input, sum/2, 0);
+		return canPartitionRecursiveMemoized(input, sum/2, 0, dp);
+	}
+	
+	public static boolean canPartitionRecursiveMemoized(int[] input,
+			int sum,
+			int currentIndex,
+			Boolean[][] dp) {
+		
+		if(sum == 0) {
+			return true;		
+		}
+		
+		if(input.length == 0 
+				|| currentIndex >= input.length) {
+			return false;
+		}
+		
+		if(dp[currentIndex][sum] == null) {
+			if((sum - input[currentIndex]) >= 0) {
+				if(canPartitionRecursiveMemoized(input, 
+						sum - input[currentIndex], 
+						currentIndex +1,
+						dp)) {
+					dp[currentIndex][sum] = true;
+					return true;
+				}
+			}
+			dp[currentIndex][sum] = canPartitionRecursiveMemoized(input, 
+					sum, 
+					currentIndex + 1, 
+					dp);
+		
+		}
+		return dp[currentIndex][sum];
 	}
 	
 	
