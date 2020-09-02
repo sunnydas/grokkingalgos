@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.math3.ml.distance.CanberraDistance;
+
 public class EqualSubSetSUmPartition {
 	
 	/*
@@ -19,6 +21,40 @@ Output: True
 Explanation: The given set can be partitioned into two subsets with equal sum: {1, 3, 4} & {1, 7}
 	 */
 	
+	public static boolean canPartitionImproved(int[] input) {
+		int sum = 0;
+		for(int i = 0; i < input.length ; i++) {
+			sum += input[i];			
+		}
+		if(sum %2 != 0) {
+			return false;			
+		}
+		return canPartitionRecursive(input, sum/2, 0);
+	}
+	
+	
+	public static boolean canPartitionRecursive(int[] input,
+			int sum,
+			int currentIndex) {
+		
+		if(sum == 0) {
+			return true;			
+		}
+		
+		if(input.length == 0 
+				|| currentIndex >= input.length) {
+			return false;
+		}
+		
+		if((sum - input[currentIndex]) >= 0) {
+			if(canPartitionRecursive(input, sum - input[currentIndex], 
+					currentIndex +1)) {
+				return true;
+			}
+		}
+		return canPartitionRecursive(input, sum, currentIndex+1);
+	}
+	
 	public static boolean canPartition(int[] input) {
 		boolean canPartition = false;
 		List<List<Integer>> all = getCombinations(input);
@@ -26,9 +62,9 @@ Explanation: The given set can be partitioned into two subsets with equal sum: {
 		for(int i = 0; i < all.size() ; i++) {
 			for(int j = i+1; j < all.size() ; j++) {
 				if(areSumEqual(all.get(i), all.get(j))) {
-					System.out.println("##");
-					System.out.println(all.get(i));
-					System.out.println(all.get(j));
+					//System.out.println("##");
+					//System.out.println(all.get(i));
+					//System.out.println(all.get(j));
 					canPartition = true;
 					break;
 				}
@@ -93,10 +129,13 @@ Explanation: The given set can be partitioned into two subsets with equal sum: {
 		// TODO Auto-generated method stub
 		int[] input = {1, 2, 3, 4};
 		System.out.println(canPartition(input));
+		System.out.println(canPartitionImproved(input));
 		int[] input1 = {1, 1, 3, 4, 7};
 		System.out.println(canPartition(input1));
+		System.out.println(canPartitionImproved(input1));
 		int[] input3 = {2, 3, 4, 6};
 		System.out.println(canPartition(input3));
+		System.out.println(canPartitionImproved(input3));
 	}
 
 }
