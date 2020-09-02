@@ -21,6 +21,55 @@ Output: True
 Explanation: The given set can be partitioned into two subsets with equal sum: {1, 3, 4} & {1, 7}
 	 */
 	
+	public static boolean canPartitionDP(int[] input) {
+		int sum = 0;
+		/*
+		 * 1 2 3 4=10
+		 * 1+4 2+3
+		 * 
+		 */
+		for(int i = 0; i < input.length ; i++) {
+			sum += input[i];			
+		}
+		if(sum %2 != 0) {
+			return false;			
+		}
+		boolean[][] dp = new boolean[input.length][sum/2 + 1];
+		/*
+		 *     0  1  2  3  4  5 
+		 *  0  N  Y  N  N  N  N   
+		 *  
+		 *  1  N  Y  
+		 *  
+		 *  2  N
+		 *  
+		 *  3  N 
+		 *  
+		 * 
+		 */
+		sum /= 2;
+		for(int i = 0 ; i < input.length ; i++) {
+			dp[i][0] = true;			
+		}
+		for(int j = 1; j < sum+1 ; j++) {
+			if(input[0] == j) {
+				dp[0][j] = true;				
+			}else {
+				dp[0][j] = false;
+			}
+		}
+		for(int i = 1; i < input.length ; i++) {
+			for(int j = 1; j < sum+1 ; j++) {
+				if(dp[i - 1][j]) {
+					dp[i][j] = dp[i - 1][j];
+				}else if(j >= input[i]) {
+					dp[i][j] = dp[i - 1][j - input[i]];					
+				}
+			}
+		}
+		return dp[input.length - 1][sum/2];
+	}
+	
 	public static boolean canPartitionImproved(int[] input) {
 		int sum = 0;
 		/*
@@ -170,12 +219,15 @@ Explanation: The given set can be partitioned into two subsets with equal sum: {
 		int[] input = {1, 2, 3, 4};
 		System.out.println(canPartition(input));
 		System.out.println(canPartitionImproved(input));
+		System.out.println(canPartitionDP(input));
 		int[] input1 = {1, 1, 3, 4, 7};
 		System.out.println(canPartition(input1));
 		System.out.println(canPartitionImproved(input1));
+		System.out.println(canPartitionDP(input1));
 		int[] input3 = {2, 3, 4, 6};
 		System.out.println(canPartition(input3));
 		System.out.println(canPartitionImproved(input3));
+		System.out.println(canPartitionDP(input3));
 	}
 
 }
