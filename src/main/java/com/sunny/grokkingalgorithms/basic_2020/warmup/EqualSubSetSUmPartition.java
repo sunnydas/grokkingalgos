@@ -34,7 +34,7 @@ Explanation: The given set can be partitioned into two subsets with equal sum: {
 		if(sum %2 != 0) {
 			return false;			
 		}
-		Boolean[][] dp = new Boolean[input.length][sum+1];
+		Boolean[][] dp = new Boolean[input.length][sum/2+1];
 		//return canPartitionRecursive(input, sum/2, 0);
 		return canPartitionRecursiveMemoized(input, sum/2, 0, dp);
 	}
