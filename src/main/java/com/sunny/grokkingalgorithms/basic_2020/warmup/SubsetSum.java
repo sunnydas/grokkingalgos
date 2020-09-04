@@ -15,6 +15,30 @@ Input: {1, 3, 4, 8}, S=6
 Output: False
 The given set does not have any subset whose sum is equal to '6'.
 	 */
+	
+	public static boolean subsetSumDP(int[] input,int k) {
+		boolean[][] dp = new boolean[input.length][k+1];
+		for(int i = 0; i < input.length ; i++) {
+			dp[i][0] = true;
+		}
+		for(int j = 1; j <= k ; j++) {
+			if(input[0] == j) {
+				dp[0][j] = true;
+			}else {
+				dp[0][j] = false;
+			}
+		}
+		for(int i = 1; i < dp.length ; i++) {
+			for(int j = 1; j <= k ; j++) {
+				if(dp[i-1][j]) {
+					dp[i][j] = dp[i-1][j];
+				}else if(input[i] <= j) {
+					dp[i][j] = dp[i - 1][j - input[i]];
+				}
+			}
+		}
+		return dp[input.length - 1][k];
+	}
 
 	public static boolean subsetSum(int[] input,int k,int index) {
 		if(k == 0) {
@@ -71,12 +95,15 @@ The given set does not have any subset whose sum is equal to '6'.
 		int[] input = {1, 2, 3, 7};
 		System.out.println(subsetSum(input,6,0));
 		System.out.println(subSetSumCached(input, 6));
+		System.out.println(subsetSumDP(input, 6));
 		int[] input1 = {1, 2, 7, 1, 5};
 		System.out.println(subsetSum(input1,10,0));
 		System.out.println(subSetSumCached(input1, 10));
+		System.out.println(subsetSumDP(input1, 10));
 		int[] input2 = {1, 3, 4, 8};
 		System.out.println(subsetSum(input2,6,0));
 		System.out.println(subSetSumCached(input2, 6));
+		System.out.println(subsetSumDP(input2, 6));
 	}
 
 }
