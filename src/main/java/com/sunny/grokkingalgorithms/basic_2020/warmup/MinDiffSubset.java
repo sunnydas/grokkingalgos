@@ -43,6 +43,51 @@ Example 2: #
 	}
 	
 	
+	public static int mindDiffDP(int[] input) {
+		int sum = 0;
+		for(int i = 0; i < input.length ; i++) {
+			sum += input[i];
+		}
+		boolean[][] dp = new boolean[input.length][sum/2 + 1];
+		for(int i = 0; i < dp.length ; i++) {
+			dp[i][0] = true;
+		}
+		for(int j = 1; j <= sum/2; j++) {
+			if(input[0] == j) {
+				dp[0][j] = true;
+			}
+		}
+		for(int i = 1; i < input.length ; i++) {
+			for(int j = 1; j <= sum/2 ; j++) {
+				if(dp[i - 1][j]) {
+					dp[i][j] = dp[i-1][j];
+				}else if(input[i] <= j) {
+					dp[i][j] = dp[i-1][j - input[i]];
+				}
+			}
+		}
+		int sum1 = 0;
+		for(int j  = sum/2 ; j >= 0 ; j--) {
+			if(dp[input.length - 1][j]) {
+				sum1 = j;
+				break;
+			}
+		}
+		//print(dp);
+		int sum2  = sum - sum1;
+		return Math.abs(sum2 - sum1);
+	}
+	
+	
+	public static void print(boolean[][] input) {
+		for(int i = 0 ; i < input.length ; i++) {
+			for(int j = 0; j < input[i].length ; j++) {
+				System.out.print(input[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
         int[] input = {1, 2, 3, 9};
@@ -53,6 +98,7 @@ Example 2: #
         }
         Integer[][] dp = new Integer[input.length+1][sum+1];
         System.out.println(minDiffMemoized(input, 0, 0, 0, dp));
+        System.out.println(mindDiffDP(input));
 	}
 
 }
