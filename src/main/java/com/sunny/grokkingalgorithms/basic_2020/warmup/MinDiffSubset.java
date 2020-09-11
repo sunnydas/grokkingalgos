@@ -29,17 +29,17 @@ Example 2: #
 			int index,
 			int sum1,
 			int sum2,
-			Integer[] dp) {
+			Integer[][] dp) {
 		if(index >= input.length) {
 			return Math.abs(sum1 - sum2);			
 		}
-		if(dp[index] != null) {
-			return dp[index];
+		if(dp[index][sum1] != null) {
+			return dp[index][sum1];
 		}
 		int diff1 = minDiff(input,index+1,sum1+input[index],sum2);
 		int diff2 = minDiff(input,index+1,sum1,sum2 + input[index]);
-		dp[index] = Math.min(diff1,diff2);
-		return dp[index];
+		dp[index][sum1] = Math.min(diff1,diff2);
+		return dp[index][sum1];
 	}
 	
 	
@@ -47,7 +47,11 @@ Example 2: #
 		// TODO Auto-generated method stub
         int[] input = {1, 2, 3, 9};
         System.out.println(minDiff(input, 0, 0, 0));
-        Integer[] dp = new Integer[input.length];
+        int sum = 0;
+        for(int i = 0; i < input.length ; i++) {
+        	sum += input[i];
+        }
+        Integer[][] dp = new Integer[input.length+1][sum+1];
         System.out.println(minDiffMemoized(input, 0, 0, 0, dp));
 	}
 
