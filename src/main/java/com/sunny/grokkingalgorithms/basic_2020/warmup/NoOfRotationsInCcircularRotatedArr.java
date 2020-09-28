@@ -1,0 +1,43 @@
+package com.sunny.grokkingalgorithms.basic_2020.warmup;
+
+public class NoOfRotationsInCcircularRotatedArr {
+	
+	/*
+	 *  Number of rotations 
+	 *  
+	 *  int[] input = new int[] {8,9,10,2,5,6};
+	 *  3
+	 *  
+	 */
+	
+	public static int findNoOfRotations(int[] input) {
+		int start = 0;
+		int end = input.length - 1;
+		while(start <= end) {
+			if(input[start] <= input[end]) {
+				return start;
+			}
+			int mid = start + (end - start)/2;
+            int next = Math.floorMod(mid + 1, input.length);
+            int prev = Math.floorMod(mid - 1, input.length);
+            if(input[mid] < input[prev] && input[mid] < input[next]) {
+            	return mid;
+            }
+            else if(input[mid] < input[end]) {
+            	end = mid - 1;
+            }
+            else if(input[mid] > input[start]) {
+            	start = mid + 1;
+            }
+		}
+		return -1;
+	}
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+        int[] input = new int[] {8,9,10,2,5,6};
+        System.out.println(findNoOfRotations(input));
+	}
+
+}
