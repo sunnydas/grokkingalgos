@@ -23,10 +23,10 @@ public class NoOfRotationsInCcircularRotatedArr {
             if(input[mid] < input[prev] && input[mid] < input[next]) {
             	return mid;
             }
-            else if(input[mid] < input[end]) {
+            else if(input[mid] <= input[end]) {
             	end = mid - 1;
             }
-            else if(input[mid] > input[start]) {
+            else if(input[mid] >= input[start]) {
             	start = mid + 1;
             }
 		}
@@ -37,6 +37,8 @@ public class NoOfRotationsInCcircularRotatedArr {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
         int[] input = new int[] {8,9,10,2,5,6};
+        System.out.println(findNoOfRotations(input));
+        input = new int[] {8,9,10,1,2,3,4,5,6,7};
         System.out.println(findNoOfRotations(input));
 	}
 
